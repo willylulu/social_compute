@@ -2,10 +2,10 @@ var socket;
 function enter_store () {
 	// body...
 	socket = io.connect('',{query: 'type=buy'});
+	me.socket_id = socket.id;
 	socket.emit('response_buyer_id_seller_id',me);
 	socket.on('response_url',function (url) {
 		// body...
-		console.log(url);
 	});
 	socket.on('msg_broadcast',function (response) {
 		// body...

@@ -86,8 +86,6 @@ app.post('/', function(req, res) {
 
 io.sockets.on('connection', function(socket) {
 	//console.log('type:' + socket.handshake.query.type);
-
-
 	socket.on('response_add_seller', function(data) {
 		// body...
 		console.log('response_add_seller:'+data);
@@ -99,15 +97,13 @@ io.sockets.on('connection', function(socket) {
 
 		var sendObj = new Object;
 		sendObj.product_list = channels[data.id].product_list;
-		console.log("update product list");
-		console.log(sendObj.product_list);
 		socket.emit('buyer_product_data',sendObj);
 	});
 
 	socket.on('response_buyer_id_seller_id', function(user) {
 		// body...
-		channel.customers[user.id] = user; 
-		socket.emit('response_url', channels[user.seller_id].youtube_url);
+		channels[user.seller_id].customers[user.id] = user; 
+		
 	});
 
 	socket.on('buyer_send_message', function (response) {
@@ -115,7 +111,7 @@ io.sockets.on('connection', function(socket) {
 		var customers  = channels[seller_id].customers;
 		
         for (var key in dictionary) {
-			io.to(customers[key]).emit('msg_broadcast', response);
+			io.to(customers[key].socket_id).emit('msg_broadcast', response);
 		}
 	});
 
@@ -128,7 +124,7 @@ io.sockets.on('connection', function(socket) {
         channels[seller_id].customers[user_id].price = price;
         response.customers.sort(function(a, b) {b.price - a.price});
         for (var key in customers) {
-            io.to(customers[key]).emit('buyer_price_broadcast', response);
+            io.to(customers[key].socket_id).emit('buyer_price_broadcast', response);
         } 
     });
 
@@ -137,7 +133,7 @@ io.sockets.on('connection', function(socket) {
 		var customers  = channels[seller_id].customers;
     
         for (var key in customers) {
-            io.to(customers[key]).emit('seller_price_broadcast', response);
+            io.to(customers[key].socket_id).emit('seller_price_broadcast', response);
         }
     });
 
@@ -166,7 +162,7 @@ io.sockets.on('connection', function(socket) {
 
 
         for (var key in customers) {
-            io.to(customers[key]).emit('product_select_broadcast', response);
+            io.to(customers[key].socket_id).emit('product_select_broadcast', response);
         }
     });
 
