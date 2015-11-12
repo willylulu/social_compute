@@ -109,7 +109,7 @@ io.sockets.on('connection', function(socket) {
 		var customers  = channels[seller_id].customers;
 	    response.customers = customers;	
         channels[seller_id].customers[user_id].price = price;
- 
+        response.customers.sort(function(a, b) {b.price - a.price});
         for (var key in customers) {
             io.to(customers[key]).emit('buyer_price_broadcast', response);
         } 
