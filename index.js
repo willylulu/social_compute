@@ -155,7 +155,7 @@ io.sockets.on('connection', function(socket) {
         sendObj.buyer_queue = customers;
  
 	    request.post("localhost:8000/buyqueue", sendObj);
-    
+
     }); 
 
     socket.on('select_product', function(response) {
