@@ -16,63 +16,80 @@ body {
 	font-family: "Microsoft JhengHei";
 }
 
-#msg-wrapper {
-    display : block;
-    position: relative;
-    height  : 580px;
-    width   : 380px;
+#msg-box-wrapper {
+    display : inline-block;
+    position: absolute;
+    height  : 70vh;
+    width   : 25vw;
     background-color : rgba(200, 200, 200, 1.0);
-    top     : 10%;
+    top     : 10vh;
     left    : 65%;
-	border-radius   : 30px;
 }
 
 
 .msg {
-    left    : 20px;
+    position: relative;
+    left    : 10px;
     top     : 10px;
+    padding : 5px;
+}
+
+#msg-container {
+    width : 20 vw;
+    height: 80 vh;
 }
 
 #msg-box {
 	background-color: rgba(255, 255, 255, 1.0);
 	position        : relative;
     top             : 8px;
-	height          : 90%;
+	height          : 97%;
 	width           : 95%;
 	border-radius   : 30px;
     margin          : 0 auto;
     vertical-align  : middle;
     overflow        : auto;
-
-
 }
 
-#msg-input-wrap {
-    width  : 80%;
-    height : 5%;
-    margin : 0 auto;
+#msg-input-wrapper {
+    position: absolute;
+    background-color : rgba(200, 200, 200, 1.0);
+    display : inline-block;
+    width  : 25vw;
+    height : 9vh;
+    left   : 65%;
+    bottom : 15vh;
+}
+
+#msg-input-wrapper, #msg-box-wrapper {
+    verticle-align: bottom;
 }
 
 #msg-input {
+    position:absolute;
     display : inline-block;
     z-index : 3;
-    width   : 100%;
-    height  : 90%;
-    left    : -20%;
-	border-radius   : 30px;
+    width   : 80%;
+    height  : 50%;
+    top     : 5px;
+    left    : 10px;
+    font-size: 16px;
 }
 
 #send {
-    width : 6%;
-    height: 80%;
+    position: absolute;
+    top     : 5px;
+    width : 10%;
+    height: 59%;
+    right : 10px;
 }
 
 #stream-frame {
-    display:block;
+    display :block;
     position : absolute;
     margin : 0 auto;
     height: 60vh;
     width : 60vw;
-    top:10vw;
-    left:3vw; 
+    top : 10vw;
+    left : 3vw; 
 }

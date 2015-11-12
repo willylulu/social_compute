@@ -8,21 +8,23 @@
 </head>
 
 <body id="body">
-        <div id="container"></div>
+    <div id="container"></div>
         <div>
-              <input type="text" class="money">
-              <input type="button" value="submit" onClick="sub_money()">
+            <input type="text" class="money">
+            <input type="button" value="submit" onClick="sub_money()">
         </div>
-         <div id="msg-wrapper">
-                  <div id="msg-box">
-                  </div>
-                  <div id="msg-input-wrap">
-                           <input id="msg-input" type="text" placeholder="你想說什麼？">
-                           <button id="send" onclick="SendMessage(my_id)">
-                  </div>
-         </div>
-         <iframe id="stream-frame" src="http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1">
-         </iframe>
+    <div id="msg-container">
+        <div id="msg-box-wrapper">
+        	<div id="msg-box"> 
+	        </div>
+        </div>
+        <div id="msg-input-wrapper">
+            <input id="msg-input" type="text" placeholder="你想說什麼？">
+            <button id="send" onclick="SendMessage(user_id)">
+        </div>
+    </div>
+    <iframe id="stream-frame" src="http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1">
+    </iframe>
 </body>
 <script>
 var user_id;
