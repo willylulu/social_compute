@@ -36,7 +36,10 @@ function UpdatePrice(response)
     var customers = response.customers;
     var wufa="";
     for(var key in customers){
-        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"bit\" value=\""+price+"\">"+"ID: "+man_price_list[i].id+" Price: "+man_price_list[i].price+"<br>"
+        var price = man_price_list[i].price;
+         var id = man_price_list[i].id;
+         var name = man_price_list[i].name;
+        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"bit\" value=\""+price+"\" id=\""+id+"\">"+name+": $"+price+"<br>"
     }
     $('#price-box').html(wufa);
 }
