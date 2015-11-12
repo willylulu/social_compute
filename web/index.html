@@ -32,10 +32,10 @@
             <input type="button" class="but" value="Enter" onClick="conversation()">
          </div>
          <div class="container"></div>
+         <div class="msg-box"></div>
 </body>
 <script type="text/javascript">
-var user_id=Math.floor((Math.random() * 10000) + 1000);
-console.log(user_id);
+var user_id='893026410788843';
 
 /*window.fbAsyncInit = function() {
          FB.init({
@@ -90,7 +90,17 @@ function checkLoginState() {
          });
 }*/
 
+function PutMessage(name, msg) {
 
+    var div = document.getElementById("msg-box");
+    var msg_div = document.createElement("div");
+
+    msg_div.className = "msg";
+    msg_div.innerHTML = name + " : " + msg + "<br>";
+    div.appendChild(msg_div);
+    div.scrollTop = div.scrollHeight; // scroll to bottom
+
+}
 </script>
 
 </html>

@@ -7,6 +7,6 @@ function conversation () {
 		alert("Please Identify your type.");
 	}
 	else{
-		socket.emit('chat',fb_id,user_id,talk);
+		socket.emit('chat',user_id,'chief',talk);
 	}
 }

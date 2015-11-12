@@ -1,4 +1,5 @@
 var channels = new Object();
+var people = new Object();
 var channel = function(seller_fb_id, youtube_url, socket_id) {
 	this.youtube_url = youtube_url;
 	this.seller_socket_id = socket_id;
@@ -24,6 +25,13 @@ app.get('/', function(req, res) {
 app.get('/chatroom', function(req, res) {
 	res.sendFile(__dirname + '/chatroom.html');
 });
+app.get('/chatcost',function (req,res) {
+	// body...
+	//var post = req.query;
+	var data = require('url').parse(req.url,true).query;
+	console.log(data);
+	res.render('./chatroom.html', data);
+});
 app.post('/', function(req, res) {
 	// body...
 	var body = '';
@@ -36,9 +44,6 @@ app.post('/', function(req, res) {
 	req.on('end', function() {
 		post = qr.parse(body);
 		console.log(post);
-		var update_url = 'http://localhost:8000/updatelive/?sellerid='+post.seller_id+"&url="+post.youtubeurl;
-		console.log(update_url);
-		request.get(update_url);
 		res.render('./chatroom.html', post);
 	});
 
@@ -50,18 +55,20 @@ io.sockets.on('connection', function(socket) {
 		// body...
 		create_channel(sale, socket.id);
 	});
-	socket.on('response_fb_id_my_id', function(fb_id) {
+	socket.on('response_fb_id_my_id', function(my_id,fb_id) {
 		// body...
-		join_broadcast(fb_id, socket.id);
+		join_broadcast(fb_id,my_id, socket.id);
 		socket.emit('response_url', channels[fb_id].youtube_url);
 	});
 	socket.on('chat',function (fb_id,user_id,talk) {
+		console.log(fb_id);
 		var customers  = channels[fb_id].customers;
 		console.log(customers.length);
 		console.log(talk);
 		console.log(fb_id);
 		for (var i = 0; i < customers.length; i++) {
 			io.to(customers[i]).emit('chat',user_id,talk);
+			console.log('talk');
 		};
 	});
 });
@@ -69,13 +76,18 @@ io.sockets.on('connection', function(socket) {
 function create_channel(sale, socket_id) {
 	// body...
 	var new_channel = new channel(sale.seller_fb_id, sale.youtube_url, socket_id);
+	people[socket_id]='Chief';
 	new_channel.customers.push(socket_id);
 	channels[sale.seller_fb_id] = new_channel;
+	console.log(sale.seller_fb_id);
+	console.log(new_channel.customers.length);
 }
 
-function join_broadcast(fb_id, socket_id) {
+function join_broadcast(fb_id,my_id, socket_id) {
 	// body...
+	console.log(fb_id);
 	var channel = channels[fb_id];
+	people[socket_id]=my_id;
 	channel.customers.push(socket_id);
 	console.log('url:' + channel.youtube_url);
 }

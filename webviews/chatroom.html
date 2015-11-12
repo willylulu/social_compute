@@ -13,16 +13,27 @@
                   </div>
                   <div id="msg-input-wrap">
                            <input id="msg-input" type="text" placeholder="你想說什麼？">
-                           <button id="send" onclick="SendMessage(user_id)">
+                           <button id="send" onclick="SendMessage(my_id)">
                   </div>
          </div>
          <iframe id="stream-frame" src="http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1">
          </iframe>
 </body>
 <script>
-var user_id = {{seller_id}};
-var url = "{{youtubeurl}}";
-console.log(user_id);
+var user_id;
+var url;
+var my_id;
+var current_url = window.location.href;
+var element = current_url.split("?");
+element = element[1];
+element = element.split("&");
+if(element.length>0)user_id = element[0].split("sellerid=")[1];
+if(element.length>1)url = element[1].split("url=")[1];
+if(element.length>2)my_id = element[2].split("user_id=")[1];
+$('#msg-input').keypress(function(e){
+        if(e.keyCode==13)
+        $('#send').click();
+        });
 </script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="man.js"></script>
