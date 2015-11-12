@@ -1,10 +1,7 @@
 enter_store();
 
 //buyer_send_message
-function SendMessage() {
-    var msg_input = document.getElementById("msg-input");
-    var msg = msg_input.value;
-    msg_input.innerHTML = '';
+function SendMessage(msg) {
 
     var sendObj = new Object;
     sendObj.user = me;
@@ -27,13 +24,10 @@ function UpdateMessage(response) {
 
 }
 
-
 //emit to 
-function ChangePrice()
+function ChangePrice(price)
 {
     //change my on price
-    var price = $('#price-input').val();
-
     var sendObj = new Object;
     sendObj.user = me;
     sendObj.price = price;
@@ -54,7 +48,6 @@ function UpdateSellerPrice(response)
     response.user.name;
     response.price = 
 }
-
 
 function UpdateProduct(response)
 {
