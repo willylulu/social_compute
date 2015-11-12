@@ -18,11 +18,6 @@ $('price-send-btn').click(function()
 
 
 
-
-
-
-
-
 $('msg-send-btn').click(function()
 {
 	var price_input = document.getElementById("msg-input");

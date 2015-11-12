@@ -102,14 +102,10 @@ io.sockets.on('connection', function(socket) {
 		socket.emit('buyer_product_data',sendObj);
 	});
 
-	socket.on('response_buyer_id_seller_id', function(data) {
+	socket.on('response_buyer_id_seller_id', function(user) {
 		// body...
-		console.log('response_buyer_id_seller_id:'+data);
-		var channel = channels[data.seller_id];
-		carrer[data.id]='walker';
-		channel.customers.push(data);
-		console.log('url:' + channel.youtube_url);
-		socket.emit('response_url', channels[data.seller_id].youtube_url);
+		channel.customers[user.id] = user; 
+		socket.emit('response_url', channels[user.seller_id].youtube_url);
 	});
 
 	socket.on('buyer_send_message', function (response) {
