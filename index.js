@@ -46,15 +46,14 @@ app.post('/', function(req, res) {
 	req.on('end', function() {
 		post = qr.parse(body);
 	    console.log(post['product[]']);	
-		var update_url = 'http://tvsalestream.herokuapp.com/updatelive';
-		//var update_url = 'http://localhost:8000/updatelive';
+		//var update_url = 'http://tvsalestream.herokuapp.com/updatelive';
+		var update_url = 'http://localhost:8000/updatelive/';
         var seller_id = post.seller_id;
 		var products = post['product[]'];
         var product_list = new Object();
         var data = {
             'sellerid' : seller_id,
             'url'      : post.youtubeurl,
-            'productid': post['product[]'],
         };
 
 
@@ -70,7 +69,7 @@ app.post('/', function(req, res) {
 			channels[seller_id].product_list[id] = name;
 		}
         
-		request.post(update_url, JSON.stringify(data));
+		request.post({'url' : update_url, 'body' :JSON.stringify(data)});
 		
         res.render(__dirname +'/sale_man.html', post);
 	});
