@@ -50,8 +50,14 @@ app.post('/', function(req, res) {
 		//var update_url = 'http://localhost:8000/updatelive';
         var seller_id = post.seller_id;
 		var products = post['product[]'];
-        
         var product_list = new Object();
+        var data = {
+            'sellerid' : seller_id,
+            'url'      : post.youtubeurl,
+            'productid': post['product[]'],
+        };
+
+
         channels[seller_id] = new Object(); 
         channels[seller_id].product_list = product_list;
         channels[seller_id].product = new Object();
@@ -64,7 +70,7 @@ app.post('/', function(req, res) {
 			channels[seller_id].product_list[id] = name;
 		}
         
-		request.post(update_url,{'sellerid':post.sellerid,'url':post.youtubeurl,'productid':post['product[]']});
+		request.post(update_url, JSON.stringify(data));
 		
         res.render(__dirname +'/sale_man.html', post);
 	});
