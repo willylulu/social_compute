@@ -12,8 +12,8 @@ var express = require('express'),
 	io = require('socket.io').listen(server);
 request = require('request');
 var engines = require('consolidate');
+server.listen(process.env.PORT || 3000);
 
-server.listen(5000);
 app.set('views', __dirname + 'views');
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
