@@ -45,20 +45,15 @@
 
     </body>
 <script>
-var user_id;
-var url;
-var my_id;
+var me = new Object();
 var current_url = window.location.href;
 var element = current_url.split("?");
-element = element[1].split("&");
-if(element.length>0)user_id = element[0].split("sellerid=")[1];
-if(element.length>1) {
-    var stream_frame = document.getElementById("stream-frame");
-    // split // to subtract from http, split from / to subtract the id of video
-    url = element[1].split("url=")[1].split("//")[1].split("/")[1];
-    stream_frame.src += url;
-}
-if(element.length>2)my_id = element[2].split("user_id=")[1];
+element = element[1];
+element = element.split("&");
+if(element.length>0)me.seller_id = element[0].split("sellerid=")[1];
+if(element.length>1)me.url = element[1].split("url=")[1];
+if(element.length>2)me.name = element[2].split("user_id=")[1];
+if(element.length>3)me.id = element[3].split("user_id=")[1];
 $('#msg-input').keypress(function(e){
         if(e.keyCode==13)
         $('#send').click();
