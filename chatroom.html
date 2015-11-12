@@ -37,7 +37,8 @@ element = element.split("&");
 if(element.length>0)user_id = element[0].split("sellerid=")[1];
 if(element.length>1) {
     var stream_frame = document.getElementById("stream-frame");
-    url = element[1].split("url=")[1];
+    // split // to subtract from http, split from / to subtract the id of video
+    url = element[1].split("url=")[1].split("//")[1].split("/")[1];
     stream_frame.src += url;
 }
 if(element.length>2)my_id = element[2].split("user_id=")[1];
