@@ -1,25 +1,32 @@
-
-
-function SelectProduct()
+function SelectProduct(product_id)
 {
+	//clear 
+	var sendObj = new Object;
+    sendObj.user = me;
+    sendObj.product = new Object;
+    sendObj.product.id = product_id;
 
+	socket.emit('select_product',sendObj);
 }
 
-function SellerChangePrice()
+
+function SellerChangePrice(price)
 {
     //change my on price
-    var price = $('#price-input').val();
-
     var sendObj = new Object;
     sendObj.user = me;
     sendObj.price = price;
+    socket.emit('seller_change_price',sendObj);
 
-    socket.emit('seller-price-changed',sendObj);
 }
 
-function UpdateSellerPrice(response)
+
+
+function SellerConfirmProductOrder(customers)
 {
-    //price list 
-    response.user.name;
-    response.price
+	var sendObj = new Object;
+	sendObj.customers = customers;
+	socket.emit('seller_confirm_product_order',sendObj);
 }
+
+function 

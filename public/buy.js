@@ -10,6 +10,6 @@ function enter_store () {
 		// body...
 		console.log(msg);
 
-		PutMessage(user_id.replace(/\%20/g," "),msg);
+		UpdateMessage(user_id.replace(/\%20/g," "),msg);
 	});
 }

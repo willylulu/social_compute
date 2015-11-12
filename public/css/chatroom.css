@@ -1,95 +1,54 @@
-html, body {
-    margin :    0;
-	padding:    0;
-	height : 100%;
-	width  : 100%;
+div{
+    display:block;
+    margin-top:5px;
 }
 
-#body {
-	background: url("../img/d_bg.png");
-	position: fixed;
-	height  :  100%;
-	width   :  100%;
+#msg-box-wrapper{
+
+   border: 2px solid lightblue;
+   width:20vw;
+   height:30vh;
 }
 
-body {
-	font-family: "Microsoft JhengHei";
-}
-
-#msg-box-wrapper {
-    display : inline-block;
-    position: absolute;
-    height  : 70vh;
-    width   : 25vw;
-    background-color : rgba(200, 200, 200, 1.0);
-    top     : 10vh;
-    left    : 65%;
+#price-box-wrapper{
+    border: 2px solid darkblue;
+    width:20vw;
+    height:30vh;
 }
 
 
-.msg {
-    position: relative;
-    left    : 10px;
-    top     : 10px;
-    padding : 5px;
-}
 
-#msg-container {
-    width : 20 vw;
-    height: 80 vh;
-}
+#stream-frame{
 
-#msg-box {
-	background-color: rgba(255, 255, 255, 1.0);
-	position        : relative;
-    top             : 8px;
-	height          : 97%;
-	width           : 95%;
-	border-radius   : 30px;
-    margin          : 0 auto;
-    vertical-align  : middle;
-    overflow        : auto;
-}
-
-#msg-input-wrapper {
-    position: absolute;
-    background-color : rgba(200, 200, 200, 1.0);
-    display : inline-block;
-    width  : 25vw;
-    height : 9vh;
-    left   : 65%;
-    bottom : 15vh;
-}
-
-#msg-input-wrapper, #msg-box-wrapper {
-    verticle-align: bottom;
-}
-
-#msg-input {
-    position:absolute;
-    display : inline-block;
-    z-index : 3;
-    width   : 80%;
-    height  : 50%;
-    top     : 5px;
-    left    : 10px;
-    font-size: 16px;
-}
-
-#send {
-    position: absolute;
-    top     : 5px;
-    width : 10%;
-    height: 59%;
-    right : 10px;
-}
-
-#stream-frame {
-    display :block;
     position : absolute;
-    margin : 0 auto;
-    height: 60vh;
-    width : 60vw;
-    top : 10vw;
-    left : 3vw; 
+    left : 5vw;
+    top :15vh;
+    width:60vw;
+    height:60vh;
+}
+
+#seller_info{
+    position:absolute;
+    top:80vh;
+    left:5vw;  
+}
+
+.sell_class{
+    margin-left:5vw;
+    display:inline-block;
+
+}
+
+
+#chat-container{
+
+    position : absolute;
+    left : 70vw;
+    top :15vh;
+ 
+
+}
+
+.inputholder{
+
 }
