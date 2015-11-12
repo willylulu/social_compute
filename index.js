@@ -48,7 +48,7 @@ app.post('/', function(req, res) {
 	    console.log(post['product[]']);	
 		var update_url = 'http://tvsalestream.herokuapp.com/updatelive';
 		//var update_url = 'http://localhost:8000/updatelive';
-        var seller_id = post.sellerid;
+        var seller_id = post.seller_id;
 		var products = post['product[]'];
         
         var product_list = new Object();
