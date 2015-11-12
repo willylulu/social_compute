@@ -76,6 +76,8 @@ app.post('/', function(req, res) {
         }, function(error, response, body){
             console.log(body);
         });
+
+
 		
         res.render(__dirname +'/sale_man.html', post);
 	});
@@ -85,6 +87,7 @@ app.post('/', function(req, res) {
 io.sockets.on('connection', function(socket) {
 	//console.log('type:' + socket.handshake.query.type);
 
+
 	socket.on('response_add_seller', function(data) {
 		// body...
 		console.log('response_add_seller:'+data);
@@ -92,6 +95,11 @@ io.sockets.on('connection', function(socket) {
 		carrer[data.id]='chief';
 		new_channel.customers.push(data);
 		channels[data.id] = new_channel;
+		var sendObj = new Object;
+		sendObj.product_list = channels[data.id].product_list;
+		console.log("update product list");
+		console.log(sendObj.product_list);
+		socket.emit('buyer_product_data',sendObj);
 	});
 
 	socket.on('response_buyer_id_seller_id', function(data) {
