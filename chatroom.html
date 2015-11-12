@@ -36,6 +36,14 @@
             </div>
     </section>
 
+    <section id="seller_info">
+        <div id="sellername" class="sell_class"><h1>HOLA</h1></div>
+        <div id="productname" class="sell_class" ><h2>stuff</h2></div>
+        <div id="productprice" class="sell_class" ><h3>$</h3></div>
+    </section>
+
+
+
     </div>
     </body>
 <script>
@@ -44,7 +52,7 @@ var url;
 var my_id;
 var current_url = window.location.href;
 var element = current_url.split("?");
-element = element[1];
+element = element[1].tostring;
 element = element.split("&");
 if(element.length>0)user_id = element[0].split("sellerid=")[1];
 if(element.length>1) {
@@ -64,4 +72,5 @@ $('#msg-input').keypress(function(e){
 <script src="sale.js"></script>
 <script src="buy.js"></script>
 <script src="js/chatroom.js"></script>
+<script src="js/chatroom_event.js"></script>
 </html>
