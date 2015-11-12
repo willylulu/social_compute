@@ -3,10 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-         <script src="/socket.io/socket.io.js"></script>
-         <script src="man.js"></script>
-         <script src="sale.js"></script>
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
 	<div>Sell Man</div>
@@ -14,12 +11,17 @@
 	<div>Youtube Url</div>
 	<div class="youtubeurl"></div>
 </body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="man.js"></script>
+<script src="sale.js"></script>
 <script type="text/javascript">
+	var user_id;
+	var url;
 	$(document).ready(function() {
 		// body...
-		var seller_id={{seller_id}};
-		var youtubeurl="{{youtubeurl}}";
-		
+		user_id={{seller_id}};
+		url="{{youtubeurl}}";
+		create_store();
 	});
 </script>
 </html>

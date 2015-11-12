@@ -1,5 +1,6 @@
 var channels = new Object();
 var people = new Object();
+var carrer = new Object();
 var channel = function(seller_fb_id, youtube_url, socket_id) {
 	this.youtube_url = youtube_url;
 	this.seller_socket_id = socket_id;
@@ -29,8 +30,8 @@ app.get('/chatcost',function (req,res) {
 	// body...
 	//var post = req.query;
 	var data = require('url').parse(req.url,true).query;
-	console.log(data);
-	res.render('./chatroom.html', data);
+	//console.log(data);
+	res.render(__dirname +'/chatroom.html', data);
 });
 app.post('/', function(req, res) {
 	// body...
@@ -44,13 +45,15 @@ app.post('/', function(req, res) {
 	req.on('end', function() {
 		post = qr.parse(body);
 		console.log(post);
-		res.render('./chatroom.html', post);
+		var update_url = 'http://localhost:8000/updatelive/?sellerid='+post.seller_id+"&url="+post.youtubeurl;
+		//console.log(update_url);
+		request.get(update_url);
+		res.render(__dirname +'/sale_man.html', post);
 	});
-
 
 });
 io.sockets.on('connection', function(socket) {
-	console.log('type:' + socket.handshake.query.type);
+	//console.log('type:' + socket.handshake.query.type);
 	socket.on('response_id_url', function(sale) {
 		// body...
 		create_channel(sale, socket.id);
@@ -68,26 +71,36 @@ io.sockets.on('connection', function(socket) {
 		console.log(fb_id);
 		for (var i = 0; i < customers.length; i++) {
 			io.to(customers[i]).emit('chat',user_id,talk);
-			console.log('talk');
+			//console.log('talk');
 		};
 	});
+	socket.on('disconnect',function () {
+		// body...
+		console.log(people[socket.id]+" disconnect!");
+		if(carrer[socket.id]=='chief'){
+			//chief disconnect
+			requests.post("localhost:8000/buyqueue", data = {"key":"value"})
+		}
+	})
 });
 
 function create_channel(sale, socket_id) {
 	// body...
 	var new_channel = new channel(sale.seller_fb_id, sale.youtube_url, socket_id);
 	people[socket_id]='Chief';
+	carrer[socket_id]='chief';
 	new_channel.customers.push(socket_id);
 	channels[sale.seller_fb_id] = new_channel;
-	console.log(sale.seller_fb_id);
-	console.log(new_channel.customers.length);
+	//console.log(sale.seller_fb_id);
+	//console.log(new_channel.customers.length);
 }
 
 function join_broadcast(fb_id,my_id, socket_id) {
 	// body...
-	console.log(fb_id);
+	//console.log("+++:"+fb_id);
 	var channel = channels[fb_id];
 	people[socket_id]=my_id;
+	carrer[socket_id]='walker';
 	channel.customers.push(socket_id);
 	console.log('url:' + channel.youtube_url);
 }
