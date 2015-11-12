@@ -16,3 +16,4 @@ function create_store () {
 	socket.on('buyer_product_data',function(response){
 		UpdateSellerProductList(response);
 	});
+}
