@@ -1,6 +1,8 @@
 var channels = new Object();
 var people = new Object();
 var carrer = new Object();
+var buyer_queue = new Object();
+
 var channel = function(seller_fb_id, youtube_url, socket_id) {
 	this.youtube_url = youtube_url;
 	this.seller_socket_id = socket_id;
@@ -12,8 +14,8 @@ var express = require('express'),
 	io = require('socket.io').listen(server);
 request = require('request');
 var engines = require('consolidate');
-server.listen(process.env.PORT || 3000);
 
+server.listen(5000);
 app.set('views', __dirname + 'views');
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
@@ -45,23 +47,31 @@ app.post('/', function(req, res) {
 	req.on('end', function() {
 		post = qr.parse(body);
 		console.log(post);
-		var update_url = 'http://localhost:8000/updatelive/?sellerid='+post.seller_id+"&url="+post.youtubeurl;
+		var update_url = 'http://localhost:8000/updatelive';
 		//console.log(update_url);
-		request.get(update_url);
-		res.render(__dirname +'/sale_man.html', post);
+		request.post(update_url,{'sellerid':post.seller_id,'url':post.youtubeurl,'productid':[1,2,3,4,5,6]});
+		res.render(__dirname +'/chatsell.html', post);
 	});
 
 });
 io.sockets.on('connection', function(socket) {
 	//console.log('type:' + socket.handshake.query.type);
-	socket.on('response_id_url', function(sale) {
+	socket.on('response_add_seller', function(data) {
 		// body...
-		create_channel(sale, socket.id);
+		console.log('response_add_seller:'+data);
+		var new_channel = new channel(data.id, data.url,socket.id);
+		carrer[data.id]='chief';
+		new_channel.customers.push(data);
+		channels[data.id] = new_channel;
 	});
-	socket.on('response_fb_id_my_id', function(my_id,fb_id) {
+	socket.on('response_buyer_id_seller_id', function(data) {
 		// body...
-		join_broadcast(fb_id,my_id, socket.id);
-		socket.emit('response_url', channels[fb_id].youtube_url);
+		console.log('response_buyer_id_seller_id:'+data);
+		var channel = channels[data.seller_id];
+		carrer[data.id]='walker';
+		channel.customers.push(data);
+		console.log('url:' + channel.youtube_url);
+		socket.emit('response_url', channels[data.seller_id].youtube_url);
 	});
 	socket.on('chat',function (fb_id,user_id,talk) {
 		console.log(fb_id);
@@ -79,28 +89,10 @@ io.sockets.on('connection', function(socket) {
 		console.log(people[socket.id]+" disconnect!");
 		if(carrer[socket.id]=='chief'){
 			//chief disconnect
-			requests.post("localhost:8000/buyqueue", data = {"key":"value"})
+			buyer_queue['seller_id'] = socket.id;
+			requests.post("localhost:8000/buyqueue", buyer_queue[socekt.id]);
+		
 		}
 	})
 });
 
-function create_channel(sale, socket_id) {
-	// body...
-	var new_channel = new channel(sale.seller_fb_id, sale.youtube_url, socket_id);
-	people[socket_id]='Chief';
-	carrer[socket_id]='chief';
-	new_channel.customers.push(socket_id);
-	channels[sale.seller_fb_id] = new_channel;
-	//console.log(sale.seller_fb_id);
-	//console.log(new_channel.customers.length);
-}
-
-function join_broadcast(fb_id,my_id, socket_id) {
-	// body...
-	//console.log("+++:"+fb_id);
-	var channel = channels[fb_id];
-	people[socket_id]=my_id;
-	carrer[socket_id]='walker';
-	channel.customers.push(socket_id);
-	console.log('url:' + channel.youtube_url);
-}
