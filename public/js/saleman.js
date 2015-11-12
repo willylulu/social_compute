@@ -1,5 +1,13 @@
 var man_price_list = [];
-
+function UpdateSellerProductList (res) {
+    // body...
+    //res.product_list
+    var wufa = "";
+    for (var i = 0; i < res.product_list.length; i++) {
+        wufa+="<input type=\"radio\" name=\"choose_product\" value=\""+res.product_list[i].id+"\">"+res.product_list[i].name+"</br>";
+    };
+    $("#productlist").html(wufa);
+}
 function SelectProduct(product_id)
 {
 	//clear 

@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+        <link rel="stylesheet" href="css/chatroom.css" />
 	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
@@ -21,8 +22,13 @@
    </section>
 
     <section id="sellerproducts">
-       <div id="productname" class="productlist"></div>
+       <div id="productname" class="productname"></div>
+       <div id="productlist" class="product_list"></div>
      </div>
+     <div id="price-input-wrapper">
+                <input id="price-input" type="text" class="inputholder" placeholder="希望價格">
+                <button id="send">Go</button>
+    </div>
   </section>
 
 
@@ -43,4 +49,6 @@
 		create_store();
 	});
 </script>
+<script src="js/saleman.js"></script>
+<script src="js/saleman_event.js"></script>
 </html>
