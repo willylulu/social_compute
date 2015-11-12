@@ -1,6 +1,6 @@
 enter_store();
 
-
+//buyer_send_message
 function SendMessage() {
     var msg_input = document.getElementById("msg-input");
     var msg = msg_input.value;
@@ -12,6 +12,7 @@ function SendMessage() {
 
     socket.emit('buyer_send_message',sendObj);
 }
+
 
 function UpdateMessage(response) {
 
@@ -27,7 +28,7 @@ function UpdateMessage(response) {
 }
 
 
-
+//emit to 
 function ChangePrice()
 {
     //change my on price
@@ -37,7 +38,7 @@ function ChangePrice()
     sendObj.user = me;
     sendObj.price = price;
 
-    socket.emit('buyer_price_changed',sendObj);
+    socket.emit('buyer_change_price',sendObj);
 }
 
 function UpdatePrice(response)
@@ -45,13 +46,16 @@ function UpdatePrice(response)
     //price list 
     response.user.name;
     response.price
-
+    
 
 }
 
 
-function UpdateProduct()
+function UpdateProduct(response)
 {
-
+    var price = response.price;
 }
+
+
+
 
