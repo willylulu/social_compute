@@ -9,7 +9,8 @@ function create_store () {
 		UpdateMessage(response);
 	});
 	socket.on('buyer_price_broadcast',function (response) {
-
 		UpdatePrice(response);
 	});
-}
+	socket.on('buyer_product_data',function(response){
+		
+	});
