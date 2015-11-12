@@ -107,7 +107,7 @@ io.sockets.on('connection', function(socket) {
         var user_id   = response.user.id;
         var price = response.price;
 		var customers  = channels[seller_id].customers;
-		
+	    response.customers = customers;	
         channels[seller_id].customers[user_id].price = price;
  
         for (var key in customers) {
