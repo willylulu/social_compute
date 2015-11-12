@@ -1,7 +1,14 @@
-function SelectProduct()
+function SelectProduct(product_id)
 {
 	//clear 
+	var sendObj = new Object;
+    sendObj.user = me;
+    sendObj.product = new Object;
+    sendObj.product.id = product_id;
+
+	socket.emit('select_product',sendObj);
 }
+
 
 function SellerChangePrice(price)
 {
@@ -13,12 +20,6 @@ function SellerChangePrice(price)
 
 }
 
-function UpdateSellerPrice(response)
-{
-    //price list 
-    response.user.name;
-    response.price = 
-}
 
 
 function SellerConfirmProductOrder(customers)

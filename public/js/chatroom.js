@@ -46,14 +46,21 @@ function UpdatePrice(response)
     //price list 
     response.user.name;
     response.price
-    
+}
 
+function UpdateSellerPrice(response)
+{
+    //price list 
+    response.user.name;
+    response.price = 
 }
 
 
 function UpdateProduct(response)
 {
-    var price = response.price;
+    response.product.name;
+    
+
 }
 
 
