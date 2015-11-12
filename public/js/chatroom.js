@@ -40,22 +40,25 @@ function ChangePrice(price)
 function UpdatePrice(response)
 {
     //price list 
-    response.user.name;
-    response.price
+    var customers = response.customers;
+    var wufa="";
+    for(var key in customers){
+        wufa+="<div>ID: "+man_price_list[i].id+" Price: "+man_price_list[i].price+"</div>"
+    }
+    $('#price-box').html(wufa);
 }
 
 function UpdateSellerPrice(response)
 {
     //price list 
-    response.user.name;
-    response.price = 
+    var wufa = "$"+response.price;
+    $('#productprice').html(wufa);
 }
 
 function UpdateProduct(response)
 {
-    response.product.name;
-    
-
+    var wufa =response.product.name;
+    $('#productname').html(wufa);
 }
 
 
