@@ -15,7 +15,7 @@ var express = require('express'),
 request = require('request');
 var engines = require('consolidate');
 
-server.listen(5000);
+server.listen(3000);
 app.set('views', __dirname + 'views');
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
@@ -46,8 +46,8 @@ app.post('/', function(req, res) {
 	req.on('end', function() {
 		post = qr.parse(body);
 	    console.log(post['product[]']);	
-		//var update_url = 'http://tvsalestream.herokuapp.com';
-		var update_url = 'http://localhost:8000/updatelive';
+		var update_url = 'http://tvsalestream.herokuapp.com';
+		//var update_url = 'http://localhost:8000/updatelive';
         var seller_id = post.sellerid;
 		var products = post['product[]'];
         
