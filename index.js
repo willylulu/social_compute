@@ -46,14 +46,23 @@ app.post('/', function(req, res) {
 	var post;
 	req.on('end', function() {
 		post = qr.parse(body);
-		console.log(post);
-		var update_url = 'http://localhost:8000/updatelive';
+		
+		var update_url = 'http://tvsalestream.herokuapp.com';
 		//console.log(update_url);
-		request.post(update_url,{'sellerid':post.seller_id,'url':post.youtubeurl,'productid':[1,2,3,4,5,6]});
+		var products = post.product;
+		for (var i = products.length - 1; i >= 0; i--) {
+			var s = products[i].split('/');
+			var id = s[0];
+			var name = s[1];
+			channels[seller_id].product_list[id] = name;
+		}
+
+		request.post(update_url,{'sellerid':post.seller_id,'url':post.youtubeurl,'productid':post.product,'seller_name':post.seller_name});
 		res.render(__dirname +'/chatsell.html', post);
 	});
 
 });
+
 io.sockets.on('connection', function(socket) {
 	//console.log('type:' + socket.handshake.query.type);
 

@@ -1,4 +1,3 @@
-var socket;
 function conversation () {
 	// body...
 	var talk = $('.talk').val();

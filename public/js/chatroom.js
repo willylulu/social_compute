@@ -24,6 +24,8 @@ function UpdateMessage(response) {
 
 }
 
+
+
 //emit to 
 function ChangePrice(price)
 {

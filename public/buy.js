@@ -1,3 +1,4 @@
+var socket;
 function enter_store () {
 	// body...
 	socket = io.connect('',{query: 'type=buy'});
