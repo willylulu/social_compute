@@ -47,7 +47,8 @@ app.post('/', function(req, res) {
 	req.on('end', function() {
 		post = qr.parse(body);
 		
-		var update_url = 'http://tvsalestream.herokuapp.com';
+		//var update_url = 'http://tvsalestream.herokuapp.com';
+		var update_url = 'http://localhost:5000';
 		//console.log(update_url);
 		var products = post.product;
 		for (var i = products.length - 1; i >= 0; i--) {
@@ -116,6 +117,21 @@ io.sockets.on('connection', function(socket) {
         }
     });
 
+    socket.on('seller_confirm_product_order', function(response){
+        var seller_id = response.user.seller_id;
+        var product_id = channels[seller_id].product.id;
+        var product_name = channels[seller_id].product.name;
+        var customers = response.customers;   
+        var sendObj = new Object();
+
+        sendObj.product_id = product_id;
+        sendObj.product_name = product_name;
+        sendObj.buyer_queue = customers;
+ 
+	    requests.post("localhost:8000/buyqueue", sendObj);
+    
+    }); 
+
     socket.on('select_product', function(response) {
         var seller_id = response.user.seller_id;
         var customers = channels[seller_id].customers;
@@ -133,12 +149,6 @@ io.sockets.on('connection', function(socket) {
 	socket.on('disconnect',function () {
 		// body...
 		console.log(people[socket.id]+" disconnect!");
-		if(carrer[socket.id]=='chief'){
-			//chief disconnect
-			buyer_queue['seller_id'] = socket.id;
-			requests.post("localhost:8000/buyqueue", buyer_queue[socekt.id]);
-		
-		}
 	});
 });
 
