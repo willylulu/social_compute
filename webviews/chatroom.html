@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+         <link rel="stylesheet" href="css/chatroom.css" />
+         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+
+<body id="body">
+         <div id="msg-wrapper">
+                  <div id="msg-box">
+                  </div>
+                  <div id="msg-input-wrap">
+                           <input id="msg-input" type="text" placeholder="你想說什麼？">
+                           <button id="send" onclick="SendMessage(user_id)">
+                  </div>
+         </div>
+         <iframe id="stream-frame" src="http://www.youtube.com/embed/XGSy3_Czz8k?autoplay=1">
+         </iframe>
+</body>
+<script>
+var user_id = {{seller_id}};
+var url = "{{youtubeurl}}";
+console.log(user_id);
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="man.js"></script>
+<script src="sale.js"></script>
+<script src="buy.js"></script>
+<script src="js/chatroom.js"></script>
+</html>

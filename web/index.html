@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+         <meta charset="UTF-8">
+         <title>Document</title>
+         <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+         <script src="/socket.io/socket.io.js"></script>
+         <script src="man.js"></script>
+         <script src="sale.js"></script>
+         <script src="buy.js"></script>
+         <style type="text/css">
+         .but {
+                  margin: 10px;
+         }
+         </style>
+</head>
+
+<body>
+         <div id="status">
+         </div>
+         <div>
+                  <input type="text" class="url">
+                  <input class="but" type="button" value="Create Store" onClick="create_store()">
+         </div>
+         <div>
+                  <input type="text" class="fb_id">
+                  <input class="but" type="button" value="Enter Store" onClick="enter_store()">
+         </div>
+         <div>
+            <input type="text" class="talk">
+            <input type="button" class="but" value="Enter" onClick="conversation()">
+         </div>
+         <div class="container"></div>
+</body>
+<script type="text/javascript">
+var user_id=Math.floor((Math.random() * 10000) + 1000);
+console.log(user_id);
+
+/*window.fbAsyncInit = function() {
+         FB.init({
+                  appId: '1703464653208469',
+                  cookie: true, // enable cookies to allow the server to access 
+                  // the session
+                  xfbml: true, // parse social plugins on this page
+                  version: 'v2.2' // use version 2.2
+         });
+
+         FB.getLoginStatus(function(response) {
+                  statusChangeCallback(response);
+         });
+
+};
+(function(d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) return;
+         js = d.createElement(s);
+         js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+
+function statusChangeCallback(response) {
+         console.log('statusChangeCallback');
+         console.log(response);
+         // The response object is returned with a status field that lets the
+         // app know the current login status of the person.
+         // Full docs on the response object can be found in the documentation
+         // for FB.getLoginStatus().
+         if (response.status === 'connected') {
+                  // Logged into your app and Facebook.
+                  //testAPI();
+                  user_id = response.authResponse.userID;
+         } else if (response.status === 'not_authorized') {
+                  // The person is logged into Facebook, but not your app.
+                  document.getElementById('status').innerHTML = 'Please log ' +
+                           'into this app.';
+         } else {
+                  // The person is not logged into Facebook, so we're not sure if
+                  // they are logged into this app or not.
+                  document.getElementById('status').innerHTML = 'Please log ' +
+                           'into Facebook.';
+         }
+}
+
+function checkLoginState() {
+         FB.getLoginStatus(function(response) {
+                  statusChangeCallback(response);
+         });
+}*/
+
+
+</script>
+
+</html>
