@@ -92,9 +92,11 @@ io.sockets.on('connection', function(socket) {
 		// body...
 		console.log('response_add_seller:'+data);
 		var new_channel = new channel(data.id, data.url,socket.id);
-		carrer[data.id]='chief';
-		new_channel.customers.push(data);
+		//carrer[data.id]='chief';
+		//new_channel.customers.[data.id] = data;
+		new_channel.customers = new Object();
 		channels[data.id] = new_channel;
+
 		var sendObj = new Object;
 		sendObj.product_list = channels[data.id].product_list;
 		console.log("update product list");
