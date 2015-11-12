@@ -15,7 +15,7 @@ var express = require('express'),
 request = require('request');
 var engines = require('consolidate');
 
-server.listen(3000);
+server.listen(process.env.PORT||3000);
 app.set('views', __dirname + 'views');
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
