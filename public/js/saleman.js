@@ -17,7 +17,7 @@ function SellerChangePrice(price)
     sendObj.user = me;
     sendObj.price = price;
     socket.emit('seller_change_price',sendObj);
-
+    
 }
 
 
