@@ -1,0 +1,32 @@
+{
+  "name": "streamsale",
+  "version": "1.0.0",
+  "description": "online stream sale",
+  "main": "index.js",
+  "dependencies": {
+    "fs": "^0.0.2",
+    "querystring": "^0.2.0",
+    "consolidate": "^0.13.1",
+    "express": "^4.13.3",
+    "ejs": "^2.3.4",
+    "http": "^0.0.0",
+    "request": "^2.65.0",
+    "socket.io": "^1.3.7",
+    "mustache": "^2.2.0",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/willylulu/social_compute.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/willylulu/social_compute/issues"
+  },
+  "homepage": "https://github.com/willylulu/social_compute#readme"
+}
