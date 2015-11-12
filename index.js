@@ -135,7 +135,7 @@ io.sockets.on('connection', function(socket) {
         sendObj.product_name = product_name;
         sendObj.buyer_queue = customers;
  
-	    requests.post("localhost:8000/buyqueue", sendObj);
+	    request.post("localhost:8000/buyqueue", sendObj);
     
     }); 
 
