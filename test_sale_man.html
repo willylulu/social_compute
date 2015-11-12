@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+        <link rel="stylesheet" href="css/chatroom.css" />
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+    <section id="chat-container">
+       
+            <div id="msg-container">
+                <div id="msg-box-wrapper">
+                    <div id="msg-box"> 
+                    </div>
+                </div>
+             <div id="price-container">
+                <div id="price-box-wrapper">
+                    <div id="price-box"> 
+                    </div>
+                </div>
+   </section>
+
+    <section id="sellerproducts">
+       <div id="productname" class="productname"></div>
+       <div id="productlist" class="product_list"></div>
+     </div>
+     <div id="price-input-wrapper">
+                <input id="price-input" type="text" class="inputholder" placeholder="希望價格">
+                <button id="send">Go</button>
+    </div>
+  </section>
+
+
+
+
+
+</body>
+<script type="text/javascript">
+    var me = new Object();
+        me.seller_id = prompt("ID?");
+        me.url = Math.floor((Math.random() * 100) + 50);
+        me.name = Math.floor((Math.random() * 100) + 50);
+        me.id = me.seller_id;
+        console.log(me);
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="man.js"></script>
+<script src="sale.js"></script>
+<script type="text/javascript">
+                    //TEST START
+		create_store();
+</script>
+<script src="js/saleman.js"></script>
+<script src="js/saleman_event.js"></script>
+</html>

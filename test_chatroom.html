@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+         <link rel="stylesheet" href="css/chatroom.css" />
+         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+         <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+
+<body id="body">
+
+    <iframe id="stream-frame" src="http://www.youtube.com/embed/">
+    </iframe>
+
+
+    <section id="chat-container">
+        
+            <div id="msg-container">
+                <div id="msg-box-wrapper">
+                    <div id="msg-box"> 
+                    </div>
+                </div>
+                 <div id="msg-input-wrapper">
+                <input id="msg-input" class="inputholder" type="text" placeholder="你想說什麼？">
+                <button id="msg-send-btn" >Send</button>
+            </div>
+
+             <div id="price-container">
+                <div id="price-box-wrapper">
+                    <div id="price-box"> 
+                    </div>
+                </div>
+                 <div id="price-input-wrapper">
+                <input id="price-input" type="text" class="inputholder" placeholder="希望價格">
+                <button id="price-send-btn" >Go</button>
+            </div>
+    </section>
+
+    <section id="seller_info">
+        <div id="sellername" class="sell_class"><h1>HOLA</h1></div>
+        <div id="productname" class="sell_class" ><h2>stuff</h2></div>
+        <div id="productprice" class="sell_class" ><h3>$</h3></div>
+     </div>
+  </section>
+
+    </body>
+<script>
+var me = new Object();
+me.seller_id = prompt("seller_id?");
+me.url = prompt("url?");
+me.name = prompt("name?");
+me.id = prompt("id?");
+console.log(me);
+$('#msg-input').keypress(function(e){
+        if(e.keyCode==13)
+        $('#send').click();
+        });
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="man.js"></script>
+<script src="sale.js"></script>
+<script src="buy.js"></script>
+<script src="js/chatroom.js"></script>
+<script src="js/chatroom_event.js"></script>
+</html>

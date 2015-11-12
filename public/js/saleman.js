@@ -41,13 +41,9 @@ function SellerConfirmProductOrder(customers)
 function UpdatePrice(response)
 {
     //price list 
-    var customers = response.customers;
     var wufa="";
-    for(var key in customers){
-        var price = man_price_list[i].price;
-         var id = man_price_list[i].id;
-         var name = man_price_list[i].name;
-        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"bit\" value=\""+price+"\" id=\""+id+"\">"+name+": $"+price+"<br>"
+    for(var key in response){
+        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"bit\" value=\""+response[key].price+"\" id=\""+response[key].id+"\">"+response[key].name+": $"+response[key].price+"<br>"
     }
     $('#price-box').html(wufa);
 }

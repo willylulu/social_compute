@@ -18,5 +18,4 @@ $('#confirm-order-btn').click(function() {
 			check.id = $(this).attr("id");
 			check_list.push(check);
 		});
-	)
-};
+});

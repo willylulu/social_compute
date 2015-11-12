@@ -12,7 +12,6 @@ function enter_store () {
 	UpdateMessage(response);
 	});
 	socket.on('buyer_price_broadcast',function (response) {
-
 		UpdatePrice(response);
 	});
 	socket.on('seller_price_broadcast',function (response) {

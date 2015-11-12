@@ -8,22 +8,21 @@ if(e.keyCode==13){
 });
 
 
-$('price-send-btn').click(function()
+$('#price-send-btn').click(function()
 {
-	var price_input = document.getElementById("msg-input");
-    var price = price_input.value;
-    price_input.innerHTML = '';
+    var price = $('#price-input').val();
+    $('#price-input').val('');
     ChangePrice(price);
 });
 
 
 
-$('msg-send-btn').click(function()
+$('#msg-send-btn').click(function()
 {
-	var price_input = document.getElementById("msg-input");
-    var price = price_input.value;
-    price_input.innerHTML = '';
-    SendMessage(msg);
+	var msg = $('#msg-input').val();
+        console.log(msg);
+        $('#msg-input').val('');
+         SendMessage(msg);
 });
 
 

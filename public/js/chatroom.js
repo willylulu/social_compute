@@ -3,10 +3,10 @@ enter_store();
 //buyer_send_message
 function SendMessage(msg) {
 
-    var sendObj = new Object;
+    var sendObj = new Object();
     sendObj.user = me;
     sendObj.msg = msg;
-
+    console.log(sendObj);
     socket.emit('buyer_send_message',sendObj);
 }
 
@@ -33,17 +33,16 @@ function ChangePrice(price)
     var sendObj = new Object;
     sendObj.user = me;
     sendObj.price = price;
-
+    console.log( sendObj);
     socket.emit('buyer_change_price',sendObj);
 }
 
 function UpdatePrice(response)
 {
     //price list 
-    var customers = response.customers;
     var wufa="";
-    for(var key in customers){
-        wufa+="<div>ID: "+man_price_list[i].id+" Price: "+man_price_list[i].price+"</div>"
+    for(var key in response){
+        wufa+="<div>"+response[key].name+" : "+response[key].price+"</div>"
     }
     $('#price-box').html(wufa);
 }
