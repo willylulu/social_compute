@@ -6,10 +6,20 @@ function enter_store () {
 		// body...
 		console.log(url);
 	});
-	socket.on('chat',function (user_id,msg) {
+	socket.on('msg_broadcast',function (response) {
 		// body...
-		console.log(msg);
+	UpdateMessage(response);
+	});
+	socket.on('buyer_price_broadcast',function (response) {
 
-		PutMessage(user_id.replace(/\%20/g," "),msg);
+		UpdatePrice(response);
+	});
+	socket.on('seller_price_broadcast',function (response) {
+
+		UpdateSellerPrice(response);
+	});
+	socket.on('product_select_broadcast',function (response) {
+
+		UpdateProduct(response);
 	});
 }

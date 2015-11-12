@@ -7,4 +7,12 @@ function create_store () {
 		console.log(talk);
 		PutMessage(user_id.replace(/\%20/g," "), talk);
 	});
+	socket.on('msg_broadcast',function (response) {
+		// body...
+		UpdateMessage(response);
+	});
+	socket.on('buyer_price_broadcast',function (response) {
+
+		UpdatePrice(response);
+	});
 }
