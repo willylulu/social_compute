@@ -15,7 +15,7 @@ var express = require('express'),
 request = require('request');
 var engines = require('consolidate');
 
-server.listen(5000);
+server.listen(process.env.PORT||3000);
 app.set('views', __dirname + 'views');
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
@@ -41,25 +41,32 @@ app.post('/', function(req, res) {
 	req.on('data', function(data) {
 		body += data;
 	});
-
 	var qr = require('querystring');
 	var post;
 	req.on('end', function() {
 		post = qr.parse(body);
-		
-		//var update_url = 'http://tvsalestream.herokuapp.com';
-		var update_url = 'http://localhost:5000';
-		//console.log(update_url);
-		var products = post.product;
+	    console.log(post['product[]']);	
+		var update_url = 'http://tvsalestream.herokuapp.com/updatelive';
+		//var update_url = 'http://localhost:8000/updatelive';
+        var seller_id = post.sellerid;
+		var products = post['product[]'];
+        
+        var product_list = new Object();
+        channels[seller_id] = new Object(); 
+        channels[seller_id].product_list = product_list;
+        channels[seller_id].product = new Object();
+
+        console.log(products);
 		for (var i = products.length - 1; i >= 0; i--) {
 			var s = products[i].split('/');
 			var id = s[0];
 			var name = s[1];
 			channels[seller_id].product_list[id] = name;
 		}
-
-		request.post(update_url,{'sellerid':post.seller_id,'url':post.youtubeurl,'productid':post.product,'seller_name':post.seller_name});
-		res.render(__dirname +'/chatsell.html', post);
+        
+		request.post(update_url,{'sellerid':post.sellerid,'url':post.youtubeurl,'productid':post['product[]']});
+		
+        res.render(__dirname +'/sale_man.html', post);
 	});
 
 });
@@ -100,9 +107,9 @@ io.sockets.on('connection', function(socket) {
         var user_id   = response.user.id;
         var price = response.price;
 		var customers  = channels[seller_id].customers;
-		
+	    response.customers = customers;	
         channels[seller_id].customers[user_id].price = price;
- 
+        response.customers.sort(function(a, b) {b.price - a.price});
         for (var key in customers) {
             io.to(customers[key]).emit('buyer_price_broadcast', response);
         } 
@@ -128,7 +135,7 @@ io.sockets.on('connection', function(socket) {
         sendObj.product_name = product_name;
         sendObj.buyer_queue = customers;
  
-	    requests.post("localhost:8000/buyqueue", sendObj);
+	    request.post("localhost:8000/buyqueue", sendObj);
     
     }); 
 

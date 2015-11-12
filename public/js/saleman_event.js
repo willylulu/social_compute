@@ -4,3 +4,7 @@ if(e.keyCode==13)
 });
 
 
+$('#confirm-order-btn').click(function()
+{
+	
+)};
