@@ -56,6 +56,7 @@ app.post('/', function(req, res) {
             'url'      : post.youtubeurl,
         };
 
+        data = JSON.stringify(data);
 
         channels[seller_id] = new Object(); 
         channels[seller_id].product_list = product_list;
@@ -69,7 +70,12 @@ app.post('/', function(req, res) {
 			channels[seller_id].product_list[id] = name;
 		}
         
-		request.post({'url' : update_url, 'body' :JSON.stringify(data)});
+		request.post({
+            url:     update_url,
+            body:    data,
+        }, function(error, response, body){
+            console.log(body);
+        });
 		
         res.render(__dirname +'/sale_man.html', post);
 	});
