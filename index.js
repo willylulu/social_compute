@@ -55,10 +55,10 @@ app.get('/chatroom', function(req, res) {
 app.get('/hostroom', function(req, res) {
     // parse url to chatroom.html
     var hostfbid = req.query.hostfbid;
-    if(!hostfbid)
+    if(!hostfbid) {
+        res.sendStatus(404);
         return;
-    console.log(hostfbid);
-    var data = require('url').parse(req.url, true).query;
+    }
     res.render(room_route + 'hostroom.html');
 });
 
@@ -67,6 +67,20 @@ app.get('/chatroom_lulu', function(req, res) {
     res.sendFile(room_route + 'chatroom_lulu.html');
 });
 
+app.get('/channel', function(req, res) {
+    var chID = req.query.chID;
+
+    if(!chID || !channels) {
+        res.sendStatus(404);
+        return;
+    }
+    if(!channels[chID]) {
+        res.sendStatus(404);
+        return;
+    }
+    res.send(channels[chID], 200);
+
+});
  
 // initialize channel info from Django server.
 app.post('/', function(req, res) {
