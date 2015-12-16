@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>LiveStream Sale</title>
+	{% load staticfiles %}
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/grayscale.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">
+
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                     <li>
+			{% if accountname != '' %}
+			<h3 id="username" style="padding:1vw;" title="Click to logout!"> Hi, {{accountname}} </h3>
+			{% else %}
+                        <a href="./account">Login</a>
+			{% endif %}
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#about">Product</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#download">onLive</a>
+                    </li>
+                    <li>
+			{% if accountname != '' %}
+                        <h4 id="OpenStream" data-toggle="modal" data-target="#openstream"  style="padding:1.3vw;">OpenStream</h3>
+			{% endif %}
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav> 
+	<!-- Modal -->
+	<div id="openstream" class="modal fade" role="dialog" style="color:black;">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title">Hi, {{accountname}}</h4>
+	      </div>
+	      <div class="modal-body" style="display:inline-block">
+            <div>
+            {% for e in user_product %}
+            <input type="checkbox" name="product[]" data-product="{{e.name}}" value="{{e.id}}"> {{e.name}}       ${{e.price}}<br></input>
+            {% endfor %}	
+            </div>
+            <div>      
+            <input type="text" id="youtubeurl" data-name="{{accountname}}" data-uid="{{uid}}" style="margin-top:5px;"placeholder=" Youtube URL">
+            </div>
+            </div>
+	      <div class="modal-footer">
+        <button class="btn btn-default" onclick="openhost()"> Create </button>
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>	
+
+    <!-- Intro Header -->
+    <header class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                    	<canvas id="draw_title" width=640 height=100></canvas>
+                        <p id="secTitle" class="intro-text">Intutive, Worldwide, Awesome.<br> Start Right NOW.</p>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about"  style="background:lightblue;" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1 id="bool_product">Product Available</h2>
+	<div id="pre_btn" onclick="previous()" style="display:inline-block; margin-right : 5px;"><h1> < </h1></div>            
+        {% for ele in product %}
+        <div id="product{{forloop.counter}}" class="product_list" style="display:inline-block;">
+		<h4> {{ ele.name}} </h4>
+		<h5> ${{ ele.price}} </h5>
+		<h5> #{{ ele.ownername}} </h5>    
+        </div>	
+		{% endfor %}
+	<div id="next_btn" onclick="next()" style="display:inline-block;margin-left:5px;"><h1> > </h1></div>            
+        <div class="col-lg-8 col-lg-offset-9">    
+		<h3 id="add_product_btn" onclick="addproduct()">::Add Product::</h3>
+        </div>
+	</div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="content-section text-center">
+        <div class="download-section">
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                <h1>On Live</h1>
+                {% for e in onlive %}
+                <div> 
+                        
+                        <a id="PopStream" data-toggle="modal" data-target="#streamviewpop{{forloop.counter}}"  style="padding:1.3vw;"><h3>{{e.acc}}</h3></a>
+                </div>
+
+                        <div id="streamviewpop{{forloop.counter}}" class="modal fade" role="dialog" style="color:black;">
+                          <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                              <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Hi, Welcome to {{e.acc}}'s stream</h4>
+                              </div>
+                              <div class="modal-body" style="display:inline-block">
+                               
+                                
+                               <iframe width="420" height="315" src="http://www.youtube.com/embed/eaX19wA-EYI" frameborder="0" allowfullscreen></iframe> 
+                                </div>
+                              <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>	
+                        
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <div id="contact">
+    
+        
+    </div>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; Your Website 2014</p>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <script src="main.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
+
+</body>
+
+</html>

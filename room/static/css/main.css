@@ -1,0 +1,21 @@
+#draw_title{
+ margin:auto;
+}
+
+.product_list{
+     
+    color : darkblue;
+    border : 2px solid darkblue;
+    border-radius : 20%;
+    margin-left :5px;
+    width:17vw;
+    height:17vw;
+    padding-top:5vh;
+
+}
+
+#add_product_btn{
+
+    color : darkred;
+
+}

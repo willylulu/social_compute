@@ -1,0 +1,10 @@
+#msg-container{
+    border : 1px solid darkblue;
+    width : 100vw;
+    height: 30vh;
+}
+#price-container{
+    border : 1px solid darkgreen;
+    width : 100vw;
+    height: 30vh;
+}

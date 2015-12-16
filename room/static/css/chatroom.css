@@ -1,0 +1,54 @@
+div{
+    display:block;
+    margin-top:5px;
+}
+
+#msg-box-wrapper{
+
+   border: 2px solid lightblue;
+   width:20vw;
+   height:30vh;
+}
+
+#price-box-wrapper{
+    border: 2px solid darkblue;
+    width:20vw;
+    height:30vh;
+}
+
+
+
+#stream-frame{
+
+    position : absolute;
+    left : 5vw;
+    top :15vh;
+    width:60vw;
+    height:60vh;
+}
+
+#seller_info{
+    position:absolute;
+    top:80vh;
+    left:5vw;  
+}
+
+.sell_class{
+    margin-left:5vw;
+    display:inline-block;
+
+}
+
+
+#chat-container{
+
+    position : absolute;
+    left : 70vw;
+    top :15vh;
+ 
+
+}
+
+.inputholder{
+
+}
