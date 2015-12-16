@@ -1,6 +1,9 @@
 
 var ptr = 1;
 var bound = $('.product_list').length;
+var front_end_url = 'http://localhost:8000/';
+var socket_url = 'http://localhost:3000/';
+
 
 window.onload = function (){
  draw();
@@ -139,7 +142,7 @@ function create(){
 }
 
 function openhost(){
-    var posturl = 'http://localhost:3000/';
+    var posturl = socket_url;
     var host_name = $('#youtubeurl').data('name');
     var host_fb_id = $('#youtubeurl').data('uid');
     var stream_url = $('#youtubeurl').val();
@@ -169,6 +172,8 @@ function openhost(){
     // done
   };
 */
+
+    console.log('prepare!');
     data_json = JSON.stringify(data);
     $.ajax({
         url: posturl,
@@ -178,8 +183,8 @@ function openhost(){
             console.log('Mom I did it');
         }
     });
- 
-       
+    console.log('qq!');
+    window.location = socket_url + ('hostroom/' + host_fb_id);
    // post(posturl,data_json,'post');
     
 }
