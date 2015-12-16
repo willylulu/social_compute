@@ -52,9 +52,11 @@ app.get('/chatroom', function(req, res) {
     res.render(room_route + 'chatroom.html');
 });
 
-app.get('/hostroom/:hostfbid', function(req, res) {
+app.get('/hostroom', function(req, res) {
     // parse url to chatroom.html
-    var hostfbid = req.params.hostfbid;
+    var hostfbid = req.query.hostfbid;
+    if(!hostfbid)
+        return;
     console.log(hostfbid);
     var data = require('url').parse(req.url, true).query;
     res.render(room_route + 'hostroom.html');

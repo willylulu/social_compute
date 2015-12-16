@@ -184,7 +184,7 @@ function openhost(){
         }
     });
     console.log('qq!');
-    window.location = socket_url + ('hostroom/' + host_fb_id);
+    window.location = socket_url + ('hostroom?hostfbid=' + host_fb_id);
    // post(posturl,data_json,'post');
     
 }
