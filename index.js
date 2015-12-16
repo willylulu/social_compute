@@ -16,6 +16,7 @@ var room_route = __dirname + '/room/templates/';
 
 
 // url base.
+var backend_url = 'http://localhost:3000/';
 var update_url = 'http://localhost:8000/updatelive/';
 
 // server socket on 3000
@@ -51,6 +52,14 @@ app.get('/chatroom', function(req, res) {
     res.render(room_route + 'chatroom.html');
 });
 
+app.get('/hostroom/:hostfbid', function(req, res) {
+    // parse url to chatroom.html
+    var hostfbid = req.params.hostfbid;
+    console.log(hostfbid);
+    var data = require('url').parse(req.url, true).query;
+    res.render(room_route + 'hostroom.html');
+});
+
 // not sure why lulu keep this.
 app.get('/chatroom_lulu', function(req, res) {
     res.sendFile(room_route + 'chatroom_lulu.html');
@@ -68,30 +77,14 @@ app.post('/', function(req, res) {
     });
 
     req.on('end', function() {
-        console.log('hi');
-        console.log(body);
-        var q = JSON.parse(body);
-        console.log(q);
+
         //body = qs.parse(body);
         //console.log(body);
-      
-        var host_fb_id = body.host_fb_id; // use fb id as identifier  
-        //var products = body['product[]'];
-        var ProductList = body['product[]'];
-        var data = {
-            'host_fb_id' : host_fb_id,
-            'stream_url' : body.stream_url,
-        };
-        data = JSON.stringify(data);
-        
-        // Tell django server that the stream is onlive.
-        request.post({
-            url : update_url,
-            body: data,
-        }, function(error, response, body) {
-            console.log(body);
-        });
-
+        var data = JSON.parse(body);
+        var host_fb_id = data.hostfbid; // use fb id as identifier  
+        var ProductList = data.productlist;
+        var streamurl = data.streamurl;       
+        console.log(data);
         // put basic info into target channel.
         // other info such as stream url and socket id
         // will be init when create_channel socket catch data.
@@ -99,8 +92,9 @@ app.post('/', function(req, res) {
         channels[host_fb_id].ProductList = ProductList;
         channels[host_fb_id].CurrentProduct = new Object();
         channels[host_fb_id].PriceList = new Object();
-
-        res.render(_dirname + '', body);
+        channels[host_fb_id].stream_url = streamurl;        
+        console.log('go!');
+        res.render(room_route + 'chatroom.html', data);
 
     });
 
@@ -118,7 +112,10 @@ io.sockets.on('connection', function(socket) {
         // fb_name
         // host_fb_id
         // stream_url
+        console.log(req);
+        console.log('create!');
         var sendObj = new Object();
+        var host_fb_id = req.host_fb_id;
 
         if(channels[host_fb_id]) {
             sendObj.ProductList = channels[host_fb_id].ProductList;
@@ -127,9 +124,6 @@ io.sockets.on('connection', function(socket) {
         }
 
         var host = new Object();
-        var host_fb_id = req.host_fb_id;
-        var stream_url = req.stream_url;
-        channels[host_fb_id].stream_url = stream_url;
         channels[host_fb_id].socket_id = socket.id;
 
         // Put host into customer list to recieve chat msg.
@@ -186,3 +180,4 @@ io.sockets.on('connection', function(socket) {
     });
 
 });
+
