@@ -25,7 +25,7 @@ function create_channel () {
 
 
 	socket.emit('create_channel', me);
-	
+	// listen on target socket
 	socket.on('broadcast_msg',function (response) {
 		// body...
 		UpdateMessage(response);
