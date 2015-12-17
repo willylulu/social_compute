@@ -17,6 +17,9 @@ app.use(express.static(__dirname + '/hall/static'));
 
 // front page.
 app.get('/', function(req, res) {
+    var onlive_channel = require('./index.js').channels;
+    console.log(onlive_channel);
+
     res.sendFile(templates_route + 'index.html');
 });
 

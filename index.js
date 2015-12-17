@@ -8,12 +8,9 @@ var express = require('express'),
 
 var channels = new Object(); // save all channel info
 var room_route = __dirname + '/room/templates/';
-/*var channel = function (stream_url, host_socket_id) {
-    this.stream_url = stream_url;
-    this.host_socket_id = host_socket_id; 
-    this.customers = new Object();
-};*/
 
+// share channel data to all backend port
+module.exports.channels = channels;
 
 // url base.
 var backend_url = 'http://localhost:3000/';
@@ -25,11 +22,6 @@ app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 app.set('views', __dirname + 'views');
 app.use(express.static(__dirname + '/room/static'));
-
-// url mapping
-/*app.get('/', function(req, res) {
-    res.sendFile(templates_route + 'index.html');
-});*/
 
 
 app.get('/test_chatroom', function(req, res) {
@@ -65,21 +57,6 @@ app.get('/hostroom', function(req, res) {
 // not sure why lulu keep this.
 app.get('/chatroom_lulu', function(req, res) {
     res.sendFile(room_route + 'chatroom_lulu.html');
-});
-
-app.get('/channel', function(req, res) {
-    var chID = req.query.chID;
-
-    if(!chID || !channels) {
-        res.sendStatus(404);
-        return;
-    }
-    if(!channels[chID]) {
-        res.sendStatus(404);
-        return;
-    }
-    res.send(channels[chID], 200);
-
 });
  
 // initialize channel info from Django server.
