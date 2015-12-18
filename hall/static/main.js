@@ -1,21 +1,109 @@
 
-var ptr = 1;
-var bound = $('.product_list').length;
+var ptr = 0;//modify
+
+var bound = productlist.length; //modify
+
 var front_end_url = 'http://localhost:8000/';
 var socket_url = 'http://localhost:3000/';
 
-
 window.onload = function (){
- draw();
-$('.product_list').hide();
-$('#secTitle').css("color","rgba(255,255,255,0.5)");
+     draw();
 
-var i ;
-for ( i = ptr ; i < ptr +3 ; i++){ 
-name = makeName(i);
- $(name).show();
-}
- checkBound();
+    //add
+     console.log(productlist);
+    for (var i = 0; i < productlist.length; i++) {
+        var product_for_sale = document.createElement('div');
+        product_for_sale.id = "product"+i;
+        product_for_sale.className = "product_list";
+        $("#product_sales").append(product_for_sale);
+        $("#product"+i).attr('style',"display:inline-block;");
+        $("#product"+i).html("<h4>"+productlist[i].fields.name+"</h4><h5>"+productlist[i].fields.price+"</h5><h5>"+productlist[i].fields.ownername+"</h5>");
+    };
+
+    //add
+     var onlive_forloop_counter=1;
+    for (var key in onlive_Channel) {
+        var onlive_obj1 = document.createElement('div');
+        $("#onlive_body").append(onlive_obj1);
+            var PopStream = document.createElement('a');
+            PopStream.id = 'PopStream';
+            PopStream.className = "PopStream";
+            onlive_obj1.appendChild(PopStream);
+            PopStream.setAttribute('data-toggle','modal');
+            PopStream.setAttribute('data-target','#streamviewpop'+onlive_forloop_counter);
+            PopStream.setAttribute('style','padding:1.3vw;');
+                var objh = document.createElement('h3');
+                PopStream.appendChild(objh);
+                    var t = document.createTextNode(key);
+                    objh.appendChild(t);
+
+        var onlive_obj2 = document.createElement('div');
+        onlive_obj2.id = 'streamviewpop'+onlive_forloop_counter;
+        onlive_obj2.className = "modal fade";
+        $("#target id").append(onlive_obj2);
+            var dialog = document.createElement('div'); 
+            dialog.className = "modal-dialog";
+            onlive_obj2.appendChild(dialog);
+                var content = document.createElement('div');  
+                content.className = "modal-content";
+                dialog.appendChild(content);
+                    var header = document.createElement('div');
+                    header.className = "modal-header";
+                    content.appendChild(header);
+                        var button = document.createElement('button');
+                        header.appendChild(button);
+                        button.setAttribute('class','close');
+                        button.setAttribute('data-dismiss','modal');
+                            var t2 = document.createTextNode('&times;');
+                            button.appendChild(t2);
+                        var h4 = document.createElement('h4');
+                        h4.className = "modal-title";
+                        header.appendChild(h4);
+                            var t3 = document.createTextNode("Hi, Welcome to "+key+"'s stream");
+                            h4.appendChild(t3);
+                    var body = document.createElement('div');
+                    body.className = "modal-body";
+                    content.appendChild(body);
+                    body.setAttribute('style',"display:inline-block");
+                        var iframe = document.createElement('iframe');
+                        target obj.appendChild(iframe);
+                        iframe.setAttribute('width':'420');
+                        iframe.setAttribute('height':'315');
+                        iframe.setAttribute('src':"http://www.youtube.com/embed/eaX19wA-EYI");
+                        iframe.setAttribute('frameborder','0');
+                        iframe.setAttribute('allowfullscreen');
+                    var footer = document.createElement('div');
+                    footer.className = "modal-footer";
+                    content.appendChild(footer);
+                        var button2 = document.createElement('button');
+                        button2.className = "btn btn-default";
+                        footer.appendChild(button2);
+                        button.setAttribute('type','button');
+                        button.setAttribute('data-dismiss','modal');
+                            var t4 = document.createTextNode("Close");
+                            button.appendChild(t4);
+                        //other attributes
+                        
+                    //other attributes
+                    
+                        //other attributes
+                        
+                    //other attributes
+                    
+        
+         onlive_forloop_counter++;
+    }
+
+    $('.product_list').hide();
+
+    $('#secTitle').css("color","rgba(255,255,255,0.5)");
+
+    var i ;
+    for ( i = ptr ; i < ptr +3 ; i++){ 
+    name = makeName(i);
+     $(name).show();
+    }
+     checkBound();
 }
 
 
@@ -59,14 +147,14 @@ function checkBound(){
 	return; 
 	}
 	
-	if (ptr == bound || ptr + 3 > bound){
+	if (ptr == bound || ptr + 3 >= bound){ //modify
 		$('#next_btn').hide();
 	}
 	else{
-	$('#next_btn').show();
+	       $('#next_btn').show();
 	}
 
-	if(ptr == 1){
+	if(ptr == 0){  //modify
 		$('#pre_btn').hide();
 	}
 	else{
