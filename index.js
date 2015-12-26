@@ -124,7 +124,8 @@ io.sockets.on('connection', function(socket) {
         // stream_url
         var sendObj = new Object();
         var host_fb_id = req.host_fb_id;
-
+        console.log('mery');
+        console.log(host_fb_id);
 
         if(channels[host_fb_id].socket_id) {
             sendObj.ProductList = channels[host_fb_id].ProductList;
