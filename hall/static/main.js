@@ -1,3 +1,4 @@
+var productlist = [];
 
 var ptr = 0;//modify
 
@@ -19,19 +20,18 @@ function load_productlist () {
 }
 function my_productlist (list) {
     // body...
-    var my_productlist = list;
-    for (var i = 0; i < my_productlist.length; i++) {
+    for (var i = 0; i < list.length; i++) {
         var my_product_for_sale = document.createElement('div');
         $("#my_product_for_sale").append(my_product_for_sale);
         var input = document.createElement('input');
         my_product_for_sale.appendChild(input);
         input.setAttribute("type",'checkbox');
         input.setAttribute('name','my_product');
-        input.setAttribute('data-product',my_productlist[i].fields.name);
-        input.setAttribute('value',my_productlist[i].pk);
+        input.setAttribute('data-product',list[i].fields.name);
+        input.setAttribute('value',list[i].pk);
         var temp = document.createElement('span');
         my_product_for_sale.appendChild(temp);
-        var t = document.createTextNode(my_productlist[i].fields.name+" $"+my_productlist[i].fields.price);
+        var t = document.createTextNode(list[i].fields.name+" $"+list[i].fields.price);
        temp.appendChild(t);
     };
 }
@@ -46,17 +46,18 @@ function my_productlist (list) {
                 $("#sale_username").html("Hi,"+res.name);
                 $("#FB_Login").hide();
                 $.post('/checklogin',{'uid':res.id},function(req,response) {
-                    console.log(req);
+                    //console.log(req);
+                    productlist = req;
                     my_productlist(req);
                 });
             });
         });
     }
 }
+
 function load_channels () {
     // body...
     console.log(productlist);
-    
 
     //add
      var onlive_forloop_counter=1;
@@ -265,6 +266,9 @@ function create(){
 }
 
 function openhost(){
+
+    console.log(productlist);
+
     var posturl = socket_url;
     var host_name = accountname;
     var host_fb_id = uid;
@@ -273,7 +277,7 @@ function openhost(){
     $("input[name='my_product']:checked").each(function(){
         var checkproduct = {};
         checkproduct['pid'] = $(this).val();
-        checkproduct['pname'] = $(this).data('product');
+        checkproduct['productname'] = $(this).data('product');
         productlist.push(checkproduct);
     });
     data = {};
