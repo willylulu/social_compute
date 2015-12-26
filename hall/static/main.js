@@ -1,5 +1,4 @@
-var productlist = [];
-
+var userproductlist = {};
 var ptr = 0;//modify
 
 var bound = productlist.length; //modify
@@ -35,7 +34,19 @@ function my_productlist (list) {
        temp.appendChild(t);
     };
 }
- function FBinitCallback () {
+
+function createGlobalProductList(list){
+    for (var e in list){
+        var name = list[e].fields.name;
+        var price = list[e].fields.price;
+        var description = list[e].fields.description;
+        var product = {};
+        product['price'] = price;
+        product['description'] = description;
+        userproductlist[name] = product;
+    }
+}
+function FBinitCallback () {
     // body...
     if(me!=undefined&&me.status=='connected'){
         FB.api('/me',function(res){
@@ -46,9 +57,8 @@ function my_productlist (list) {
                 $("#sale_username").html("Hi,"+res.name);
                 $("#FB_Login").hide();
                 $.post('/checklogin',{'uid':res.id},function(req,response) {
-                    //console.log(req);
-                    productlist = req;
                     my_productlist(req);
+                    createGlobalProductList(req);
                 });
             });
         });
@@ -267,7 +277,7 @@ function create(){
 
 function openhost(){
 
-    console.log(productlist);
+    console.log(userproductlist);
 
     var posturl = socket_url;
     var host_name = accountname;
@@ -276,8 +286,11 @@ function openhost(){
     var productlist = [];
     $("input[name='my_product']:checked").each(function(){
         var checkproduct = {};
+        var name = $(this).data('product');
         checkproduct['pid'] = $(this).val();
-        checkproduct['productname'] = $(this).data('product');
+        checkproduct['productname'] = name;
+        checkproduct['price'] = userproductlist[name]['price'];
+        checkproduct['description'] = userproductlist[name]['description'];
         productlist.push(checkproduct);
     });
     data = {};
@@ -285,7 +298,7 @@ function openhost(){
     data['hostfbid'] = host_fb_id;
     data['streamurl'] = stream_url;
     data['productlist'] = productlist;
-    console.log(productlist);
+//    console.log(productlist);
  /* 
    var xhr = new XMLHttpRequest();
   xhr.open('POST', posturl, true);
