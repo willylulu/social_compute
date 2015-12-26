@@ -70,11 +70,9 @@ function FBinitCallback () {
 
 function load_channels () {
     // body...
-    console.log(productlist);
-
-    //add
      var onlive_forloop_counter=1;
     for (var key in onlive_Channel) {
+        if(key=='undefined')continue;
         var onlive_obj1 = document.createElement('div');
         $("#onlive_body").append(onlive_obj1);
             var PopStream = document.createElement('a');
@@ -86,13 +84,13 @@ function load_channels () {
             PopStream.setAttribute('style','padding:1.3vw;');
                 var objh = document.createElement('h3');
                 PopStream.appendChild(objh);
-                    var t = document.createTextNode(key);
+                    var t = document.createTextNode(onlive_Channel[key].host_name);
                     objh.appendChild(t);
 
         var onlive_obj2 = document.createElement('div');
         onlive_obj2.id = 'streamviewpop'+onlive_forloop_counter;
         onlive_obj2.className = "modal fade";
-        $("#target id").append(onlive_obj2);
+        $("#onlive_body").append(onlive_obj2);
             var dialog = document.createElement('div'); 
             dialog.className = "modal-dialog";
             onlive_obj2.appendChild(dialog);
@@ -104,15 +102,15 @@ function load_channels () {
                     content.appendChild(header);
                         var button = document.createElement('button');
                         header.appendChild(button);
-                        button.setAttribute('class','close');
-                        button.setAttribute('data-dismiss','modal');
-                            var t2 = document.createTextNode('&times;');
-                            button.appendChild(t2);
-                        var h4 = document.createElement('h4');
+                        var h4 = document.createElement('div');
                         h4.className = "modal-title";
                         header.appendChild(h4);
-                            var t3 = document.createTextNode("Hi, Welcome to "+key+"'s stream");
+                            var t3 = document.createTextNode("Hi, Welcome to "+onlive_Channel[key].host_name+"'s stream");
                             h4.appendChild(t3);
+                        button.setAttribute('class','close');
+                        button.setAttribute('data-dismiss','modal');
+                            var t2 = document.createTextNode('Close');
+                            button.appendChild(t2);
                     var body = document.createElement('div');
                     body.className = "modal-body";
                     content.appendChild(body);
@@ -121,7 +119,7 @@ function load_channels () {
                         body.appendChild(iframe);
                         iframe.setAttribute('width','420');
                         iframe.setAttribute('height','315');
-                        iframe.setAttribute('src',"http://www.youtube.com/embed/eaX19wA-EYI");
+                        iframe.setAttribute('src',onlive_Channel[key].stream_url);
                         iframe.setAttribute('frameborder','0');
                     var footer = document.createElement('div');
                     footer.className = "modal-footer";
@@ -129,13 +127,19 @@ function load_channels () {
                         var button2 = document.createElement('button');
                         button2.className = "btn btn-default";
                         footer.appendChild(button2);
-                        button.setAttribute('type','button');
-                        button.setAttribute('data-dismiss','modal');
-                            var t4 = document.createTextNode("Close");
-                            button.appendChild(t4);
+                        button2.setAttribute('type','button');
+                        button2.setAttribute('data-dismiss','modal');
+                        button2.setAttribute('onClick','enterChannel('+key+',\''+onlive_Channel[key].stream_url+'\')');
+                            var t4 = document.createTextNode("Go!");
+                            button2.appendChild(t4);
         
          onlive_forloop_counter++;
     }
+}
+function enterChannel (host_fb_id,stream_url) {
+    // body...
+     window.location ='chatroom?host_fb_id='+host_fb_id+'&stream_url='+stream_url;
+
 }
 window.onload = function (){
      draw();

@@ -62,18 +62,20 @@ app.get('/test_hostroom', function(req, res) {
 
 app.get('/chatroom', function(req, res) {
     // parse url to chatroom.html
-    var data = require('url').parse(req.url, true).query;
-    res.render(room_route + 'chatroom.html');
+    var host_fb_id = req.query.host_fb_id;
+    var stream_url = req.query.stream_url;
+    res.render(room_route + 'chatroom.html',{'host_fb_id':host_fb_id,'stream_url':stream_url});
 });
 
 app.get('/hostroom', function(req, res) {
     // parse url to chatroom.html
     var hostfbid = req.query.hostfbid;
+    var stream_url = req.query
     if(!hostfbid) {
         res.sendStatus(404);
         return;
     }
-    res.render(room_route + 'hostroom.html');
+    res.render(room_route + 'hostroom.html',{'host_fb_id':hostfbid});
 });
 
 // not sure why lulu keep this.
@@ -96,7 +98,8 @@ app.post('/create_channel', function(req, res) {
         var data = JSON.parse(body);
         var host_fb_id = data.hostfbid; // use fb id as identifier  
         var ProductList = data.productlist;
-        var streamurl = data.streamurl;       
+        var streamurl = data.streamurl; 
+        var host_name = data.hostname;      
         console.log(data);
         // put basic info into target channel.
         // other info such as stream url and socket id
@@ -105,7 +108,8 @@ app.post('/create_channel', function(req, res) {
         channels[host_fb_id].ProductList = ProductList;
         channels[host_fb_id].CurrentProduct = 0;
         channels[host_fb_id].PriceList = new Object();
-        channels[host_fb_id].stream_url = streamurl;        
+        channels[host_fb_id].stream_url = streamurl;
+        channels[host_fb_id].host_name = host_name;    
         res.render(room_route + 'chatroom.html', data);
 
     });
@@ -124,6 +128,7 @@ io.sockets.on('connection', function(socket) {
         // fb_name
         // host_fb_id
         // stream_url
+        console.log(req);
         var sendObj = new Object();
         var host_fb_id = req.host_fb_id;
 

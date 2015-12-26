@@ -1,7 +1,12 @@
 var socket;
+function getsession(){
+	$.get('',function(res) {
+		
+	});
+}
 function enter_store () {
 	// body...
-	var init_data;
+	var init_data = new Object;
 
 	init_data.CurrentProduct = 0;
 	//init_data.host_fb_id = 
