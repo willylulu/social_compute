@@ -53,6 +53,12 @@ function UpdateProduct(response)
     $('#productname').html(wufa);
 }
 
+function UpdateProductList(response)
+{
+    fillProductListSlide(response.ProductList);
+}
 
-
-
+function SelectProduct(response)
+{
+    fillCurrentProductBlock(response.CurrentProduct);
+}
