@@ -61,7 +61,7 @@
 			<h3 id="username" style="padding:1vw;" title="Click to logout!"> Hi, {{accountname}} </h3>
                     </li>
                     <li>
-                        <a href="./account">Login</a>
+                        <a onclick="loginFacebook()">Login</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#about">Product</a>
@@ -90,10 +90,12 @@
 		<h4 class="modal-title">Hi, {{accountname}}</h4>
 	      </div>
 	      <div class="modal-body" style="display:inline-block">
-            <div>
+            <div class="my_product_for_sale">
+            <!--
             {% for e in user_product %}
             <input type="checkbox" name="product[]" data-product="{{e.name}}" value="{{e.id}}"> {{e.name}}       ${{e.price}}<br></input>
-            {% endfor %}	
+            {% endfor %}
+            -->	
             </div>
             <div>      
             <input type="text" id="youtubeurl" data-name="{{accountname}}" data-uid="{{uid}}" style="margin-top:5px;"placeholder=" Youtube URL">
@@ -204,7 +206,7 @@
             <p>Copyright &copy; Your Website 2014</p>
         </div>
     </footer>
-
+    <script src="js/FBlogin.js"></script>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <script src="main.js"></script>

@@ -5,6 +5,9 @@ var check_url = "http://tvsalestream.herokuapp.com/checklogin/";
       xfbml      : true,
       version    : 'v2.5'
     });
+    checkLoginState(function () {
+      FBinitCallback();
+    });
   };
 
   (function(d, s, id){
@@ -15,25 +18,28 @@ var check_url = "http://tvsalestream.herokuapp.com/checklogin/";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
-    function checkLoginState() {
-      console.log("qq");
-      FB.api('/me/',function(response){
-		  console.log(response);
-      $.ajax({
-        type: 'post',
-        url: check_url,
-        data: {user:response.name, uid: response.id},
-        success: function(response){
-          console.log(response);
-          window.location.href = "../";
-        },
-        done: function (response) {
-          console.log(response);    
+function checkLoginState(callback) {
+      FB.getLoginStatus(function(response) {
+        console.log(response);
+
+        if(response && response.status === 'connected') {
+            me=response;
         }
-        });
+        if(callback && response) {
+          callback(response.status);
+        }
       });
+    }
 
-
-
-  }
-
+    function loginFacebook() {
+      checkLoginState(function(resp){
+          if(resp != 'connected') {
+            console.log('not login.');
+            FB.login(function (response) {
+              if(response.authResponse) {
+                location.reload();
+              }
+            });
+          }
+      });
+    }

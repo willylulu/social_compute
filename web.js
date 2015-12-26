@@ -30,7 +30,7 @@ app.get('/', function(req, res) {
         } else {
             var str_json = JSON.stringify(json);
             var str_channel = JSON.stringify(onlive_channel);
-            res.render(templates_route + 'index.html',{'accountname':'Guess','uid':-1,'productlist':str_json,'onlive_channel':str_channel});
+            res.render(templates_route + 'index.html',{'accountname':'Guest','uid':-1,'productlist':str_json,'onlive_channel':str_channel});
         }
     });
 });

@@ -2,23 +2,42 @@
 var ptr = 0;//modify
 
 var bound = productlist.length; //modify
-
+var FB_init_is_done = false;
 var front_end_url = 'http://localhost:8000/';
 var socket_url = 'http://localhost:3000/';
-
-window.onload = function (){
-     draw();
-
-    //add
-     console.log(productlist);
+var me;
+function load_productlist () {
+    // body...
     for (var i = 0; i < productlist.length; i++) {
         var product_for_sale = document.createElement('div');
         product_for_sale.id = "product"+i;
         product_for_sale.className = "product_list";
         $("#product_sales").append(product_for_sale);
         $("#product"+i).attr('style',"display:inline-block;");
-        $("#product"+i).html("<h4>"+productlist[i].fields.name+"</h4><h5>"+productlist[i].fields.price+"</h5><h5>"+productlist[i].fields.ownername+"</h5>");
+        $("#product"+i).html("<h4>"+productlist[i].fields.name+"</h4><h5>"+productlist[i].fields.price+"</h5><h5>"+productlist[i].fields.ownername+"</h5>");  
     };
+}
+function my_productlist () {
+    // body...
+    var my_productlist=[];
+    for (var i = 0; i < my_productlist.length; i++) {
+        var my_product_for_sale = document.createElement('div');
+        $("#my_product_for_sale").append(my_product_for_sale);
+        var input = document.createElement('input');
+        my_product_for_sale.appendChild(input);
+        input.setAttribute('name','my_product');
+        input.setAttribute('data-product',productlist[i].fields.name);
+        input.setAttribute('value',productlist[i].fields.owner);
+    };
+}
+ function FBinitCallback () {
+    // body...
+    console.log("data");
+}
+function load_channels () {
+    // body...
+    console.log(productlist);
+    
 
     //add
      var onlive_forloop_counter=1;
@@ -66,10 +85,10 @@ window.onload = function (){
                     content.appendChild(body);
                     body.setAttribute('style',"display:inline-block");
                         var iframe = document.createElement('iframe');
-                        target obj.appendChild(iframe);
-                        iframe.setAttribute('width':'420');
-                        iframe.setAttribute('height':'315');
-                        iframe.setAttribute('src':"http://www.youtube.com/embed/eaX19wA-EYI");
+                        body.appendChild(iframe);
+                        iframe.setAttribute('width','420');
+                        iframe.setAttribute('height','315');
+                        iframe.setAttribute('src',"http://www.youtube.com/embed/eaX19wA-EYI");
                         iframe.setAttribute('frameborder','0');
                         iframe.setAttribute('allowfullscreen');
                     var footer = document.createElement('div');
@@ -82,18 +101,16 @@ window.onload = function (){
                         button.setAttribute('data-dismiss','modal');
                             var t4 = document.createTextNode("Close");
                             button.appendChild(t4);
-                        //other attributes
-                        
-                    //other attributes
-                    
-                        //other attributes
-                        
-                    //other attributes
-                    
         
          onlive_forloop_counter++;
     }
-
+}
+window.onload = function (){
+     draw();
+    //add
+    load_productlist();
+    load_channels();
+     
     $('.product_list').hide();
 
     $('#secTitle').css("color","rgba(255,255,255,0.5)");
