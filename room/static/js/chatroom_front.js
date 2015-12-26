@@ -1,5 +1,6 @@
 var productlist = [];
 var currentproduct = 0;
+/*
 var product = {};
 product['productname'] = 'Stussy';
 product['price'] = '999';
@@ -13,7 +14,7 @@ productlist.push(product1);
 
 $(fillProductListSlide(productlist));
 $(fillCurrentProductBlock(currentproduct));
-
+*/
 $('.productlist').hover(function(){
     $('.productlistblock').animate({
         right:'0',
@@ -47,6 +48,7 @@ function generateAppendItem(position){
 }
 
 function fillProductListSlide(productlist){
+    createGlobalList(productlist);
     $('.productlistblock').empty();
     var length = productlist.length
     for ( var i = 0 ; i < length ; i ++){
@@ -61,8 +63,18 @@ function fillCurrentProductBlock(position){
     $('#currentprice').empty();
     var productname = productlist[position]['productname'];
     var price = productlist[position]['price'];
-    $('#currentname').text(productname);
-    $('#currentprice').text(price); 
+    $('#productname').text(productname);
+    $('#productprice').text(price); 
 
 }
 
+function createGlobalList(list){
+    for (var e in list){
+        var product = {};
+        product['pid'] = list[e]['pid'];
+        product['productname'] = list[e]['productname'];
+        product['price'] = list[e]['price'];
+        product['description'] = list[e]['description'];
+        productlist.push(product);
+    }
+}
