@@ -8,7 +8,6 @@ var express = require('express'),
 server.listen(process.env.PORT || 8000); // set server port
 
 var templates_route = __dirname + '/hall/templates/';
-
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 app.set('views', __dirname + 'views');
@@ -35,6 +34,7 @@ app.get('/', function(req, res) {
     });
 });
 
+
 // register page.
 app.get('/account', function(req, res) {
     res.sendFile(templates_route + 'LoginRegis.html');
@@ -46,8 +46,28 @@ app.get('/logout', function(req, res) {
 
 });
 
-app.get('/checklogin', function(req, res) {
-    request.get();
+app.post('/checklogin', function(req, response) {
+    var body = '';
+    var str_json;
+    req.on('data', function(data) {
+        body += data; 
+    });
+    req.on('end',function() {
+        var temp = body.split("=");
+        var temp = temp[1];
+        var uurl = 'http://tvsalestream.herokuapp.com/getuserproduct/?uid='+temp;
+        request({
+            url: uurl,
+             method: 'GET',
+             json:true
+        },function(error,res,userproduct){
+             if(error) {
+                console.log(error);
+            } else {
+                response.json(userproduct);
+            }
+        });
+    });
 });
 app.get('/addproduct',function (req,res) {
     // body...

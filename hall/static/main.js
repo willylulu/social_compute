@@ -32,15 +32,20 @@ function my_productlist () {
 }
  function FBinitCallback () {
     // body...
-    FB.api('/me',function(res){
-        $.post(check_url,{'user':res.name,'uid':res.id},function() {
-            accountname=res.name;
-            uid  = res.id;
-            $("#username").html("Hi,"+res.name);
-            $("#sale_username").html("Hi,"+res.name);
-            $("#FB_Login").hide();
+    if(me!=undefined&&me.status=='connected'){
+        FB.api('/me',function(res){
+            $.post(check_url,{'user':res.name,'uid':res.id},function() {
+                accountname=res.name;
+                uid  = res.id;
+                $("#username").html("Hi,"+res.name);
+                $("#sale_username").html("Hi,"+res.name);
+                $("#FB_Login").hide();
+                $.post('/checklogin',{'uid':res.id},function(req,response) {
+                    console.log(req);
+                });
+            });
         });
-    });
+    }
 }
 function load_channels () {
     // body...
