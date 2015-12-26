@@ -80,7 +80,7 @@ app.post('/', function(req, res) {
         // will be init when create_channel socket catch data.
         channels[host_fb_id] = new Object();
         channels[host_fb_id].ProductList = ProductList;
-        channels[host_fb_id].CurrentProduct = new Object();
+        channels[host_fb_id].CurrentProduct = 0;
         channels[host_fb_id].PriceList = new Object();
         channels[host_fb_id].stream_url = streamurl;        
         res.render(room_route + 'chatroom.html', data);
@@ -106,23 +106,23 @@ io.sockets.on('connection', function(socket) {
         var sendObj = new Object();
         var host_fb_id = req.host_fb_id;
 
+
         if(channels[host_fb_id]) {
             sendObj.ProductList = channels[host_fb_id].ProductList;
-            socket.emit('', sendObj); // undefine.
+            sendObj.CurrentProduct = channels[host_fb_id].CurrentProduct;
+            io.to(socket.id).emit('init_channel', sendObj); // undefine.
             return;
         }
 
-        var host = new Object();
         channels[host_fb_id].socket_id = socket.id;
 
         // Put host into customer list to recieve chat msg.
-        host.user = req;
-        host.socket_id = socket.id;
         channels[host_fb_id].customers = new Object();
         channels[host_fb_id].customers[host_fb_id] = host;
 
         sendObj.ProductList = channels[host_fb_id].ProductList;
-        socket.emit('', sendObj); // undefine.
+        sendObj.CurrentProduct = 0;
+        io.to(socket.id).emit('init_channel', sendObj); // undefine.
     });
 
     socket.on('enter_channel', function(req) {
