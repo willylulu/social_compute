@@ -83,6 +83,22 @@ app.get('/chatroom_lulu', function(req, res) {
     res.sendFile(room_route + 'chatroom_lulu.html');
 });
  
+
+app.get('/get_channel', function(req, res) {
+    var hostfbid = req.query.hostfbid;
+    if(!hostfbid) {
+        res.sendStatus(404);
+        return;
+    }
+
+    if(!channels[hostfbid]) {
+        res.sendStatus(404);
+        return;
+    }
+
+    res.send(channels[hostfbid]);
+});
+
 // initialize channel info from Django server.
 app.post('/create_channel', function(req, res) {
     var body = '';
@@ -115,8 +131,6 @@ app.post('/create_channel', function(req, res) {
     });
 
 });
-
-
 
 // Socket port define and implement here.
 io.sockets.on('connection', function(socket) {
@@ -161,6 +175,7 @@ io.sockets.on('connection', function(socket) {
         customer.user = req;
         customer.socket_id = socket.id;
         // put customer into channel's customers list.
+
         channels[host_fb_id].customers[user_id] = customer;
         sendObj.CurrentProduct = 0;
         sendObj.ProductList = channels[host_fb_id].ProductList;

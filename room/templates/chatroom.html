@@ -75,33 +75,17 @@
 
     </body>
 <script>
-  var host_fb_id='{{host_fb_id}}';
-  var me = new Object;
-/*
-  var me = new Object();
-  var current_url = window.location.href;
-  var element = current_url.split("?");
-  element = element[1];
-  element = element.split("&");
-  
-  if(element.length > 0)
-    me.host_fb_id = element[0].split("sellerid=")[1];
-  
-  if(element.length > 1)
-    me.stream_url = element[1].split("url=")[1];
-  
-  if(element.length > 2)
-    me.fb_name = element[2].split("user_id=")[1];
-  
-  if(element.length > 3) 
-    me.fb_id = element[3].split("user_id=")[1];
-  
-  $('#msg-input').keypress(function(e){
-          if(e.keyCode==13)
-          $('#send').click();
-  });
+  var hostfbid = window.location.href.split('hostfbid=')[1];
+  $.ajax({
+        url: 'http://localhost:3000/get_channel?hostfbid=' + hostfbid,
+        type: 'GET',
+        success: function(response) {
+          var stream_url = response.stream_url.split('youtu.be/')[1];
+          $('#stream-frame').attr('src', 'http://www.youtube.com/embed/' + stream_url);   
+        }
+    });
+  enter_store();
 
-*/
 </script>
 <script src="room/static/js/channel_event.js"></script>
 <script src="/socket.io/socket.io.js"></script>
