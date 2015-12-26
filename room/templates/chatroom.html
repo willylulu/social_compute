@@ -3,6 +3,7 @@
 
 <head>
          <link rel="stylesheet" href="css/chatroom.css" />
+         <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"/>
          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
          <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
@@ -14,32 +15,47 @@
 
 
     <section id="chat-container">
-        
-            <div id="msg-container">
-                <div id="msg-box-wrapper">
+             <div id="msg-container" class="contentcontainer">
+             <div class="container-header">
+                <i class="fa fa-times"></i>
+            </div> 
+    <div id="msg-box-wrapper">
                     <div id="msg-box"> 
                     </div>
                 </div>
                  <div id="msg-input-wrapper">
                 <input id="msg-input" class="inputholder" type="text" placeholder="你想說什麼？">
-                <button id="msg-send-btn" >Send</button>
+                <button id="msg-send-btn" class="sendbtn">Send</button>
             </div>
-
-             <div id="price-container">
-                <div id="price-box-wrapper">
+            </div>
+             <div id="price-container" class="contentcontainer">
+                <div class="container-header">
+                    <i class="fa fa-times"></i>
+                </div> 
+              <div id="price-box-wrapper">
                     <div id="price-box"> 
                     </div>
                 </div>
                  <div id="price-input-wrapper">
                 <input id="price-input" type="text" class="inputholder" placeholder="希望價格">
-                <button id="price-send-btn" >Go</button>
+                <button id="price-send-btn" class="sendbtn" >Go</button>
+            </div>
             </div>
     </section>
 
     <section id="seller_info">
-        <div id="sellername" class="sell_class"><h1>HOLA</h1></div>
-        <div id="productname" class="sell_class" ><h2>stuff</h2></div>
-        <div id="productprice" class="sell_class" ><h3>$</h3></div>
+        <div class="sell_class">
+            <div class="tag">賣家名字</div>
+            <div id="sellername" class="info">Frank</div>
+        </div>
+        <div class="sell_class" >
+            <div class="tag">商品名字</div>
+            <div id="productname" class="info">Stussy</div>
+        </div>
+        <div class="sell_class" >
+            <div class="tag">商品價格</div>
+            <div id="productprice" class="info">2189</div>
+        </div>
      </div>
   </section>
 
