@@ -59,7 +59,7 @@ function load_channels () {
     //add
      var onlive_forloop_counter=1;
     for (var key in onlive_Channel) {
-        if(key==undefined)continue;
+        if(key=='undefined')continue;
         var onlive_obj1 = document.createElement('div');
         $("#onlive_body").append(onlive_obj1);
             var PopStream = document.createElement('a');
@@ -89,15 +89,15 @@ function load_channels () {
                     content.appendChild(header);
                         var button = document.createElement('button');
                         header.appendChild(button);
-                        button.setAttribute('class','close');
-                        button.setAttribute('data-dismiss','modal');
-                            var t2 = document.createTextNode('&times;');
-                            button.appendChild(t2);
-                        var h4 = document.createElement('h4');
+                        var h4 = document.createElement('div');
                         h4.className = "modal-title";
                         header.appendChild(h4);
-                            var t3 = document.createTextNode("Hi, Welcome to "+key+"'s stream");
+                            var t3 = document.createTextNode("Hi, Welcome to "+onlive_Channel[key].host_name+"'s stream");
                             h4.appendChild(t3);
+                        button.setAttribute('class','close');
+                        button.setAttribute('data-dismiss','modal');
+                            var t2 = document.createTextNode('Close');
+                            button.appendChild(t2);
                     var body = document.createElement('div');
                     body.className = "modal-body";
                     content.appendChild(body);
@@ -114,13 +114,17 @@ function load_channels () {
                         var button2 = document.createElement('button');
                         button2.className = "btn btn-default";
                         footer.appendChild(button2);
-                        button.setAttribute('type','button');
-                        button.setAttribute('data-dismiss','modal');
-                            var t4 = document.createTextNode("Close");
-                            button.appendChild(t4);
+                        button2.setAttribute('type','button');
+                        button2.setAttribute('data-dismiss','modal');
+                        button2.setAttribute('onClick','enterChannel()');
+                            var t4 = document.createTextNode("Go!");
+                            button2.appendChild(t4);
         
          onlive_forloop_counter++;
     }
+}
+function enterChannel () {
+    // body...
 }
 window.onload = function (){
      draw();

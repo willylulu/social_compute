@@ -20,6 +20,8 @@ productlist.push(product1);
 //$(fillProductListSlide(productlist));
 //$(fillCurrentProductBlock(currentproduct));
 
+var productlist;
+
 $('.productlist').hover(function(){
     $('.productlistblock').animate({
         right:'0',
@@ -41,9 +43,10 @@ function triggerChangeCurrentItem(){
 }
 
 
-function fillProductListSlide(productlist){
+function fillProductListSlide(product_list){
     $('.productlistblock').empty();
-    var length = productlist.length
+    productlist = product_list;
+    var length = product_list.length
     for ( var i = 0 ; i < length ; i ++){
         append = generateAppendItem(i);
         $('.productlistblock').append(append); 
