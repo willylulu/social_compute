@@ -13,7 +13,7 @@
                 <div class="container-header">
                     <i class="fa fa-times"></i>
                 </div>
-                <div id="msg-box-wrapper">
+                <div id="msg-box-wrapper" class="wrapper">
                     <div id="msg-box"> 
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                  <div class="container-header">
                     <i class="fa fa-times"></i>
                 </div>
-<div id="price-box-wrapper">
+<div id="price-box-wrapper" class="wrapper">
                    <div id="price-box"> 
                     </div>
                 </div>
@@ -33,11 +33,11 @@
     <div id="currentproduct">
         <div class="currentinfo">
             <div class="tag">直播商品</div>
-            <div  id="currentname">Stussy</div>
+            <div  id="currentname"></div>
         </div>
         <div class="currentinfo">
             <div class="tag">現在價格</div>
-            <div id="currentprice">999</div>
+            <div id="currentprice"></div>
         </div> 
         <div class="currentinfo" id="price-input-wrapper">
                     <input id="price-input" type="number" class="inputholder" placeholder="希望價格">
@@ -50,10 +50,8 @@
             <i class="fa fa-info"></i>  
         </div>
         <div class="productlistblock">
-
         </div>
     </div>
-
 </body>
 <script src="js/jquery.js"></script>
 <script src="/socket.io/socket.io.js"></script>
