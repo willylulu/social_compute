@@ -3,15 +3,17 @@ var express = require('express'),
 	server = require('http').createServer(app),
 	io = require('socket.io').listen(server),
     engines = require('consolidate'),
-    request = require('request'),
-    web = require('./web.js');
+    request = require('request');
+    //web = require('./web.js');
 
 var channels = new Object(); // save all channel info
 var room_route = __dirname + '/room/templates/';
 
 // share channel data to all backend port
 module.exports.channels = channels;
+module.exports.app = app;
 
+var web = require('./web.js');
 
 
 // url base.
@@ -22,7 +24,7 @@ server.listen(process.env.PORT || 3000); // set server port
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 app.set('views', __dirname + 'views');
-app.use(express.static(__dirname + '/room/static'));
+app.use(express.static(__dirname);
 
 app.use(function (req, res, next) {
 
@@ -80,7 +82,7 @@ app.get('/chatroom_lulu', function(req, res) {
 });
  
 // initialize channel info from Django server.
-app.post('/', function(req, res) {
+app.post('/create_channel', function(req, res) {
     var body = '';
     var qs = require('querystring');
     // on receiving request data
@@ -150,10 +152,15 @@ io.sockets.on('connection', function(socket) {
         var user_id = req.fb_id;
         var customer = new Object();
         var host_fb_id = req.host_fb_id;
+        var sendObj = new Object();
         customer.user = req;
         customer.socket_id = socket.id;
         // put customer into channel's customers list.
         channels[host_fb_id].customers[user_id] = customer;
+        sendObj.CurrentProduct = 0;
+        sendObj.ProductList = channels[host_fb_id].ProductList;
+
+        io.to(socket.id).emit('update_productlist', sendObj);
     });
 
     socket.on('send_msg', function(req) {
