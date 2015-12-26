@@ -138,7 +138,7 @@ function load_channels () {
 }
 function enterChannel (host_fb_id) {
     // body...
-     window.location ='chatroom?host_fb_id='+host_fb_id;
+     window.location ='chatroom?hostfbid='+host_fb_id;
 
 }
 window.onload = function (){
