@@ -58,10 +58,10 @@
                         <a href="#page-top"></a>
                     </li>
                      <li>
-			<h3 id="username" style="padding:1vw;" title="Click to logout!"> Hi, {{accountname}} </h3>
+			<h3 id="username" style="padding:1vw;" title="Click to logout!"> Hi</h3>
                     </li>
                     <li>
-                        <a onclick="loginFacebook()">Login</a>
+                        <a onclick="loginFacebook()" id='FB_Login'>Login</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#about">Product</a>
@@ -87,7 +87,7 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h4 class="modal-title">Hi, {{accountname}}</h4>
+		<h4 class="modal-title" id="sale_username">Hi, {{accountname}}</h4>
 	      </div>
 	      <div class="modal-body" style="display:inline-block">
             <div class="my_product_for_sale">

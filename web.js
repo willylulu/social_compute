@@ -49,4 +49,8 @@ app.get('/logout', function(req, res) {
 app.get('/checklogin', function(req, res) {
     request.get();
 });
+app.get('/addproduct',function (req,res) {
+    // body...
+    res.sendFile(templates_route+'addproduct.html');
+});
 

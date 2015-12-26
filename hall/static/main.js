@@ -32,7 +32,15 @@ function my_productlist () {
 }
  function FBinitCallback () {
     // body...
-    console.log("data");
+    FB.api('/me',function(res){
+        $.post(check_url,{'user':res.name,'uid':res.id},function() {
+            accountname=res.name;
+            uid  = res.id;
+            $("#username").html("Hi,"+res.name);
+            $("#sale_username").html("Hi,"+res.name);
+            $("#FB_Login").hide();
+        });
+    });
 }
 function load_channels () {
     // body...
@@ -237,7 +245,7 @@ ctx.strokeStyle = ctx.fillStyle = "#FFF";
 }
 
 function addproduct(){
-	window.location.href = './addproduct';
+	window.location.href = '/addproduct';
 }
 
 
