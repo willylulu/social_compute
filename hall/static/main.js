@@ -305,7 +305,7 @@ function openhost(){
         }
     });
    // post(posturl,data_json,'post');
-    
+    window.location = socket_url + ('hostroom?hostfbid=' + host_fb_id);        
 }
 
 
