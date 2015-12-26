@@ -3,11 +3,11 @@ function FBinitCallback () {
     FB.api('/me',function(res){
         console.log(res);
         me.host_fb_id = host_fb_id;
-        me.fb_name = res.name;
+        me.ufb_name = res.name;
         me.fb_id = res.id;
         me.stream_url = res.stream_url;
+        enter_store();
     });
-    enter_store();
 }
 //buyer_send_message
 function SendMessage(msg) {
@@ -15,19 +15,17 @@ function SendMessage(msg) {
     var sendObj = new Object();
     sendObj.user = me;
     sendObj.msg = msg;
-    console.log(sendObj);
     socket.emit('send_msg',sendObj);
 }
 
 
 function UpdateMessage(response) {
-
-    response.user.name;
+    console.log(response);
     var div = document.getElementById("msg-box");
     var msg_div = document.createElement("div");
 
     msg_div.className = "msg";
-    msg_div.innerHTML = response.user.name + " : " + response.msg + "<br>";
+    msg_div.innerHTML = response.user.ufb_name + " : " + response.msg + "<br>";
     div.appendChild(msg_div);
     div.scrollTop = div.scrollHeight; // scroll to bottom
 
@@ -49,6 +47,7 @@ function CustomerChangePrice(price)
 function CustomerUpdatePrice(response)
 {
     //price list 
+    console.log(response);
     var output ="";
     for(var key in response){
         output += "<div>"+response[key].name+" : "+response[key].price+"</div>"

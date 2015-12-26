@@ -108,6 +108,7 @@ app.post('/create_channel', function(req, res) {
         channels[host_fb_id].ProductList = ProductList;
         channels[host_fb_id].CurrentProduct = 0;
         channels[host_fb_id].PriceList = new Object();
+        channels[host_fb_id].customers = new Object();
         channels[host_fb_id].stream_url = streamurl;
         channels[host_fb_id].host_name = host_name;    
         res.render(room_route + 'chatroom.html', data);
@@ -143,8 +144,11 @@ io.sockets.on('connection', function(socket) {
         host.socket_id = socket.id;
 
         channels[host_fb_id].socket_id = socket.id;
+        var customer = new Object();
+        customer.user = req;
+        customer.socket_id = socket.id;
+        channels[host_fb_id].customers[host_fb_id] = customer;
         // Put host into customer list to recieve chat msg.
-        channels[host_fb_id].customers = new Object();
         //channels[host_fb_id].customers[host_fb_id] = host;
 
         sendObj.ProductList = channels[host_fb_id].ProductList;
@@ -154,6 +158,7 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('enter_channel', function(req) {
         // response will be a 'me' object.
+        console.log(req);
         var user_id = req.fb_id;
         var customer = new Object();
         var host_fb_id = req.host_fb_id;
@@ -169,11 +174,12 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('send_msg', function(req) {
+        console.log(req);
         var host_fb_id = req.user.host_fb_id;
         var customers = channels[host_fb_id].customers;
-        
         for (var key in customers) {
-            io.to(customers[key].socket_id).emit('broadcast_msg');
+            console.log(key);
+            io.to(customers[key].socket_id).emit('broadcast_msg',req);
         }
     });
 
@@ -184,10 +190,10 @@ io.sockets.on('connection', function(socket) {
         // get price and user info from req.
         price_info.price = req.price;
         price_info.fb_name = req.user.fb_name;
-        channels[host_fb_id].PriceList[customer_id] = price_info;
+        channels[host_fb_id].PriceList[req.user.fb_id] = price_info;
         
         for (var key in customers) {
-            io.to(customers[key].socket_id).emit('broadcast_customer_price');
+            io.to(customers[key].socket_id).emit('broadcast_customer_price',req);
         }
     });
 

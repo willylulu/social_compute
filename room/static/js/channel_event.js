@@ -15,7 +15,7 @@ function enter_store () {
 
 	socket.emit('enter_channel',me);
 
-	socket.on('msg_broadcast',function (response) {
+	socket.on('broadcast_msg',function (response) {
 		UpdateMessage(response);
 	});
 

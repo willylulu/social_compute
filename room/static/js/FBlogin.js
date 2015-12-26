@@ -23,7 +23,7 @@ function checkLoginState(callback) {
         console.log(response);
 
         if(response && response.status === 'connected') {
-            me=response;
+            FBme=response;
         }
         if(callback && response) {
           callback(response.status);
