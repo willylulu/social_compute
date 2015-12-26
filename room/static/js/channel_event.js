@@ -35,6 +35,6 @@ function create_channel () {
 	});
 
 	socket.on('update_productlist', function (response) {
-		UpdateSellerProduct(response);
+		UpdateSellerProductList(response);
 	});
 }

@@ -2,7 +2,11 @@ var express = require('express'),
     app = express(),
     server = require('http').createServer(app),
     engines = require('consolidate'),
-    request = require('request');
+    request = require('request'),
+    cookieParser = require('cookie-parser'),
+    cookieSession = require('cookie-session'),
+    passport = require('passport'),
+    FacebookStrategy = require('passport-facebook').Strategy;
 
 // webpage on port 8000
 server.listen(process.env.PORT || 8000); // set server port
@@ -73,4 +77,72 @@ app.get('/addproduct',function (req,res) {
     // body...
     res.sendFile(templates_route+'addproduct.html');
 });
+
+////////////////////////////////////////////////
+//              FACEBOOK SECTION              //
+////////////////////////////////////////////////
+
+// use cookie mechanism to maintain user login status.
+// we have to init cookie parser/session first, and initilize
+// passport after it.
+app.use(cookieParser());
+app.use(cookieSession({
+  secret: 'Youknowthissecretsoyouareapsycho',
+  cookie: {
+    maxAge: 60*1000*500
+  }
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// serialize data to put in session
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+
+// The function will put user object into session.
+// We can check the session by access req.user.
+passport.use('facebook', new FacebookStrategy({
+  clientID: '938533709533376',
+  clientSecret: 'fe74d87e74a2d2e145974556ed7e7c0a',
+  callbackURL: 'http://localhost:8000/auth/response'
+  },
+  function(accessToken, refreshToken, profile, done) {
+    var user = profile;
+    return done(null, user);
+  }
+));
+
+// check if user has login or not and redirect.
+app.get('/auth', function(req, res) {
+    if(req.user) {
+        console.log('logged in');
+    } else {
+        console.log('nope');
+    }
+    console.log(req.user);
+    res.redirect('../');
+});
+
+app.get('/auth/facebook', 
+    passport.authenticate('facebook', 
+        { authType: 'rerequest', scope: ['user_status', 'user_checkins'] }));
+
+app.get('/auth/response', passport.authenticate('facebook', {
+  successRedirect: '/auth',
+  failureRedirect: '../',
+  failureFlash: true
+}));
+
+app.get('/islogin', function(req, res) {
+    console.log(req);
+    res.send(req.user);
+});
+
 
