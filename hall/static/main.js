@@ -129,16 +129,16 @@ function load_channels () {
                         footer.appendChild(button2);
                         button2.setAttribute('type','button');
                         button2.setAttribute('data-dismiss','modal');
-                        button2.setAttribute('onClick','enterChannel('+key+',\''+onlive_Channel[key].stream_url+'\')');
+                        button2.setAttribute('onClick','enterChannel('+key+')');
                             var t4 = document.createTextNode("Go!");
                             button2.appendChild(t4);
         
          onlive_forloop_counter++;
     }
 }
-function enterChannel (host_fb_id,stream_url) {
+function enterChannel (host_fb_id) {
     // body...
-     window.location ='chatroom?host_fb_id='+host_fb_id+'&stream_url='+stream_url;
+     window.location ='chatroom?host_fb_id='+host_fb_id;
 
 }
 window.onload = function (){

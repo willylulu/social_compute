@@ -32,11 +32,12 @@ function enter_store () {
 	});
 
 	socket.on('update_productlist', function (response) {
-		UpdateProductList(response);
+		console.log(response);
+        UpdateProductList(response);
 	});
 
 
-	SelectProduct(init_data);
+	//SelectProduct(init_data);
 
 }
 

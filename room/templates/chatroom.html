@@ -74,25 +74,14 @@
 
     </section>
     </body>
-<script>
-  var host_fb_id = "{{host_fb_id}}";
-  var me = new Object();
-  var hostfbid = window.location.href.split('hostfbid=')[1];
-  $.ajax({
-        url: 'http://localhost:3000/get_channel?hostfbid=' + hostfbid,
-        type: 'GET',
-        success: function(response) {
-          var stream_url = response.stream_url.split('youtu.be/')[1];
-          $('#stream-frame').attr('src', 'http://www.youtube.com/embed/' + stream_url);   
-        }
-    });
-  enter_store();
-
-</script>
-<script src="room/static/js/channel_event.js"></script>
-<script src="/socket.io/socket.io.js"></script>
+<script src="room/static/js/chatroom_front.js"></script>
 <script src="room/static/js/chatroom.js"></script>
 <script src="room/static/js/chatroom_event.js"></script>
-<script src="room/static/js/chatroom_front.js"></script>
+<script src="room/static/js/channel_event.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+</script>
+
 <script src="room/static/js/FBlogin.js"></script>
+
 </html>

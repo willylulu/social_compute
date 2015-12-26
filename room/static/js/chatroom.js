@@ -1,17 +1,32 @@
+var me = new Object();
+
 function FBinitCallback () {
     // body...
     FB.api('/me',function(res){
-        console.log(res);
-        me.host_fb_id = host_fb_id;
-        me.ufb_name = res.name;
-        me.fb_id = res.id;
-        me.stream_url = res.stream_url;
-        enter_store();
+            var host_fb_id = window.location.href.split('hostfbid=')[1];
+            console.log(res);
+            me.host_fb_id = host_fb_id;
+            me.ufb_name = res.name;
+            me.fb_id = res.id;
+
+            $.ajax({
+                url: 'http://localhost:3000/get_channel?hostfbid=' + host_fb_id,
+                type: 'GET',
+                success: function(response) {
+                var stream_url = response.stream_url.split('youtu.be/')[1];
+                $('#stream-frame').attr('src', 'http://www.youtube.com/embed/' + stream_url);   
+                }
+                }).done(function(){
+                enter_store();  
+            });
+            //me.stream_url = res.stream_url;
+            //enter_store();
+           
     });
 }
 //buyer_send_message
 function SendMessage(msg) {
-
+    console.log(msg);
     var sendObj = new Object();
     sendObj.user = me;
     sendObj.msg = msg;

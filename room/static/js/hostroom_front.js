@@ -28,7 +28,6 @@ $('.productlist').hover(function(){
     $('.productlistblock').animate({
         right:'-300',
     },500);
-
 });
 
 function triggerChangeCurrentItem(){
