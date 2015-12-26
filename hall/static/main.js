@@ -264,7 +264,7 @@ function create(){
         $('#openstream').modal('hide'); 
 }
 
-function oopenhost(){
+function openhost(){
     var posturl = socket_url;
     var host_name = accountname;
     var host_fb_id = uid;
