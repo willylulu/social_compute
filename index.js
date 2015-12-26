@@ -203,12 +203,11 @@ io.sockets.on('connection', function(socket) {
         var price_info = new Object();
         var customers = channels[host_fb_id].customers;
         // get price and user info from req.
-        price_info.price = req.price;
-        price_info.fb_name = req.user.fb_name;
+        price_info = req;
         channels[host_fb_id].PriceList[req.user.fb_id] = price_info;
         
         for (var key in customers) {
-            io.to(customers[key].socket_id).emit('broadcast_customer_price',req);
+            io.to(customers[key].socket_id).emit('broadcast_customer_price',channels[host_fb_id].PriceList);
         }
     });
 

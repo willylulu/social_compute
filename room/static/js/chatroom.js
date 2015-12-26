@@ -50,7 +50,7 @@ function CustomerUpdatePrice(response)
     console.log(response);
     var output ="";
     for(var key in response){
-        output += "<div>"+response[key].name+" : "+response[key].price+"</div>"
+        output += "<div>"+response[key].user.ufb_name+" : "+response[key].price+"</div>"
     }
     $('#price-box').html(output);
 }

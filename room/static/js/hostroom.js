@@ -40,7 +40,7 @@ function UpdatePrice(response)
     //price list 
     var wufa="";
     for(var key in response){
-        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"bit\" value=\""+response[key].price+"\" id=\""+response[key].id+"\">"+response[key].name+": $"+response[key].price+"<br>"
+        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"bit\" value=\""+response[key].price+"\" id=\""+response[key].user.fb_id+"\">"+response[key].user.ufb_name+": $"+response[key].price+"<br>"
     }
     $('#price-box').html(wufa);
 }
