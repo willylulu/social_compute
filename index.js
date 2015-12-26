@@ -15,7 +15,6 @@ module.exports.channels = channels;
 // url base.
 var backend_url = 'http://localhost:3000/';
 var update_url = 'http://localhost:8000/updatelive/';
-
 // server socket on 3000
 server.listen(process.env.PORT || 3000); // set server port
 app.engine('html', engines.mustache);
@@ -61,7 +60,6 @@ app.get('/chatroom_lulu', function(req, res) {
  
 // initialize channel info from Django server.
 app.post('/', function(req, res) {
-
     var body = '';
     var qs = require('querystring');
     // on receiving request data
@@ -70,7 +68,6 @@ app.post('/', function(req, res) {
     });
 
     req.on('end', function() {
-
         //body = qs.parse(body);
         //console.log(body);
         var data = JSON.parse(body);
@@ -86,7 +83,6 @@ app.post('/', function(req, res) {
         channels[host_fb_id].CurrentProduct = 0;
         channels[host_fb_id].PriceList = new Object();
         channels[host_fb_id].stream_url = streamurl;        
-        console.log('go!');
         res.render(room_route + 'chatroom.html', data);
 
     });

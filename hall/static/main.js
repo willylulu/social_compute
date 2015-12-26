@@ -17,17 +17,22 @@ function load_productlist () {
         $("#product"+i).html("<h4>"+productlist[i].fields.name+"</h4><h5>"+productlist[i].fields.price+"</h5><h5>"+productlist[i].fields.ownername+"</h5>");  
     };
 }
-function my_productlist () {
+function my_productlist (list) {
     // body...
-    var my_productlist=[];
+    var my_productlist = list;
     for (var i = 0; i < my_productlist.length; i++) {
         var my_product_for_sale = document.createElement('div');
         $("#my_product_for_sale").append(my_product_for_sale);
         var input = document.createElement('input');
         my_product_for_sale.appendChild(input);
+        input.setAttribute("type",'checkbox');
         input.setAttribute('name','my_product');
-        input.setAttribute('data-product',productlist[i].fields.name);
-        input.setAttribute('value',productlist[i].fields.owner);
+        input.setAttribute('data-product',my_productlist[i].fields.name);
+        input.setAttribute('value',my_productlist[i].fields.owner);
+        var temp = document.createElement('span');
+        my_product_for_sale.appendChild(temp);
+        var t = document.createTextNode(my_productlist[i].fields.name+" $"+my_productlist[i].fields.price);
+       temp.appendChild(t);
     };
 }
  function FBinitCallback () {
@@ -42,6 +47,7 @@ function my_productlist () {
                 $("#FB_Login").hide();
                 $.post('/checklogin',{'uid':res.id},function(req,response) {
                     console.log(req);
+                    my_productlist(req);
                 });
             });
         });
@@ -103,7 +109,6 @@ function load_channels () {
                         iframe.setAttribute('height','315');
                         iframe.setAttribute('src',"http://www.youtube.com/embed/eaX19wA-EYI");
                         iframe.setAttribute('frameborder','0');
-                        iframe.setAttribute('allowfullscreen');
                     var footer = document.createElement('div');
                     footer.className = "modal-footer";
                     content.appendChild(footer);
@@ -259,25 +264,24 @@ function create(){
         $('#openstream').modal('hide'); 
 }
 
-function openhost(){
+function oopenhost(){
     var posturl = socket_url;
-    var host_name = $('#youtubeurl').data('name');
-    var host_fb_id = $('#youtubeurl').data('uid');
+    var host_name = accountname;
+    var host_fb_id = uid;
     var stream_url = $('#youtubeurl').val();
     var productlist = [];
-    $("input[name='product[]']:checked").each(function(){
+    $("input[name='my_product']:checked").each(function(){
         var checkproduct = {};
         checkproduct['pid'] = $(this).val();
         checkproduct['pname'] = $(this).data('product');
         productlist.push(checkproduct);
     });
-    
     data = {};
     data['hostname'] = host_name;
     data['hostfbid'] = host_fb_id;
     data['streamurl'] = stream_url;
     data['productlist'] = productlist;
-
+    console.log(productlist);
  /* 
    var xhr = new XMLHttpRequest();
   xhr.open('POST', posturl, true);
@@ -290,7 +294,6 @@ function openhost(){
     // done
   };
 */
-
     console.log('prepare!');
     data_json = JSON.stringify(data);
     $.ajax({
@@ -301,8 +304,6 @@ function openhost(){
             console.log('Mom I did it');
         }
     });
-    console.log('qq!');
-    window.location = socket_url + ('hostroom?hostfbid=' + host_fb_id);
    // post(posturl,data_json,'post');
     
 }
