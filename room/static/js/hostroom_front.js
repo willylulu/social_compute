@@ -1,3 +1,4 @@
+/*
 var currentproduct = 0;
 var productlist = [];
 
@@ -14,10 +15,10 @@ product1['price'] = '300';
 product1['description'] = "It's eiekl";
 productlist.push(product1);
 
+*/
 
-
-$(fillProductListSlide(productlist));
-$(fillCurrentProductBlock(currentproduct));
+//$(fillProductListSlide(productlist));
+//$(fillCurrentProductBlock(currentproduct));
 
 $('.productlist').hover(function(){
     $('.productlistblock').animate({
@@ -32,6 +33,13 @@ $('.productlist').hover(function(){
 });
 
 
+function triggerChangeCurrentItem(){
+    $('.productitem').click(function(){
+        currentproduct = $(this).data('item');
+        fillCurrentProductBlock(currentproduct);
+    })
+}
+
 
 function fillProductListSlide(productlist){
     $('.productlistblock').empty();
@@ -39,7 +47,8 @@ function fillProductListSlide(productlist){
     for ( var i = 0 ; i < length ; i ++){
         append = generateAppendItem(i);
         $('.productlistblock').append(append); 
-    }    
+    }   
+    triggerChangeCurrentItem(); 
 }
 
 function fillCurrentProductBlock(position){
@@ -58,7 +67,7 @@ function generateAppendItem(position){
     var price = productlist[position]['price'];
     var description = productlist[position]['description'];  
 
-     var append = '<div class="productitem">'+
+     var append = '<div class="productitem" data-item="'+position+'">'+
                          ' <div class="productprofile">'+
                          ' </div>'+
                          ' <div class="iteminfo">'+
@@ -70,6 +79,6 @@ function generateAppendItem(position){
                               '</div>'+
                          '</div>'+
                     '</div>';
-
     return append
 }
+
