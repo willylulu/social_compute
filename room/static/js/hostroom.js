@@ -40,7 +40,7 @@ function UpdatePrice(response)
     //price list 
     var wufa="";
     for(var key in response){
-        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"bit\" value=\""+response[key].price+"\" id=\""+response[key].id+"\">"+response[key].name+": $"+response[key].price+"<br>"
+        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"bit\" value=\""+response[key].price+"\" id=\""+response[key].user.fb_id+"\">"+response[key].user.ufb_name+": $"+response[key].price+"<br>"
     }
     $('#price-box').html(wufa);
 }
@@ -52,7 +52,7 @@ function UpdateMessage(response) {
     var msg_div = document.createElement("div");
 
     msg_div.className = "msg";
-    msg_div.innerHTML = response.user.name + " : " + response.msg + "<br>";
+    msg_div.innerHTML = response.user.ufb_name + " : " + response.msg + "<br>";
     div.appendChild(msg_div);
     div.scrollTop = div.scrollHeight; // scroll to bottom
 
