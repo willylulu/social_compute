@@ -6,6 +6,10 @@ function getsession(){
 }
 function enter_store () {
 	// body...
+	var init_data = new Object;
+
+	init_data.CurrentProduct = 0;
+	//init_data.host_fb_id = 
 	socket = io.connect('',{query: 'type=buy'});
 	me.socket_id = socket.id;
 
@@ -24,8 +28,16 @@ function enter_store () {
 	});
 
 	socket.on('broadcast_product_select', function(response) {
-		
+		SelectProduct(response);
 	});
+
+	socket.on('update_productlist', function (response) {
+		UpdateProductList(response);
+	});
+
+
+	SelectProduct(init_data);
+
 }
 
 function create_channel () {

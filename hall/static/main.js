@@ -3,8 +3,8 @@ var ptr = 0;//modify
 
 var bound = productlist.length; //modify
 var FB_init_is_done = false;
-var front_end_url = 'http://localhost:8000/';
-var socket_url = 'http://localhost:3000/';
+var front_end_url = 'http://localhost:3000/';
+var socket_url = 'http://localhost:3000/create_channel';
 var me;
 function load_productlist () {
     // body...
@@ -17,6 +17,7 @@ function load_productlist () {
         $("#product"+i).html("<h4>"+productlist[i].fields.name+"</h4><h5>"+productlist[i].fields.price+"</h5><h5>"+productlist[i].fields.ownername+"</h5>");  
     };
 }
+
 function my_productlist (list) {
     // body...
     for (var i = 0; i < list.length; i++) {
@@ -36,6 +37,7 @@ function my_productlist (list) {
 }
 
 function createGlobalProductList(list){
+
     for (var e in list){
         var name = list[e].fields.name;
         var price = list[e].fields.price;
@@ -46,6 +48,7 @@ function createGlobalProductList(list){
         userproductlist[name] = product;
     }
 }
+
 function FBinitCallback () {
     // body...
     if(me!=undefined&&me.status=='connected'){
@@ -135,7 +138,7 @@ function load_channels () {
 }
 function enterChannel (host_fb_id,stream_url) {
     // body...
-     window.location = socket_url+'chatroom?host_fb_id='+host_fb_id+'&stream_url='+stream_url;
+     window.location ='chatroom?host_fb_id='+host_fb_id+'&stream_url='+stream_url;
 
 }
 window.onload = function (){
@@ -326,7 +329,7 @@ function openhost(){
         }
     });
    // post(posturl,data_json,'post');
-    window.location = socket_url + 'hostroom?hostfbid=' + host_fb_id;     
+    window.location = 'hostroom?hostfbid=' + host_fb_id;        
 }
 
 

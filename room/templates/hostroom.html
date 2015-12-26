@@ -3,8 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-        <link rel="stylesheet" href="css/hostroom.css" />
-	    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="room/static/css/hostroom.css" />
+	    <link rel="stylesheet" href="room/static/font-awesome/css/font-awesome.min.css"/>
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
@@ -53,9 +53,9 @@
         </div>
     </div>
 </body>
-<script src="js/jquery.js"></script>
+<script src="room/static/js/jquery.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script src="js/channel_event.js"></script>
+<script src="room/static/js/channel_event.js"></script>
 <script type="text/javascript">
 	var host_fb_id='{{host_fb_id}}';
 	var stream_url;
@@ -66,7 +66,7 @@
 		create_channel();
 	});
 </script>
-<script src="js/hostroom_front.js"></script>
-<script src="js/hostroom.js"></script>
-<script src="js/hostroom_event.js"></script>
+<script src="room/static/js/hostroom_front.js"></script>
+<script src="room/static/js/hostroom.js"></script>
+<script src="room/static/js/hostroom_event.js"></script>
 </html>

@@ -1,4 +1,3 @@
-
 function FBinitCallback () {
     // body...
     FB.api('/me',function(res){
@@ -63,6 +62,12 @@ function UpdateProduct(response)
     $('#productname').html(wufa);
 }
 
+function UpdateProductList(response)
+{
+    fillProductListSlide(response.ProductList);
+}
 
-
-
+function SelectProduct(response)
+{
+    fillCurrentProductBlock(response.CurrentProduct);
+}
