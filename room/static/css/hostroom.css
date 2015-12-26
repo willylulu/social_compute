@@ -1,0 +1,141 @@
+.tag{
+
+}
+
+#changepricebtn{
+    background:transparent;
+    border:0px;
+    border-bottom:1px solid black;
+    padding:5px 5px;
+}
+#changepricebtn:hover{
+    cursor:pointer;
+    font-weight:bold;
+    border-bottom:2px solid black;
+}
+
+.container-header{
+    padding:5px 5px;
+    float:right;
+}
+.container-header i{
+    cursor:pointer;
+}
+
+#msg-container{
+    background:rgba(248,143,88,0.5);
+
+}
+
+#price-container{
+    background:rgba(110,248,32,0.5);
+}
+
+#msg-box-wrapper{
+   width:20vw;
+   height:35vh;
+}
+
+#price-box-wrapper{
+    width:20vw;
+    height:35vh;
+}
+#chat-container{
+    position : absolute;
+    top :15vh;
+    width:90%;
+}
+
+.contentcontainer{
+    width:100%;
+    margin-top:5px;
+    padding:5px;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+}
+
+.inputholder{
+    border:0px;
+    border-bottom:1px solid black;
+    padding:5px 5px;
+    background:transparent;
+    color:black;
+    font-weight:bold;
+}
+
+.sendbtn{
+    border:0px;
+    background:transparent;
+    border-bottom:1px solid black;
+    padding:5px 5px;
+}
+.sendbtn:hover{
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.tag{
+    font-size:8px;
+    color:gray; 
+}
+
+.productlist:hover{
+    cursor:pointer;
+}  
+
+.productlistbtn{
+    position:fixed;
+    top:10%;
+    right:5px;
+    width:48px;
+    height:48px;
+    z-index:100;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+    font-size:40px;
+    text-align:center;
+    padding:5px 5px;
+    background:rgba(0,0,0,0.5);
+    color:white;
+}
+
+.productlistblock{
+    z-index:200;
+    position:fixed;
+    right:-300px;
+    top:0px;
+    height:100%;
+    width:15%;
+    background:rgba(0,0,0,0.5);
+
+}
+
+.currentinfo{
+    display:inline-block;
+    margin-left:10px;
+}
+
+#currentproduct{
+    padding:10px 10px;
+    position:fixed;
+    top:5px;
+    left:5px;
+    width:50%;
+    height:10%;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+}
+
+#price-input-wrapper{
+    right:10px;
+    bottom:10px;
+    position:absolute;
+}
+
+#currentname{
+    font-size:2vw;
+}
+#currentprice{
+    font-size:2vw;
+}
+
+::-webkit-input-placeholder{
+    color:black;
+}
