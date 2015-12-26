@@ -3,39 +3,59 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-        <link rel="stylesheet" href="css/chatroom.css" />
-	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <link rel="stylesheet" href="css/hostroom.css" />
+	    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css"/>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
     <section id="chat-container">
-       
-            <div id="msg-container">
+            <div id="msg-container" class="contentcontainer">
+                <div class="container-header">
+                    <i class="fa fa-times"></i>
+                </div>
                 <div id="msg-box-wrapper">
                     <div id="msg-box"> 
                     </div>
                 </div>
-             <div id="price-container">
-                <div id="price-box-wrapper">
-                    <div id="price-box"> 
+             </div>
+             <div id="price-container" class="contentcontainer">
+                 <div class="container-header">
+                    <i class="fa fa-times"></i>
+                </div>
+<div id="price-box-wrapper">
+                   <div id="price-box"> 
                     </div>
                 </div>
+             </div>
+             </div>
    </section>
 
-    <section id="sellerproducts">
-       <div id="productname" class="productname"></div>
-       <div id="productlist" class="product_list"></div>
-     </div>
-     <div id="price-input-wrapper">
-                <input id="price-input" type="text" class="inputholder" placeholder="希望價格">
-                <button id="send">Go</button>
+    <div id="currentproduct">
+        <div class="currentinfo">
+            <div class="tag">直播商品</div>
+            <div  id="currentname">Stussy</div>
+        </div>
+        <div class="currentinfo">
+            <div class="tag">現在價格</div>
+            <div id="currentprice">999</div>
+        </div> 
+        <div class="currentinfo" id="price-input-wrapper">
+                    <input id="price-input" type="number" class="inputholder" placeholder="希望價格">
+                    <button id="changepricebtn">Go</button>
+        </div>
+  </div>
+
+    <div class="productlist">
+        <div class="productlistbtn">
+            <i class="fa fa-info"></i>  
+        </div>
+        <div class="productlistblock">
+
+        </div>
     </div>
-  </section>
-
-
-
-
 
 </body>
+<script src="js/jquery.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="channel_event.js"></script>
 <script type="text/javascript">
@@ -49,6 +69,7 @@
 		create_channel();
 	});
 </script>
+<script src="js/hostroom_front.js"></script>
 <script src="js/hostroom.js"></script>
 <script src="js/hostroom_event.js"></script>
 </html>
