@@ -60,5 +60,5 @@ function UpdateProductList(response)
 
 function SelectProduct(response)
 {
-    fillCurrentProductBlock
+    fillCurrentProductBlock(response.CurrentProduct);
 }
