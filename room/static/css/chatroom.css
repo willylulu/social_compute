@@ -99,3 +99,66 @@ div{
 ::-webkit-input-placeholder{
     color:black;
 }
+.productlist:hover{
+    cursor:pointer;
+}  
+
+.productlistbtn{
+    position:fixed;
+    top:10%;
+    right:5px;
+    width:48px;
+    height:48px;
+    z-index:100;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+    font-size:40px;
+    text-align:center;
+    padding:5px 5px;
+    background:rgba(0,0,0,0.5);
+    color:white;
+}
+
+.productlistblock{
+    z-index:200;
+    position:fixed;
+    right:-300px;
+    top:0px;
+    height:100%;
+    width:250px;
+    background:rgba(0,0,0,0.5);
+
+}
+
+.productitem{
+    margin-left:10px;
+    margin-top:10px;
+    width:90%;
+    height:10%;
+    background:rgba(255,255,192,0.5);
+    box-shadow:0 2px 5px 0 rgba(255,255,255,0.16),0 2px 10px 0 rgba(255,255,255,0.12); 
+    padding:10px 10px;
+}
+.iteminfo{
+    vertical-align:top;
+    display:inline-block;
+}
+.productprofile{
+    display:inline-block;
+    height:100%;
+    width:40%;
+    background:rgba(0,0,0,1);  
+}
+.producttitle{
+    font-weight:bold;
+    font-size:18px; 
+}
+.productprice{
+    font-weight:300;
+    font-size:16px;
+}
+.productdescription{
+    font-size:12px;
+    font-weight:200;    
+}
+
+

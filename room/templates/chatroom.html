@@ -14,6 +14,14 @@
     </iframe>
 
 
+    <div class="productlist">
+        <div class="productlistbtn">
+            <i class="fa fa-info"></i>  
+        </div>
+        <div class="productlistblock">
+        </div>
+    </div>
+
     <section id="chat-container">
              <div id="msg-container" class="contentcontainer">
              <div class="container-header">
@@ -57,10 +65,17 @@
             <div id="productprice" class="info">2189</div>
         </div>
      </div>
-  </section>
+
+    </section>
+       <div class="buycurrentblock">
+            <div class="buycurrentbtn">
+                購買當前產品
+            </div> 
+        </div>
 
     </body>
 <script>
+/*
   var me = new Object();
   var current_url = window.location.href;
   var element = current_url.split("?");
@@ -83,9 +98,12 @@
           if(e.keyCode==13)
           $('#send').click();
   });
+
+*/
 </script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="channel_event.js"></script>
 <script src="js/chatroom.js"></script>
 <script src="js/chatroom_event.js"></script>
+<script src="js/chatroom_front.js"></script>
 </html>
