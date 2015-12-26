@@ -33,4 +33,8 @@ function create_channel () {
 	socket.on('broadcast_customer_price',function (response) {
 		UpdatePrice(response);
 	});
+
+	socket.on('update_productlist', function (response) {
+		UpdateSellerProduct(response);
+	});
 }
