@@ -60,8 +60,9 @@ app.get('/test_hostroom', function(req, res) {
 
 app.get('/chatroom', function(req, res) {
     // parse url to chatroom.html
-    var data = require('url').parse(req.url, true).query;
-    res.render(room_route + 'chatroom.html');
+    var host_fb_id = req.query.host_fb_id;
+    var stream_url = req.query.stream_url;
+    res.render(room_route + 'chatroom.html',{'host_fb_id':host_fb_id,'stream_url':stream_url});
 });
 
 app.get('/hostroom', function(req, res) {
@@ -128,8 +129,6 @@ io.sockets.on('connection', function(socket) {
         console.log(req);
         var sendObj = new Object();
         var host_fb_id = req.host_fb_id;
-        console.log('mery');
-        console.log(host_fb_id);
 
         if(channels[host_fb_id].socket_id) {
             sendObj.ProductList = channels[host_fb_id].ProductList;
@@ -185,8 +184,21 @@ io.sockets.on('connection', function(socket) {
         }
     });
 
-    socket.on('change_product', function(req) {
+    socket.on('select_product', function(req) {
         // need to be implemented
+        var host_fb_id = req.user.host_fb_id;
+        var customers;
+        var sendObj = new Object();
+        if(channels[host_fb_id]) {
+            channels[host_fb_id].CurrentProduct = req.new_pos;
+            customers = channels[host_fb_id].customers;
+            sendObj.CurrentProduct = req.new_pos;
+            sendObj.host_fb_id = host_fb_id;
+            for(var key in customers) {
+                io.to(customers[key].socket_id).emit('broadcast_product_select', sendObj);
+            }
+        }
+
     });
 
     socket.on('disconnect', function(req) {

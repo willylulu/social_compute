@@ -1,4 +1,9 @@
 var socket;
+function getsession(){
+	$.get('',function(res) {
+		
+	});
+}
 function enter_store () {
 	// body...
 	socket = io.connect('',{query: 'type=buy'});
@@ -16,6 +21,10 @@ function enter_store () {
 
 	socket.on('broadcast_host_product',function (response) {
 		UpdateProduct(response);
+	});
+
+	socket.on('broadcast_product_select', function(response) {
+		
 	});
 }
 
@@ -37,4 +46,5 @@ function create_channel () {
 	socket.on('update_productlist', function (response) {
 		UpdateSellerProductList(response);
 	});
+
 }

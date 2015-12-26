@@ -5,14 +5,14 @@ function UpdateSellerProductList (res) {
     fillProductListSlide(res.ProductList);
 }
 
-function SelectProduct(product_id)
+function SelectProduct(position)
 {
 	//clear 
 	var sendObj = new Object;
     sendObj.user = me;
-    sendObj.product = new Object;
-    sendObj.product.id = product_id;
-
+    sendObj.new_pos = position;
+    // host can change it directly
+    fillCurrentProductBlock(position);
 	socket.emit('select_product',sendObj);
 }
 

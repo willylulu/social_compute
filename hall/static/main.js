@@ -1,4 +1,4 @@
-
+var userproductlist = {};
 var ptr = 0;//modify
 
 var bound = productlist.length; //modify
@@ -19,23 +19,34 @@ function load_productlist () {
 }
 function my_productlist (list) {
     // body...
-    var my_productlist = list;
-    for (var i = 0; i < my_productlist.length; i++) {
+    for (var i = 0; i < list.length; i++) {
         var my_product_for_sale = document.createElement('div');
         $("#my_product_for_sale").append(my_product_for_sale);
         var input = document.createElement('input');
         my_product_for_sale.appendChild(input);
         input.setAttribute("type",'checkbox');
         input.setAttribute('name','my_product');
-        input.setAttribute('data-product',my_productlist[i].fields.name);
-        input.setAttribute('value',my_productlist[i].pk);
+        input.setAttribute('data-product',list[i].fields.name);
+        input.setAttribute('value',list[i].pk);
         var temp = document.createElement('span');
         my_product_for_sale.appendChild(temp);
-        var t = document.createTextNode(my_productlist[i].fields.name+" $"+my_productlist[i].fields.price);
+        var t = document.createTextNode(list[i].fields.name+" $"+list[i].fields.price);
        temp.appendChild(t);
     };
 }
- function FBinitCallback () {
+
+function createGlobalProductList(list){
+    for (var e in list){
+        var name = list[e].fields.name;
+        var price = list[e].fields.price;
+        var description = list[e].fields.description;
+        var product = {};
+        product['price'] = price;
+        product['description'] = description;
+        userproductlist[name] = product;
+    }
+}
+function FBinitCallback () {
     // body...
     if(me!=undefined&&me.status=='connected'){
         FB.api('/me',function(res){
@@ -46,17 +57,16 @@ function my_productlist (list) {
                 $("#sale_username").html("Hi,"+res.name);
                 $("#FB_Login").hide();
                 $.post('/checklogin',{'uid':res.id},function(req,response) {
-                    console.log(req);
                     my_productlist(req);
+                    createGlobalProductList(req);
                 });
             });
         });
     }
 }
+
 function load_channels () {
     // body...
-    console.log(onlive_Channel);
-    //add
      var onlive_forloop_counter=1;
     for (var key in onlive_Channel) {
         if(key=='undefined')continue;
@@ -106,7 +116,7 @@ function load_channels () {
                         body.appendChild(iframe);
                         iframe.setAttribute('width','420');
                         iframe.setAttribute('height','315');
-                        iframe.setAttribute('src',"http://www.youtube.com/embed/eaX19wA-EYI");
+                        iframe.setAttribute('src',onlive_Channel[key].stream_url);
                         iframe.setAttribute('frameborder','0');
                     var footer = document.createElement('div');
                     footer.className = "modal-footer";
@@ -116,15 +126,17 @@ function load_channels () {
                         footer.appendChild(button2);
                         button2.setAttribute('type','button');
                         button2.setAttribute('data-dismiss','modal');
-                        button2.setAttribute('onClick','enterChannel()');
+                        button2.setAttribute('onClick','enterChannel('+key+',\''+onlive_Channel[key].stream_url+'\')');
                             var t4 = document.createTextNode("Go!");
                             button2.appendChild(t4);
         
          onlive_forloop_counter++;
     }
 }
-function enterChannel () {
+function enterChannel (host_fb_id,stream_url) {
     // body...
+     window.location = socket_url+'chatroom?host_fb_id='+host_fb_id+'&stream_url='+stream_url;
+
 }
 window.onload = function (){
      draw();
@@ -268,6 +280,9 @@ function create(){
 }
 
 function openhost(){
+
+    console.log(userproductlist);
+
     var posturl = socket_url;
     var host_name = accountname;
     var host_fb_id = uid;
@@ -275,8 +290,11 @@ function openhost(){
     var productlist = [];
     $("input[name='my_product']:checked").each(function(){
         var checkproduct = {};
+        var name = $(this).data('product');
         checkproduct['pid'] = $(this).val();
-        checkproduct['pname'] = $(this).data('product');
+        checkproduct['productname'] = name;
+        checkproduct['price'] = userproductlist[name]['price'];
+        checkproduct['description'] = userproductlist[name]['description'];
         productlist.push(checkproduct);
     });
     data = {};
@@ -284,7 +302,7 @@ function openhost(){
     data['hostfbid'] = host_fb_id;
     data['streamurl'] = stream_url;
     data['productlist'] = productlist;
-    console.log(productlist);
+//    console.log(productlist);
  /* 
    var xhr = new XMLHttpRequest();
   xhr.open('POST', posturl, true);

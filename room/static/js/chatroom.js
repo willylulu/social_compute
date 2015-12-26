@@ -1,5 +1,15 @@
-enter_store();
 
+function FBinitCallback () {
+    // body...
+    FB.api('/me',function(res){
+        console.log(res);
+        me.host_fb_id = host_fb_id;
+        me.fb_name = res.name;
+        me.fb_id = res.id;
+        me.stream_url = res.stream_url;
+    });
+    enter_store();
+}
 //buyer_send_message
 function SendMessage(msg) {
 
