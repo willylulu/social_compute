@@ -67,11 +67,12 @@ app.get('/chatroom', function(req, res) {
 app.get('/hostroom', function(req, res) {
     // parse url to chatroom.html
     var hostfbid = req.query.hostfbid;
+    var stream_url = req.query
     if(!hostfbid) {
         res.sendStatus(404);
         return;
     }
-    res.render(room_route + 'hostroom.html');
+    res.render(room_route + 'hostroom.html',{'host_fb_id':hostfbid});
 });
 
 // not sure why lulu keep this.
