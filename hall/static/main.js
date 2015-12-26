@@ -28,7 +28,7 @@ function my_productlist (list) {
         input.setAttribute("type",'checkbox');
         input.setAttribute('name','my_product');
         input.setAttribute('data-product',my_productlist[i].fields.name);
-        input.setAttribute('value',my_productlist[i].fields.owner);
+        input.setAttribute('value',my_productlist[i].pk);
         var temp = document.createElement('span');
         my_product_for_sale.appendChild(temp);
         var t = document.createTextNode(my_productlist[i].fields.name+" $"+my_productlist[i].fields.price);
