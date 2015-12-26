@@ -24,7 +24,7 @@ server.listen(process.env.PORT || 3000); // set server port
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 app.set('views', __dirname + 'views');
-app.use(express.static(__dirname);
+app.use(express.static(__dirname));
 
 app.use(function (req, res, next) {
 
