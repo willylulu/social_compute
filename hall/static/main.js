@@ -17,6 +17,7 @@ function load_productlist () {
         $("#product"+i).html("<h4>"+productlist[i].fields.name+"</h4><h5>"+productlist[i].fields.price+"</h5><h5>"+productlist[i].fields.ownername+"</h5>");  
     };
 }
+
 function my_productlist (list) {
     // body...
     for (var i = 0; i < list.length; i++) {
@@ -36,6 +37,7 @@ function my_productlist (list) {
 }
 
 function createGlobalProductList(list){
+
     for (var e in list){
         var name = list[e].fields.name;
         var price = list[e].fields.price;
@@ -46,6 +48,7 @@ function createGlobalProductList(list){
         userproductlist[name] = product;
     }
 }
+
 function FBinitCallback () {
     // body...
     if(me!=undefined&&me.status=='connected'){

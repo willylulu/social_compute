@@ -1,6 +1,6 @@
-/*
-var currentproduct = 0;
 var productlist = [];
+var currentproduct = 0;
+/*var productlist = [];
 
 
 // example product info, will push into productlist
@@ -18,9 +18,6 @@ productlist.push(product1);
 */
 
 //$(fillProductListSlide(productlist));
-//$(fillCurrentProductBlock(currentproduct));
-
-var productlist;
 
 $('.productlist').hover(function(){
     $('.productlistblock').animate({
@@ -34,26 +31,34 @@ $('.productlist').hover(function(){
 
 });
 
-
 function triggerChangeCurrentItem(){
     $('.productitem').click(function(){
         currentproduct = $(this).data('item');
         fillCurrentProductBlock(currentproduct);
     })
 }
-
-
 function fillProductListSlide(product_list){
+    createGlobalList(product_list);
     $('.productlistblock').empty();
-    productlist = product_list;
     var length = product_list.length
     for ( var i = 0 ; i < length ; i ++){
         append = generateAppendItem(i);
         $('.productlistblock').append(append); 
     }   
-    triggerChangeCurrentItem(); 
+    triggerChangeCurrentItem();
+    fillCurrentProductBlock(currentproduct);
 }
 
+function createGlobalList(list){
+    for (var e in list){
+        var product = {};
+        product['pid'] = list[e]['pid'];
+        product['productname'] = list[e]['productname'];
+        product['price'] = list[e]['price'];
+        product['description'] = list[e]['description'];
+        productlist.push(product);
+    }
+}
 function fillCurrentProductBlock(position){
 
     $('#currentname').empty();
@@ -62,7 +67,6 @@ function fillCurrentProductBlock(position){
     var price = productlist[position]['price'];
     $('#currentname').text(productname);
     $('#currentprice').text(price); 
-
 }
 
 function generateAppendItem(position){
