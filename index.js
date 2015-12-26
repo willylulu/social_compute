@@ -12,6 +12,14 @@ var room_route = __dirname + '/room/templates/';
 // share channel data to all backend port
 module.exports.channels = channels;
 
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+}
+
+
 // url base.
 var backend_url = 'http://localhost:3000/';
 var update_url = 'http://localhost:8000/updatelive/';
