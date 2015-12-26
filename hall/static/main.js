@@ -55,12 +55,11 @@ function my_productlist (list) {
 }
 function load_channels () {
     // body...
-    console.log(productlist);
-    
-
+    console.log(onlive_Channel);
     //add
      var onlive_forloop_counter=1;
     for (var key in onlive_Channel) {
+        if(key==undefined)continue;
         var onlive_obj1 = document.createElement('div');
         $("#onlive_body").append(onlive_obj1);
             var PopStream = document.createElement('a');
@@ -72,13 +71,13 @@ function load_channels () {
             PopStream.setAttribute('style','padding:1.3vw;');
                 var objh = document.createElement('h3');
                 PopStream.appendChild(objh);
-                    var t = document.createTextNode(key);
+                    var t = document.createTextNode(onlive_Channel[key].host_name);
                     objh.appendChild(t);
 
         var onlive_obj2 = document.createElement('div');
         onlive_obj2.id = 'streamviewpop'+onlive_forloop_counter;
         onlive_obj2.className = "modal fade";
-        $("#target id").append(onlive_obj2);
+        $("#onlive_body").append(onlive_obj2);
             var dialog = document.createElement('div'); 
             dialog.className = "modal-dialog";
             onlive_obj2.appendChild(dialog);

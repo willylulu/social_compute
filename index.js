@@ -95,7 +95,8 @@ app.post('/', function(req, res) {
         var data = JSON.parse(body);
         var host_fb_id = data.hostfbid; // use fb id as identifier  
         var ProductList = data.productlist;
-        var streamurl = data.streamurl;       
+        var streamurl = data.streamurl; 
+        var host_name = data.host_name;      
         console.log(data);
         // put basic info into target channel.
         // other info such as stream url and socket id
@@ -104,7 +105,8 @@ app.post('/', function(req, res) {
         channels[host_fb_id].ProductList = ProductList;
         channels[host_fb_id].CurrentProduct = 0;
         channels[host_fb_id].PriceList = new Object();
-        channels[host_fb_id].stream_url = streamurl;        
+        channels[host_fb_id].stream_url = streamurl;
+        channels[host_fb_id].host_name = host_name;    
         res.render(room_route + 'chatroom.html', data);
 
     });
@@ -123,6 +125,7 @@ io.sockets.on('connection', function(socket) {
         // fb_name
         // host_fb_id
         // stream_url
+        console.log(req);
         var sendObj = new Object();
         var host_fb_id = req.host_fb_id;
 
