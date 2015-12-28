@@ -21,6 +21,10 @@ div{
     background:rgba(110,248,32,0.5);
 }
 
+.wrapper{
+    overflow-y: auto;
+}
+
 #msg-box-wrapper{
    width:20vw;
    height:35vh;

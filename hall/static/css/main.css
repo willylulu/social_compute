@@ -1,3 +1,63 @@
+section{
+	width:100%;
+	height:100%;
+}
+
+#getstarted{
+	background:rgba(255,255,255,1);
+}
+
+.sectioncontainer{
+	position:absolute;
+	width:80%;
+	height:60%;
+	margin-top:5%;
+	left:10%;
+}
+.sectiontitle{
+	font-size:5vw;
+	width:auto;
+	font-weight:bold;
+	color:orange;
+	box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+}
+
+.introcontainer{
+	position:absolute;
+	padding-top:10%;
+	height:100%;
+	width:100%;
+	background:rgba(0,0,0,0.5);
+}
+
+.tutorialblock{
+	margin:10px 10px;
+	padding:10px 10px;
+	width:25vw;
+	height:25vw;
+	background:black;
+}
+
+/* Handle hot stream stuff */
+.hotstreamblock{
+	width:15vw;
+	height:15vw;
+	border-radius: 10px;
+	background:orange;
+	padding:5px 5px;
+}
+.hotstreamhost{
+	font-size: 3vw;
+	font-weight:bold;
+	float:left;
+}
+.hotstreambtn{
+	bottom:5px;
+	right:5px;
+}
+
+
+
 #draw_title{
  margin:auto;
 }

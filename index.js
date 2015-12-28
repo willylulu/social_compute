@@ -172,7 +172,7 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('enter_channel', function(req) {
         // response will be a 'me' object.
-        console.log(req);
+        //console.log(req);
         var user_id = req.fb_id;
         var customer = new Object();
         var host_fb_id = req.host_fb_id;
@@ -181,7 +181,8 @@ io.sockets.on('connection', function(socket) {
         customer.socket_id = socket.id;
         // put customer into channel's customers list.
 
-        channels[host_fb_id].customers[user_id] = customer;
+        //channels[host_fb_id].customers[user_id] = customer;
+        channels[host_fb_id].customers[socket.id] = customer;
         sendObj.CurrentProduct = 0;
         sendObj.ProductList = channels[host_fb_id].ProductList;
 

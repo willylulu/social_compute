@@ -74,7 +74,7 @@ function load_channels () {
     for (var key in onlive_Channel) {
         if(key=='undefined')continue;
         var onlive_obj1 = document.createElement('div');
-        $("#onlive_body").append(onlive_obj1);
+        $(".hotstreamcontainer").append(onlive_obj1);
             var PopStream = document.createElement('a');
             PopStream.id = 'PopStream';
             PopStream.className = "PopStream";
@@ -90,7 +90,7 @@ function load_channels () {
         var onlive_obj2 = document.createElement('div');
         onlive_obj2.id = 'streamviewpop'+onlive_forloop_counter;
         onlive_obj2.className = "modal fade";
-        $("#onlive_body").append(onlive_obj2);
+        $(".hotstreamcontainer").append(onlive_obj2);
             var dialog = document.createElement('div'); 
             dialog.className = "modal-dialog";
             onlive_obj2.appendChild(dialog);
@@ -115,12 +115,14 @@ function load_channels () {
                     body.className = "modal-body";
                     content.appendChild(body);
                     body.setAttribute('style',"display:inline-block");
+                        /*
                         var iframe = document.createElement('iframe');
                         body.appendChild(iframe);
                         iframe.setAttribute('width','420');
                         iframe.setAttribute('height','315');
                         iframe.setAttribute('src',onlive_Channel[key].stream_url);
                         iframe.setAttribute('frameborder','0');
+                            */
                     var footer = document.createElement('div');
                     footer.className = "modal-footer";
                     content.appendChild(footer);
@@ -136,6 +138,13 @@ function load_channels () {
          onlive_forloop_counter++;
     }
 }
+
+// create by Frank 12/28 
+function generateHotStreamAppend(){
+
+}
+
+
 function enterChannel (host_fb_id) {
     // body...
      window.location ='chatroom?hostfbid='+host_fb_id;
