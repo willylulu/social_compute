@@ -11,7 +11,7 @@ function FBinitCallback () {
             me.fb_id = res.id;
 
             $.ajax({
-                url: 'http://localhost:3000/get_channel?hostfbid=' + host_fb_id,
+                url: './get_channel?hostfbid=' + host_fb_id,
                 type: 'GET',
                 success: function(response) {
                 var stream_url = response.stream_url.split('youtu.be/')[1];
