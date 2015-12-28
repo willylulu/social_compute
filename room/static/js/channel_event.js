@@ -6,9 +6,6 @@ function getsession(){
 }
 function enter_store () {
 	// body...
-	var init_data = new Object;
-
-	init_data.CurrentProduct = 0;
 	//init_data.host_fb_id = 
 	socket = io.connect('',{query: 'type=buy'});
 	me.socket_id = socket.id;
@@ -32,13 +29,9 @@ function enter_store () {
 	});
 
 	socket.on('update_productlist', function (response) {
-		console.log(response);
         UpdateProductList(response);
+        SelectProduct(init_data.CurrentProduct);
 	});
-
-
-	//SelectProduct(init_data);
-
 }
 
 function create_channel () {

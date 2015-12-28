@@ -58,15 +58,20 @@ function fillProductListSlide(productlist){
 }
 
 function fillCurrentProductBlock(position){
-
-    $('#currentname').empty();
-    $('#currentprice').empty();
+    $('#productname').empty();
+    $('#productprice').empty();
     var productname = productlist[position]['productname'];
     var price = productlist[position]['price'];
     $('#productname').text(productname);
     $('#productprice').text(price); 
 
 }
+
+function fillHostName(name) {
+  $('#hostname').empty();
+  $('#hostname').text(name);
+}
+
 
 function createGlobalList(list){
     for (var e in list){

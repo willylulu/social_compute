@@ -1,4 +1,5 @@
 var me = new Object();
+var init_data = new Object();
 
 function FBinitCallback () {
     // body...
@@ -14,11 +15,12 @@ function FBinitCallback () {
                 type: 'GET',
                 success: function(response) {
                 var stream_url = response.stream_url.split('youtu.be/')[1];
-                $('#stream-frame').attr('src', 'http://www.youtube.com/embed/' + stream_url);   
+                $('#stream-frame').attr('src', 'http://www.youtube.com/embed/' + stream_url);
+                init_data.CurrentProduct = response.CurrentProduct; 
+                fillHostName(response.host_name);
+                enter_store();
                 }
-                }).done(function(){
-                enter_store();  
-            });
+                });
             //me.stream_url = res.stream_url;
             //enter_store();
            
@@ -83,5 +85,5 @@ function UpdateProductList(response)
 
 function SelectProduct(response)
 {
-    fillCurrentProductBlock(response.CurrentProduct);
+    fillCurrentProductBlock(response);
 }

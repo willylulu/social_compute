@@ -11,8 +11,6 @@ function SelectProduct(position)
 	var sendObj = new Object;
     sendObj.user = me;
     sendObj.new_pos = position;
-    // host can change it directly
-    fillCurrentProductBlock(position);
 	socket.emit('select_product',sendObj);
 }
 
