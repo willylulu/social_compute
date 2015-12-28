@@ -148,6 +148,7 @@ io.sockets.on('connection', function(socket) {
         var host_fb_id = req.host_fb_id;
 
         if(channels[host_fb_id].socket_id) {
+            channels[host_fb_id].socket_id = socket.id;
             sendObj.ProductList = channels[host_fb_id].ProductList;
             sendObj.CurrentProduct = channels[host_fb_id].CurrentProduct;
             io.to(channels[host_fb_id].socket_id).emit('update_productlist', sendObj); // undefine.
@@ -217,11 +218,13 @@ io.sockets.on('connection', function(socket) {
         var host_fb_id = req.user.host_fb_id;
         var customers;
         var sendObj = new Object();
+        console.log('Select : ' + host_fb_id);
         if(channels[host_fb_id]) {
             channels[host_fb_id].CurrentProduct = req.new_pos;
             customers = channels[host_fb_id].customers;
             sendObj.CurrentProduct = req.new_pos;
             sendObj.host_fb_id = host_fb_id;
+            console.log('broadcast');
             for(var key in customers) {
                 io.to(customers[key].socket_id).emit('broadcast_product_select', sendObj);
             }
