@@ -3,7 +3,7 @@ var ptr = 0;//modify
 
 var bound = productlist.length; //modify
 var FB_init_is_done = false;
-var front_end_url = 'http://localhost:3000/';
+var front_end_url = './';
 var socket_url = './create_channel';
 var me;
 function load_productlist () {
@@ -17,6 +17,22 @@ function load_productlist () {
         $("#product"+i).html("<h4>"+productlist[i].fields.name+"</h4><h5>"+productlist[i].fields.price+"</h5><h5>"+productlist[i].fields.ownername+"</h5>");  
     };
 }
+
+/* jQuery Handle event block */
+function triggerHotStreamBtn(){
+    $('.hotstreambtn').click(function(){
+        var hostid = $(this).data('hostid');
+        fillStreamViewModal(hostid);
+        $('#streamviewpop').modal('show');
+    });
+}
+
+
+
+/* jQuery Handle end */
+
+
+
 
 function my_productlist (list) {
     // body...
@@ -68,8 +84,10 @@ function FBinitCallback () {
     }
 }
 
+/*
 function load_channels () {
     // body...
+
      var onlive_forloop_counter=1;
     for (var key in onlive_Channel) {
         if(key=='undefined')continue;
@@ -115,14 +133,6 @@ function load_channels () {
                     body.className = "modal-body";
                     content.appendChild(body);
                     body.setAttribute('style',"display:inline-block");
-                        /*
-                        var iframe = document.createElement('iframe');
-                        body.appendChild(iframe);
-                        iframe.setAttribute('width','420');
-                        iframe.setAttribute('height','315');
-                        iframe.setAttribute('src',onlive_Channel[key].stream_url);
-                        iframe.setAttribute('frameborder','0');
-                            */
                     var footer = document.createElement('div');
                     footer.className = "modal-footer";
                     content.appendChild(footer);
@@ -137,13 +147,61 @@ function load_channels () {
         
          onlive_forloop_counter++;
     }
+}*/
+
+function load_channels(){
+    for (var key in onlive_Channel){
+        if ( key =='undefined'){
+            continue;
+        }
+        else{
+            var append = generateHotStreamAppend(key);
+            $('.hotstreamcontainer').append(append);
+        }
+    }
+    triggerHotStreamBtn();
+}
+
+Object.size = function(obj){
+    var size = 0, key;
+    for (key in obj){
+        if(obj.hasOwnProperty(key))size ++;
+    }
+    return size;
 }
 
 // create by Frank 12/28 
-function generateHotStreamAppend(){
-
+function generateHotStreamAppend(position){
+    
+    var name = onlive_Channel[position]['host_name'];
+    var number = Object.size(onlive_Channel[position]['customers']);
+    var profile = '';
+    var append = '  <div class="hotstreamblock">'+
+                        '<div class="hotstreamhost">'+name+'</div>'+
+                        '<div class="hotstreamprofile">'+profile+'</div>'+
+                        '<div class="hotstreamnumber"><i class="fa fa-user">'+number+'</i></div>'+
+                        '<div class="hotstreambtn" data-hostid="'+position+'">Check it out!</div>'+
+                    '</div>'
+    return append
 }
 
+function fillStreamViewModal(position){
+    clearStreamViewModal();
+
+    var name = onlive_Channel[position]['host_name'];
+    var hostproducts = onlive_Channel[position]['ProductList'];
+    var streamurl = onlive_Channel[position]['stream_url'];
+
+    var appendname = '前往 ' +name+' 的頻道';
+    var appendproduct = '';    // TODO
+    $('.streamviewpoptitle').append(appendname);
+    $('#gostreambtn').attr('onclick',"enterChannel('"+position+"')");
+}
+
+function clearStreamViewModal(){
+    $('.streamviewpoptitle').empty();
+    $('.streamviewpopbody').empty();
+}
 
 function enterChannel (host_fb_id) {
     // body...
