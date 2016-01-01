@@ -34,7 +34,7 @@ function triggerChangeCurrentItem(){
     $('.productitem').click(function(){
         currentproduct = $(this).data('item');
         SelectProduct(currentproduct);
-    })
+    });
 }
 function fillProductListSlide(product_list){
     createGlobalList(product_list);

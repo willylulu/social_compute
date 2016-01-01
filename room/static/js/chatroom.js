@@ -91,22 +91,33 @@ function SelectProduct(response)
 
 function OrderProduct()
 {
-    var sendObj = new Object();
-    sendObj.user = me;
-    sendObj.order = true;
-    $.ajax({
-        url: './send_order',
-        type: 'POST',
-        data: sendObj,
-        success: function(response) {
-            console.log('Mom I did it');
-            console.log(response);
-        }
+    var data = genOrderData(true);
+    PostRequest('./send_order', data, function(response) {
     });
 }
 
-function CancelProduct()
+function CancelOrderProduct()
 {
+    var data = genOrderData(false);
+    PostRequest('./send_order', data, function(response) {
 
+    });
+}
+
+function genOrderData(order)
+{
+    var sendObj = new Object();
+    sendObj.user = me;
+    sendObj.order = order;
+    console.log(sendObj);
+    var data = JSON.stringify(sendObj);
+    return data;
+}
+
+function PostRequest(url, data, callback)
+{
+    $.post(url, data, function(response) {
+        console.log(response);
+    });
 }
 
