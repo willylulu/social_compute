@@ -80,10 +80,33 @@ function UpdateProduct(response)
 
 function UpdateProductList(response)
 {
-    fillProductListSlide(response.ProductList);
+    fillProductListSlide(response);
 }
 
 function SelectProduct(response)
 {
+    console.log(response);
     fillCurrentProductBlock(response);
 }
+
+function OrderProduct()
+{
+    var sendObj = new Object();
+    sendObj.user = me;
+    sendObj.order = true;
+    $.ajax({
+        url: './send_order',
+        type: 'POST',
+        data: sendObj,
+        success: function(response) {
+            console.log('Mom I did it');
+            console.log(response);
+        }
+    });
+}
+
+function CancelProduct()
+{
+
+}
+

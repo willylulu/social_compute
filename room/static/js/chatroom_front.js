@@ -31,8 +31,7 @@ function generateAppendItem(position){
     var title = productlist[position]['productname'];
     var price = productlist[position]['price'];
     var description = productlist[position]['description'];  
-
-     var append = '<div class="productitem" data-item="'+position+'">'+
+    var append = '<div class="productitem" data-item="'+position+'">'+
                          ' <div class="productprofile">'+
                          ' </div>'+
                          ' <div class="iteminfo">'+
@@ -64,7 +63,6 @@ function fillCurrentProductBlock(position){
     var price = productlist[position]['price'];
     $('#productname').text(productname);
     $('#productprice').text(price); 
-
 }
 
 function fillHostName(name) {
@@ -74,6 +72,7 @@ function fillHostName(name) {
 
 
 function createGlobalList(list){
+    productlist = [];
     for (var e in list){
         var product = {};
         product['pid'] = list[e]['pid'];
