@@ -83,9 +83,36 @@ app.get('/chatroom_lulu', function(req, res) {
     res.sendFile(room_route + 'chatroom_lulu.html');
 });
  
-
- app.post('confirm_order', function(req, res) {
+app.post('send_order', function(req, res) {
     // catch dataform, in json
+    var host_fb_id = req.query.hostfbid;
+    var uid = req.user.fb_id;
+    var order = req.order; // should be bool.
+    if(!channels[host_fb_id] || !uid) {
+        res.sendStatus(404);
+        return;
+    }
+
+    var cur = channels[host_fb_id].CurrentProduct;
+    var cur_product = channels[host_fb_id].ProductList[cur];
+    var result = '';
+    // if not init, init it.
+    if(!cur_product.order)
+        cur_product.order = new Object();
+
+    if(!order && cur_product.order[uid]) {
+        delete cur_product.order[uid];
+        result = 'cancel order success';
+    } else if(order && !cur_product.order[uid]) {
+        cur_product.order[uid] = true;
+        result = 'order success';
+    } else if(order) {
+        result = 'already order';
+    } else {
+        result = 'Cannot cancel because you have not ordered it';
+    }
+
+    res.send(result);
  });
 
 app.get('/get_channel', function(req, res) {
@@ -169,7 +196,6 @@ io.sockets.on('connection', function(socket) {
         channels[host_fb_id].customers[host_fb_id] = customer;
         // Put host into customer list to recieve chat msg.
         //channels[host_fb_id].customers[host_fb_id] = host;
-
         sendObj.ProductList = channels[host_fb_id].ProductList;
         sendObj.CurrentProduct = 0;
         io.to(socket.id).emit('update_productlist', sendObj); // undefine.
@@ -195,13 +221,13 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('send_msg', function(req) {
-        console.log(req);
         var host_fb_id = req.user.host_fb_id;
         var customers = channels[host_fb_id].customers;
         for (var key in customers) {
-            console.log(key);
-            io.to(customers[key].socket_id).emit('broadcast_msg',req);
+            //io.to(customers[key].socket_id).emit('broadcast_msg',req);
+            io.to(key).emit('broadcast_msg', req);
         }
+        io.to(channels[host_fb_id].socket_id).emit('broadcast_msg', req);
     });
 
     socket.on('customer_change_price', function(req) {
@@ -213,7 +239,27 @@ io.sockets.on('connection', function(socket) {
         channels[host_fb_id].PriceList[req.user.fb_id] = price_info;
         
         for (var key in customers) {
-            io.to(customers[key].socket_id).emit('broadcast_customer_price',channels[host_fb_id].PriceList);
+            io.to(key).emit('broadcast_customer_price',channels[host_fb_id].PriceList);
+        }
+        io.to(channels[host_fb_id].socket_id).emit('broadcast_customer_price', channels[host_fb_id].PriceList);
+    });
+
+    socket.on('host_change_price', function(req) {
+        var host_fb_id = req.user.host_fb_id;
+        var new_price  = req.new_price;
+        var customers  = channels[host_fb_id].customers;
+        var sendObj = new Object();
+
+        if(channels[host_fb_id]) {
+            var cur = channels[host_fb_id].CurrentProduct;
+            channels[host_fb_id].ProductList[cur].price = new_price;
+            sendObj.ProductList = channels[host_fb_id].ProductList;
+            sendObj.CurrentProduct = channels[host_fb_id].CurrentProduct;
+
+            for(var key in customers) {
+                io.to(key).emit('broadcast_host_product', sendObj);
+            }
+            io.to(channels[host_fb_id].socket_id).emit('broadcast_host_product', sendObj);
         }
     });
 
@@ -230,14 +276,14 @@ io.sockets.on('connection', function(socket) {
             sendObj.host_fb_id = host_fb_id;
             console.log('broadcast');
             for(var key in customers) {
-                io.to(customers[key].socket_id).emit('broadcast_product_select', sendObj);
+                io.to(key).emit('broadcast_product_select', sendObj);
             }
         }
 
     });
 
     socket.on('host_confirm_order', function(req) {
-        // collect all the data from 
+        // collect all the data from web
     });
 
     socket.on('customer_disconnect', function(req) {
