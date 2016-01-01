@@ -1,8 +1,8 @@
 var man_price_list = [];
-function UpdateSellerProductList (res) {
+function UpdateSellerProductList (response) {
     // body...
     //res.product_list
-    fillProductListSlide(res.ProductList);
+    fillProductListSlide(response);
 }
 
 function SelectProduct(position)
@@ -11,6 +11,7 @@ function SelectProduct(position)
 	var sendObj = new Object;
     sendObj.user = me;
     sendObj.new_pos = position;
+    fillCurrentProductBlock(position);
 	socket.emit('select_product',sendObj);
 }
 
@@ -55,8 +56,17 @@ function UpdateMessage(response) {
     div.scrollTop = div.scrollHeight; // scroll to bottom
 
 }
+
 function UpdateProduct(response)
 {
     var wufa =response.product.name;
     $('#productname').html(wufa);
+}
+
+function ChangePrice(price)
+{
+    var sendObj = new Object();
+    sendObj.user = me;
+    sendObj.new_price = price;
+    socket.emit('host_change_price', sendObj);
 }

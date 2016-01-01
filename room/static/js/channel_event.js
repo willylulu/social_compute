@@ -21,16 +21,16 @@ function enter_store () {
 	});
 
 	socket.on('broadcast_host_product',function (response) {
-		UpdateProduct(response);
+		UpdateProductList(response.ProductList);
 	});
 
 	socket.on('broadcast_product_select', function(response) {
-		SelectProduct(response);
+		SelectProduct(response.CurrentProduct);
 	});
 
 	socket.on('update_productlist', function (response) {
-        UpdateProductList(response);
-        SelectProduct(init_data.CurrentProduct);
+        UpdateProductList(response.ProductList);
+        SelectProduct(response.CurrentProduct);
 	});
 }
 
@@ -49,8 +49,14 @@ function create_channel () {
 		UpdatePrice(response);
 	});
 
-	socket.on('update_productlist', function (response) {
-		UpdateSellerProductList(response);
+	socket.on('broadcast_host_product', function(response) {
+		UpdateSellerProductList(response.ProductList);
+		SelectProduct(response.CurrentProduct);
 	});
 
+	socket.on('update_productlist', function (response) {
+		console.log(response);
+		UpdateSellerProductList(response.ProductList);
+		SelectProduct(response.CurrentProduct);
+	});
 }

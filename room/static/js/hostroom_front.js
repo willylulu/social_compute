@@ -33,7 +33,7 @@ $('.productlist').hover(function(){
 function triggerChangeCurrentItem(){
     $('.productitem').click(function(){
         currentproduct = $(this).data('item');
-        fillCurrentProductBlock(currentproduct);
+        SelectProduct(currentproduct);
     })
 }
 function fillProductListSlide(product_list){
@@ -45,10 +45,10 @@ function fillProductListSlide(product_list){
         $('.productlistblock').append(append); 
     }   
     triggerChangeCurrentItem();
-    fillCurrentProductBlock(currentproduct);
 }
 
 function createGlobalList(list){
+    productlist = [];
     for (var e in list){
         var product = {};
         product['pid'] = list[e]['pid'];
@@ -66,7 +66,6 @@ function fillCurrentProductBlock(position){
     var price = productlist[position]['price'];
     $('#currentname').text(productname);
     $('#currentprice').text(price); 
-    SelectProduct(position);
 }
 
 function generateAppendItem(position){
