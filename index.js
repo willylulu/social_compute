@@ -84,6 +84,10 @@ app.get('/chatroom_lulu', function(req, res) {
 });
  
 
+ app.post('confirm_order', function(req, res) {
+    // catch dataform, in json
+ });
+
 app.get('/get_channel', function(req, res) {
     var hostfbid = req.query.hostfbid;
     if(!hostfbid) {
@@ -232,9 +236,22 @@ io.sockets.on('connection', function(socket) {
 
     });
 
-    socket.on('disconnect', function(req) {
+    socket.on('host_confirm_order', function(req) {
+        // collect all the data from 
+    });
+
+    socket.on('customer_disconnect', function(req) {
+        var host_fb_id = req.user.host_fb_id;
+        if(channels[host_fb_id].customers[socket.id]) {
+            channels[host_fb_id].customers[socket.id] = null;
+        }
+    });
+
+    socket.on('host_disconnect', function(req) {
         var host_fb_id = req.host_fb_id;
-        channels[host_fb_id] = null;
+        if(channels[host_fb_id]) {
+            channels[host_fb_id] = null;
+        }
     });
 
 });
