@@ -4,7 +4,7 @@ var ptr = 0;//modify
 var bound = productlist.length; //modify
 var FB_init_is_done = false;
 var front_end_url = 'http://localhost:3000/';
-var socket_url = 'http://localhost:3000/create_channel';
+var socket_url = './create_channel';
 var me;
 function load_productlist () {
     // body...
