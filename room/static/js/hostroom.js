@@ -70,3 +70,10 @@ function ChangePrice(price)
     sendObj.new_price = price;
     socket.emit('host_change_price', sendObj);
 }
+
+function Disconnect()
+{
+    var sendObj = new Object();
+    sendObj.user = me;
+    socket.emit('host_disconnect', sendObj);
+}

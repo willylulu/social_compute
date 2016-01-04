@@ -121,3 +121,10 @@ function PostRequest(url, data, callback)
     });
 }
 
+function Disconnect()
+{
+    var sendObj = new Object();
+    sendObj.user = me;
+    socket.emit('customer_disconnect', sendObj);
+}
+

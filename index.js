@@ -307,8 +307,14 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('host_disconnect', function(req) {
-        var host_fb_id = req.host_fb_id;
+        var db_url;
+        var host_fb_id = req.user.host_fb_id;
         if(channels[host_fb_id]) {
+            var data = JSON.stringify(channels[host_fb_id].ProductList);
+            request.post(db_url, data, function(response) {
+                // to do  :: retry if failed
+                console.log('Finishing post to django');
+            });
             channels[host_fb_id] = null;
         }
     });
