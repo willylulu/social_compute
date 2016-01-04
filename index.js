@@ -312,9 +312,14 @@ io.sockets.on('connection', function(socket) {
     socket.on('host_disconnect', function(req) {
         var host_fb_id = req.user.host_fb_id;
         if(channels[host_fb_id]) {
-            var data = JSON.stringify(channels[host_fb_id].ProductList);
+            var data = {
+                        orderlist : channels[host_fb_id].ProductList,
+                        };
+            data = JSON.stringify(data);
+            console.log(data);
             request.post(db_url + 'placeorder/', data, function(response) {
                 // to do  :: retry if failed
+                console.log(response);
                 console.log('Finishing post to django');
             });
             channels[host_fb_id] = null;
