@@ -315,14 +315,14 @@ io.sockets.on('connection', function(socket) {
             var data = {
                         orderlist : channels[host_fb_id].ProductList,
                         };
-            data = JSON.stringify(data);
+//            data = JSON.stringify(data);
             console.log(data);
             request.post(db_url + 'placeorder/', data, function(response) {
                 // to do  :: retry if failed
                 console.log(response);
                 console.log('Finishing post to django');
             });
-            channels[host_fb_id] = null;
+                channels[host_fb_id] = null;
         }
     });
 
