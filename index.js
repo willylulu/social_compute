@@ -247,6 +247,7 @@ io.sockets.on('connection', function(socket) {
 
     socket.on('customer_change_price', function(req) {
         var price_info = new Object();
+        var host_fb_id = req.user.host_fb_id;
         var customers = channels[host_fb_id].customers;
         // get price and user info from req.
         price_info = req;
