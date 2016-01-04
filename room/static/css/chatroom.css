@@ -166,4 +166,24 @@ div{
     font-weight:200;    
 }
 
+.buycurrentbtn{
+    background:darkblue;
+    padding:5px;
+    cursor:pointer;
+    width:8vw;
+    font-weight:bold;
+    color:white;    
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+    -webkit-transition:all 1s;
+    transition:all 1s;
+}
 
+.buycurrentbtn:hover{
+    padding-left:4vw;
+    width:10vw;
+}
+
+.buycurrentbtn-bought{
+    background:white;
+    color:darkblue;
+}

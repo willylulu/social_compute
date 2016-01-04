@@ -15,6 +15,11 @@ productlist.push(product1);
 $(fillProductListSlide(productlist));
 $(fillCurrentProductBlock(currentproduct));
 */
+
+
+// STATSUS stand for order the current product order not.
+var BUYSTATUS = false;
+
 $('.productlist').hover(function(){
     $('.productlistblock').animate({
         right:'0',
@@ -24,6 +29,22 @@ $('.productlist').hover(function(){
     $('.productlistblock').animate({
         right:'-300',
     },500);
+
+});
+
+$('.buycurrentbtn').click(function(){
+    if (BUYSTATUS){
+        CancelOrderProduct();
+        $('.buycurrentbtn').text('購買當前產品');
+        $('.buycurrentbtn').removeClass('buycurrentbtn-bought');
+    }
+    else{
+        OrderProduct();
+        $('.buycurrentbtn').text('取消購買');
+        $('.buycurrentbtn').addClass('buycurrentbtn-bought');
+    }
+
+    BUYSTATUS = ~BUYSTATUS;
 
 });
 
