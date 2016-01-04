@@ -19,6 +19,7 @@ var web = require('./web.js');
 // url base.
 var backend_url = 'http://localhost:3000/';
 var update_url = 'http://localhost:8000/updatelive/';
+var db_url = 'http://tvsalestream.herokuapp.com/';
 // server socket on 3000
 server.listen(process.env.PORT || 3000); // set server port
 app.engine('html', engines.mustache);
@@ -123,6 +124,9 @@ app.post('/send_order', function(req, res) {
         } else {
             result = 'Cannot cancel because you have not ordered it';
         }
+
+        console.log(cur_product.order[uid]);
+
         res.status(200);
         res.end(result);
     });
@@ -244,8 +248,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('customer_change_price', function(req) {
-        var host_fb_id = req.user.host_fb_id;
-        var price_info = new Object();
+        var price_info = new Object();cccccc
         var customers = channels[host_fb_id].customers;
         // get price and user info from req.
         price_info = req;
@@ -307,11 +310,10 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('host_disconnect', function(req) {
-        var db_url;
         var host_fb_id = req.user.host_fb_id;
         if(channels[host_fb_id]) {
             var data = JSON.stringify(channels[host_fb_id].ProductList);
-            request.post(db_url, data, function(response) {
+            request.post(db_url + 'placeorder/', data, function(response) {
                 // to do  :: retry if failed
                 console.log('Finishing post to django');
             });
