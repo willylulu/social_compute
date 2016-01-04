@@ -125,8 +125,6 @@ app.post('/send_order', function(req, res) {
             result = 'Cannot cancel because you have not ordered it';
         }
 
-        console.log(cur_product.order[uid]);
-
         res.status(200);
         res.end(result);
     });
@@ -248,7 +246,7 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('customer_change_price', function(req) {
-        var price_info = new Object();cccccc
+        var price_info = new Object();
         var customers = channels[host_fb_id].customers;
         // get price and user info from req.
         price_info = req;
@@ -287,10 +285,12 @@ io.sockets.on('connection', function(socket) {
         console.log('Select : ' + host_fb_id);
         if(channels[host_fb_id]) {
             channels[host_fb_id].CurrentProduct = req.new_pos;
+            if(!channels[host_fb_id].ProductList[req.new_pos].order)
+                channels[host_fb_id].ProductList[req.new_pos].order = new Object();
+
             customers = channels[host_fb_id].customers;
             sendObj.CurrentProduct = req.new_pos;
             sendObj.host_fb_id = host_fb_id;
-            console.log('broadcast');
             for(var key in customers) {
                 io.to(key).emit('broadcast_product_select', sendObj);
             }
@@ -313,11 +313,10 @@ io.sockets.on('connection', function(socket) {
         var host_fb_id = req.user.host_fb_id;
         if(channels[host_fb_id]) {
             var data = {
-                        orderlist : channels[host_fb_id].ProductList,
+                        orderlist : JSON.stringify(channels[host_fb_id].ProductList),
                         };
-            data = JSON.stringify(data);
-            console.log(data);
-            request.post(db_url + 'placeorder/', data, function(response) {
+            //data = JSON.stringify(data);
+            request.post({url : db_url + 'placeorder/', form : data}, function(response) {
                 // to do  :: retry if failed
                 console.log(response);
                 console.log('Finishing post to django');
