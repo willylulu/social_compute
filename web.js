@@ -49,7 +49,24 @@ app.get('/logout', function(req, res) {
     //res.sendFile(templates_route + 'LoginRegis.html');
 
 });
-
+app.get('/productlist', function(req, res) {
+  var onlive_channel = require('./index.js').channels;
+  console.log(onlive_channel);
+  request({
+        url: 'http://tvsalestream.herokuapp.com/allproduct/',
+         //URL to hit
+        method: 'GET',
+        json:true
+    }, function(error, response, json){
+        if(error) {
+            console.log(error);
+        } else {
+            var str_json = JSON.stringify(json);
+            var str_channel = JSON.stringify(onlive_channel);
+            res.render(templates_route + 'productlist.html',{'productlist':str_json,'onlive_channel':str_channel});
+        }
+    });
+});
 app.post('/checklogin', function(req, response) {
     var body = '';
     var str_json;
