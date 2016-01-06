@@ -32,7 +32,7 @@ $('#msg-input').keypress(function(e){
 if(e.keyCode==13){
     var msg_input = document.getElementById("msg-input");
     var msg = msg_input.value;
-    msg_input.innerHTML = '';
+    $('#msg-input').val('');
     SendMessage(msg);
     } 
 });
