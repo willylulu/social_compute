@@ -1,6 +1,7 @@
 var me = new Object();
 var init_data = new Object();
 me.guest = true;
+me.ufb_name = 'Guest';
 
 window.onbeforeunload = function (e) {
     Disconnect();
