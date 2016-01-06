@@ -307,7 +307,7 @@ io.sockets.on('connection', function(socket) {
     socket.on('customer_disconnect', function(req) {
         var host_fb_id = req.user.host_fb_id;
         if(channels[host_fb_id].customers[socket.id]) {
-            channels[host_fb_id].customers[socket.id] = null;
+            delete channels[host_fb_id].customers[socket.id];
         }
     });
 
@@ -322,7 +322,7 @@ io.sockets.on('connection', function(socket) {
                 // to do  :: retry if failed
                 console.log('Finishing post to django');
             });
-            channels[host_fb_id] = null;
+            delete channels[host_fb_id];
         }
     });
 
