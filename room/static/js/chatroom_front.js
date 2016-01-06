@@ -33,19 +33,8 @@ $('.productlist').hover(function(){
 });
 
 $('.buycurrentbtn').click(function(){
-    if (BUYSTATUS){
-        CancelOrderProduct();
-        $('.buycurrentbtn').text('購買當前產品');
-        $('.buycurrentbtn').removeClass('buycurrentbtn-bought');
-    }
-    else{
-        OrderProduct();
-        $('.buycurrentbtn').text('取消購買');
-        $('.buycurrentbtn').addClass('buycurrentbtn-bought');
-    }
-
-    BUYSTATUS = ~BUYSTATUS;
-
+    // OrderStatus defined in chatroom.js
+    changeBuyButtonStatus(BUYSTATUS);
 });
 
 function generateAppendItem(position){
@@ -82,6 +71,7 @@ function fillCurrentProductBlock(position){
     $('#productprice').empty();
     var productname = productlist[position]['productname'];
     var price = productlist[position]['price'];
+    currentproduct = position;
     $('#productname').text(productname);
     $('#productprice').text(price); 
 }
@@ -103,3 +93,29 @@ function createGlobalList(list){
         productlist.push(product);
     }
 }
+
+function changeBuyButtonStatus()
+{
+    if (BUYSTATUS){
+        CancelOrderProduct();
+        setBuyButtonStatus(!BUYSTATUS);
+    }
+    else{
+        OrderProduct();
+        setBuyButtonStatus(!BUYSTATUS);
+    }
+}
+
+function setBuyButtonStatus(status)
+{
+    if (!status){
+        $('.buycurrentbtn').text('購買當前產品');
+        $('.buycurrentbtn').removeClass('buycurrentbtn-bought');
+    }
+    else{
+        $('.buycurrentbtn').text('取消購買');
+        $('.buycurrentbtn').addClass('buycurrentbtn-bought');
+    }
+    BUYSTATUS = status;
+}
+

@@ -128,3 +128,10 @@ function Disconnect()
     socket.emit('customer_disconnect', sendObj);
 }
 
+function BuyButtonReset (status)
+{
+    // defined in chatroom_front.js
+    setBuyButtonStatus(status);
+}
+
+

@@ -26,6 +26,7 @@ function enter_store () {
 
 	socket.on('broadcast_product_select', function(response) {
 		SelectProduct(response.CurrentProduct);
+		BuyButtonReset(response.order);
 	});
 
 	socket.on('update_productlist', function (response) {
