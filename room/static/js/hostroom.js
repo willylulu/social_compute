@@ -1,4 +1,17 @@
 var man_price_list = [];
+
+
+$(window).on('beforeunload', function (e) {
+    var msg = "離開這個頁面將導致頻道關閉，您確定要離開嗎?(注意：hangout直播在關閉視窗後仍會繼續執行，請在hangout中停止直播)";
+    return msg;
+});
+
+
+$(window).unload(function() {
+    // disconnect when user confirmed to leace
+    Disconnect();
+});
+
 function UpdateSellerProductList (response) {
     // body...
     //res.product_list
