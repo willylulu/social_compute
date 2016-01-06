@@ -30,6 +30,14 @@ $('.productlist').hover(function(){
     },500);
 });
 
+// Host want to change price.
+$('#changepricebtn').click(function(){
+    // OrderStatus defined in chatroom.js
+    var new_price = $('#price-input').val();
+    if(!isNaN(new_price))
+      ChangePrice(new_price);
+});
+
 function triggerChangeCurrentItem(){
     $('.productitem').click(function(){
         currentproduct = $(this).data('item');
