@@ -18,6 +18,7 @@ var web = require('./web.js');
 
 // url base.
 var backend_url = 'http://localhost:3000/';
+var djangoport_url = 'http://localhost:8000/';
 var update_url = 'http://localhost:8000/updatelive/';
 var db_url = 'http://tvsalestream.herokuapp.com/';
 // server socket on 3000
@@ -319,7 +320,6 @@ io.sockets.on('connection', function(socket) {
             //data = JSON.stringify(data);
             request.post({url : db_url + 'placeorder/', form : data}, function(response) {
                 // to do  :: retry if failed
-                console.log(response);
                 console.log('Finishing post to django');
             });
             channels[host_fb_id] = null;
