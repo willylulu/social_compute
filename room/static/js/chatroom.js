@@ -1,6 +1,6 @@
 var me = new Object();
 var init_data = new Object();
-
+me.guest = true;
 function FBinitCallback () {
     // body...
     FB.api('/me',function(res){
@@ -9,7 +9,7 @@ function FBinitCallback () {
             me.host_fb_id = host_fb_id;
             me.ufb_name = res.name;
             me.fb_id = res.id;
-
+            me.guest = false;
             $.ajax({
                 url: './get_channel?hostfbid=' + host_fb_id,
                 type: 'GET',
