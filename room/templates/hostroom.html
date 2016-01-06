@@ -57,13 +57,14 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="room/static/js/channel_event.js"></script>
 <script type="text/javascript">
-	var host_fb_id='{{host_fb_id}}';
+	var host_fb_id={{host_fb_id}};
 	var stream_url;
     var me = new Object();
+    console.log(host_fb_id);
 	$(document).ready(function() {
-		// body...
-		me.host_fb_id = window.location.href.split('hostfbid=')[1];
-		create_channel();
+		me.host_fb_id = host_fb_id.toString();
+        console.log(me.host_fb_id);
+        create_channel();
 	});
 </script>
 <script src="room/static/js/hostroom_front.js"></script>
