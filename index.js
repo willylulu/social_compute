@@ -308,7 +308,7 @@ io.sockets.on('connection', function(socket) {
     socket.on('customer_disconnect', function(req) {
         var host_fb_id = req.user.host_fb_id;
         if(channels[host_fb_id].customers[socket.id]) {
-            console.log('customer leave : ' + socket.id);
+            console.log('customer leave : ' + channels[host_fb_id].customers[socket.id].user.fb_id + ' '+ socket.id);
             delete channels[host_fb_id].customers[socket.id];
         }
     });

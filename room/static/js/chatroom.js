@@ -1,6 +1,12 @@
 var me = new Object();
 var init_data = new Object();
 me.guest = true;
+
+window.onbeforeunload = function (e) {
+    Disconnect();
+}
+
+
 function FBinitCallback () {
     // body...
     FB.api('/me',function(res){
