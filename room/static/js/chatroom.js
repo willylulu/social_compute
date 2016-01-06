@@ -51,7 +51,6 @@ function UpdateMessage(response) {
     msg_div.className = "msg";
     msg_div.innerHTML = response.user.ufb_name + " : " + response.msg + "<br>";
     div.appendChild(msg_div);
-    div.scrollTop = div.scrollHeight;
 }
 
 
