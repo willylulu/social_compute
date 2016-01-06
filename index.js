@@ -64,9 +64,13 @@ app.get('/test_hostroom', function(req, res) {
 
 app.get('/chatroom', function(req, res) {
     // parse url to chatroom.html
-    var host_fb_id = req.query.host_fb_id;
+    var hostfbid = req.query.hostfbid;
     var stream_url = req.query.stream_url;
-    res.render(room_route + 'chatroom.html',{'host_fb_id':host_fb_id,'stream_url':stream_url});
+    if(!hostfbid) {
+        res.sendStatus(404);
+        return;        
+    }
+    res.render(room_route + 'chatroom.html',{'host_fb_id':hostfbid,'stream_url':stream_url});
 });
 
 app.get('/hostroom', function(req, res) {
