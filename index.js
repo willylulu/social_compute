@@ -90,7 +90,6 @@ app.post('/send_order', function(req, res) {
     // catch dataform, in json
     var body = '';
     var result = '';
-    console.log(req.body);
 
     req.on('data', function(data) { 
         body += data;
@@ -116,12 +115,12 @@ app.post('/send_order', function(req, res) {
 
         if(!order && cur_product.order[uid]) {
             delete cur_product.order[uid];
-            result = 'cancel order success';
+            result = 'cancel order success : ' + cur_product.productname ;;
         } else if(order && !cur_product.order[uid]) {
             cur_product.order[uid] = true;
-            result = 'order success';
+            result = 'order success : ' + cur_product.productname ;
         } else if(order) {
-            result = 'already order';
+            result = 'already order : ' + cur_product.productname ;;
         } else {
             result = 'Cannot cancel because you have not ordered it';
         }
@@ -283,6 +282,7 @@ io.sockets.on('connection', function(socket) {
         // need to be implemented
         var host_fb_id = req.user.host_fb_id;
         var customers;
+        var orderlist;
         var sendObj = new Object();
         console.log('Select : ' + host_fb_id);
         if(channels[host_fb_id]) {
@@ -291,9 +291,11 @@ io.sockets.on('connection', function(socket) {
                 channels[host_fb_id].ProductList[req.new_pos].order = new Object();
 
             customers = channels[host_fb_id].customers;
+            orderlist = channels[host_fb_id].ProductList[req.new_pos].order;
             sendObj.CurrentProduct = req.new_pos;
             sendObj.host_fb_id = host_fb_id;
             for(var key in customers) {
+                sendObj.order = orderlist[customers[key].user.fb_id];
                 io.to(key).emit('broadcast_product_select', sendObj);
             }
         }
@@ -307,6 +309,7 @@ io.sockets.on('connection', function(socket) {
     socket.on('customer_disconnect', function(req) {
         var host_fb_id = req.user.host_fb_id;
         if(channels[host_fb_id].customers[socket.id]) {
+            console.log('customer leave : ' + channels[host_fb_id].customers[socket.id].user.fb_id + ' '+ socket.id);
             delete channels[host_fb_id].customers[socket.id];
         }
     });
@@ -320,7 +323,8 @@ io.sockets.on('connection', function(socket) {
             //data = JSON.stringify(data);
             request.post({url : db_url + 'placeorder/', form : data}, function(response) {
                 // to do  :: retry if failed
-                console.log('Finishing post to django');
+                console.log(response);
+                console.log('host finish : ' + host_fb_id);
             });
             delete channels[host_fb_id];
         }

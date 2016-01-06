@@ -61,9 +61,11 @@ app.get('/productlist', function(req, res) {
         if(error) {
             console.log(error);
         } else {
+            // handle for demo SCAD, object to dictionary
+
             var str_json = JSON.stringify(json);
             var str_channel = JSON.stringify(onlive_channel);
-            res.render(templates_route + 'productlist.html',{'productlist':str_json,'onlive_channel':str_channel});
+            res.render(templates_route + 'productlist.html',{'productlist':json,'onlive_channel':str_channel,'productlist_dict':str_json,});
         }
     });
 });

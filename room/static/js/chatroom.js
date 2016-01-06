@@ -1,5 +1,11 @@
 var me = new Object();
 var init_data = new Object();
+me.guest = true;
+
+window.onbeforeunload = function (e) {
+    Disconnect();
+}
+
 
 function FBinitCallback () {
     // body...
@@ -9,7 +15,7 @@ function FBinitCallback () {
             me.host_fb_id = host_fb_id;
             me.ufb_name = res.name;
             me.fb_id = res.id;
-
+            me.guest = false;
             $.ajax({
                 url: './get_channel?hostfbid=' + host_fb_id,
                 type: 'GET',
@@ -127,4 +133,11 @@ function Disconnect()
     sendObj.user = me;
     socket.emit('customer_disconnect', sendObj);
 }
+
+function BuyButtonReset (status)
+{
+    // defined in chatroom_front.js
+    setBuyButtonStatus(status);
+}
+
 
