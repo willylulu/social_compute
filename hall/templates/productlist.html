@@ -3,20 +3,56 @@
 <head>
 	<meta charset="UTF-8">
 	<title>商品集</title>
+    <link href="hall/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="hall/static/css/productlist.css" rel="stylesheet">
 </head>
 <body>
+    
+    {{ #productlist }}
+        <div class="productblock" data-pk="{{pk}}"data-toggle="modal" data-target="#productdetail" data-owner="{{#fields}}{{owner}}{{/fields}}">
+            <div class="producttitle">{{#fields}}{{name}}{{/fields}}</div>
+            <div class="productprice">{{#fields}}{{price}}{{/fields}}</div>
+        </div>
+    {{ /productlist }}
 	<div id='who'></div>
-	<div id="productlist_container"></div>
-	<div id="pre" class="button product_element">Pre</div>
-	<div id="next" class="button product_element">Next</div>
+<!-- Modal -->
+<div id="productdetail" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modaltitle"></div>
+        </div>
+      <div class="modal-body">
+            <div class="modaldescription"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 </body>
 <script>
-	productlist={{{productlist}}};
 	onlive_channel={{{onlive_channel}}};
-	console.log(productlist);
-	console.log(onlive_channel);
+    var productlist = {};
+
+    {{ #productlist }}
+            var tempproduct = {};
+            tempproduct['price'] = '{{#fields}}{{price}}{{/fields}}';
+            tempproduct['title'] = '{{#fields}}{{name}}{{/fields}}' ;
+            tempproduct['description'] = '{{#fields}}{{description}}{{/fields}}';
+            tempproduct['onlive'] =  false;   
+            productlist['{{pk}}'] = tempproduct; 
+    {{ /productlist}}
 </script>
+
 <script src="hall/static/js/jquery.js"></script>
 <script src="hall/static/js/FBlogin.js"></script>
 <script src="hall/static/js/productlist.js"></script>
+<script src="hall/static/js/bootstrap.min.js"></script>
 </html>

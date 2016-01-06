@@ -18,6 +18,7 @@ var web = require('./web.js');
 
 // url base.
 var backend_url = 'http://localhost:3000/';
+var djangoport_url = 'http://localhost:8000/';
 var update_url = 'http://localhost:8000/updatelive/';
 var db_url = 'http://tvsalestream.herokuapp.com/';
 // server socket on 3000
