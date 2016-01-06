@@ -1,7 +1,7 @@
 var check_url = "http://tvsalestream.herokuapp.com/checklogin/";
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '938533709533376',
+      appId      : '1703464653208469',
       xfbml      : true,
       version    : 'v2.5'
     });

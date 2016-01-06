@@ -1,6 +1,7 @@
 var me = new Object();
 var init_data = new Object();
 me.guest = true;
+me.ufb_name = 'Guest';
 
 window.onbeforeunload = function (e) {
     Disconnect();
@@ -50,8 +51,11 @@ function UpdateMessage(response) {
     msg_div.className = "msg";
     msg_div.innerHTML = response.user.ufb_name + " : " + response.msg + "<br>";
     div.appendChild(msg_div);
-    div.scrollTop = div.scrollHeight; // scroll to bottom
-
+    var scrolled=$('#msg-box')[0].scrollHeight;
+        
+    $("#msg-box").animate({
+        scrollTop:  scrolled
+   }); // scroll to bottom
 }
 
 
