@@ -5,16 +5,16 @@
  */
 
 body {
-    width: 100%;
-    height: 100%;
+    position:relative;
     font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #fff;
+    height:100%;
     background-color: #000;
 }
 
-html {
-    width: 100%;
-    height: 100%;
+html{
+    height:100%;
+    position:relative;
 }
 
 h1,
@@ -78,7 +78,6 @@ a:focus {
 }
 
 .navbar-custom .navbar-brand .navbar-toggle {
-    padding: 4px 6px;
     font-size: 16px;
     color: #fff;
 }
@@ -124,27 +123,25 @@ a:focus {
 
 @media(min-width:768px) {
     .navbar-custom {
-        padding: 3px 0;
         border-bottom: 0;
         letter-spacing: 1px;
-        background: rgba(0,0,0,1);
-        -webkit-transition: background .5s ease-in-out,padding .5s ease-in-out;
-        -moz-transition: background .5s ease-in-out,padding .5s ease-in-out;
-        transition: background .5s ease-in-out,padding .5s ease-in-out;
+        background: rgba(0,0,0,0.5);
+        padding-top:10px;
+        -webkit-transition: all .5s ease-in-out,padding .5s ease-in-out;
+        -moz-transition: all .5s ease-in-out,padding .5s ease-in-out;
+        transition: all .5s ease-in-out,padding .5s ease-in-out;
     }
 
     .navbar-custom.top-nav-collapse {
-        padding: 0;
+        top:-300px;
         border-bottom: 1px solid rgba(255,255,255,.3);
-        background: rgba(0,0,0,0.5);
     }
 }
 
 .intro {
     display: table;
     width: 100%;
-    height: auto;
-    padding: 100px 0;
+    height: 100%;
     text-align: center;
     color: #fff;
     background-color: #000;
