@@ -55,6 +55,7 @@ app.get('/orderlist', function(req, res) {
   var uid = req.query.uid;
   var url = 'http://tvsalestream.herokuapp.com/orderlist/';
   var data = {uid : uid.toString()};
+  console.log(uid);
   request({
     url: url,
     method: 'POST',
@@ -63,8 +64,9 @@ app.get('/orderlist', function(req, res) {
     if(error) {
       console.log(error);
     } else {
-      console.log(body);
-      res.render(templates_route + 'orderlist.html', {'orderlist' : body});
+      console.log(JSON.parse(body));
+      console.log(uid); 
+      res.render(templates_route + 'orderlist.html', {'orderlist' : JSON.parse(body)});
       return;
     }
     res.sendStatus(404);
