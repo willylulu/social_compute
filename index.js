@@ -325,6 +325,7 @@ io.sockets.on('connection', function(socket) {
         var host_fb_id = req.user.host_fb_id;
         if(channels[host_fb_id]) {
             var data = {
+                        owner     : host_fb_id,
                         orderlist : JSON.stringify(channels[host_fb_id].ProductList),
                         };
             //data = JSON.stringify(data);
