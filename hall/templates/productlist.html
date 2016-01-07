@@ -7,7 +7,6 @@
     <link href="hall/static/css/productlist.css" rel="stylesheet">
 </head>
 <body>
-    
     {{ #productlist }}
         <div class="productblock" data-pk="{{pk}}"data-toggle="modal" data-target="#productdetail" data-owner="{{#fields}}{{owner}}{{/fields}}">
             <div class="producttitle">{{#fields}}{{name}}{{/fields}}</div>
