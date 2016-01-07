@@ -4,7 +4,7 @@ section{
 }
 
 #getstarted{
-	background:rgba(255,255,255,1);
+	background:rgba(10,10,10,1);
     height:auto;
     position:relative;
 }
@@ -44,19 +44,27 @@ section{
     position:relative;
     display:block;
 	padding:10px 10px;
+    background:rgba(0,0,0,0.5);
+    border-radius:10px;
 	width:100%;
     height:25vw;
-    margin-top:5px;
-	box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+    margin-top:15px;
+	box-shadow:0 2px 5px 0 rgba(255,255,255,0.60),0 2px 10px 0 rgba(255,255,255,0.45); 
 }
 
 .tutorialicon{
     margin:5px;
     width:20vw;
     height:20vw;
-    background:black;
     position:relative;
+    border:0px;
+    padding:5px;
     display:inline-block;
+}
+
+.icon{
+    height:100%;
+    width:100%;
 }
 
 .tutorialdescription{
@@ -69,6 +77,7 @@ section{
     margin-top:10%;
     border:2px solid #47AB23;
     display:inline-block;
+	box-shadow:0 2px 5px 0 rgba(255,255,255,0.40),0 2px 10px 0 rgba(255,255,255,0.30); 
     transition:all 0.5s;
     -webkit-transition:all 0.5s;
 }
