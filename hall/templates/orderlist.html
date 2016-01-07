@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下訂單囉</title>
+</head>
+<body>
+	<!--
+		{ model: 'Product.buyqueue',
+		    fields: 
+		     { productnumber: '3',
+		       buyername: 'Sou Gen',
+		       buyer: '145492232487827',
+		       price: '1000',
+		       owner: '891490484237634' },
+		    pk: 4 }
+	-->
+	{{#orderlist}}
+		<div class="productblock" data-pk="{{#fields}}{{productnumber}}{{/fields}}" data-owner="{{#fields}}{{owner}}{{/fields}}">
+			{{#field}}
+			<div class="buyername">買家: {{buyername}}</div>
+			<div class="buyername">價格: {{price}}</div>
+			<div class="owner"><a href="https://www.facebook.com/{{owner}}">聯絡買家</a></div>
+			{{/field}}
+		</div>
+	{{/orderlist}}
+</body>
+<script src="hall/static/js/jquery.js"></script>
+<script src="hall/static/js/bootstrap.min.js"></script>
+</html>
