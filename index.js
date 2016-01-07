@@ -255,12 +255,15 @@ io.sockets.on('connection', function(socket) {
         var customers = channels[host_fb_id].customers;
         // get price and user info from req.
         price_info = req;
-        channels[host_fb_id].PriceList[req.user.fb_id] = price_info;
+        price_info.price = parseInt(price_info.price);
+        if(Number.isInteger(price_info.price)){
+            channels[host_fb_id].PriceList[req.user.fb_id] = price_info;
         
-        for (var key in customers) {
-            io.to(key).emit('broadcast_customer_price',channels[host_fb_id].PriceList);
+            for (var key in customers) {
+                io.to(key).emit('broadcast_customer_price',channels[host_fb_id].PriceList);
+            }
+            io.to(channels[host_fb_id].socket_id).emit('broadcast_customer_price', channels[host_fb_id].PriceList);
         }
-        io.to(channels[host_fb_id].socket_id).emit('broadcast_customer_price', channels[host_fb_id].PriceList);
     });
 
     socket.on('host_change_price', function(req) {
