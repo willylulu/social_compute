@@ -18,8 +18,12 @@ function submit () {
 	      data:{user:user,uid:uid,productname:name,price:price,description:description},
 	      dataType:"json"
 	}).done(function() {
-		console.log("data");
+
 	}) ;
+	console.log('Done');
+	$('#productnametext').val('');
+	$('#productpricetext').val('');
+	$('textarea').val('');
 }
 //user
 //uid

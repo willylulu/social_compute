@@ -16,8 +16,8 @@ function enter_store () {
 		UpdateMessage(response);
 	});
 
-	socket.on('broadcast_customer_price',function (response) {
-		CustomerUpdatePrice(response);
+	socket.on('broadcast_customer_price',function (response,sort_user) {
+		CustomerUpdatePrice(response,sort_user);
 	});
 
 	socket.on('broadcast_host_product',function (response) {
@@ -46,8 +46,8 @@ function create_channel () {
 		// body...
 		UpdateMessage(response);
 	});
-	socket.on('broadcast_customer_price',function (response) {
-		UpdatePrice(response);
+	socket.on('broadcast_customer_price',function (response,sort_user) {
+		UpdatePrice(response,sort_user);
 	});
 
 	socket.on('broadcast_host_product', function(response) {

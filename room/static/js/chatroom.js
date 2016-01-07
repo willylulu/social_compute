@@ -66,13 +66,13 @@ function CustomerChangePrice(price)
     socket.emit('customer_change_price',sendObj);
 }
 
-function CustomerUpdatePrice(response)
+function CustomerUpdatePrice(response,sort_user)
 {
     //price list 
-    console.log(response);
+    console.log(sort_user);
     var output ="";
-    for(var key in response){
-        output += "<div>"+response[key].user.ufb_name+" : "+response[key].price+"</div>"
+    for(var key in sort_user){
+        output += "<div>"+response[sort_user[key]].user.ufb_name+" : "+response[sort_user[key]].price+"</div>"
     }
     $('#price-box').html(output);
 }
