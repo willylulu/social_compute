@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>下訂單囉</title>
+	<title>查看訂單</title>
 </head>
 <body>
 	{{#orderlist}}
@@ -10,7 +10,7 @@
 			<div class="productname">商品: {{#fields}}{{productname}}{{/fields}}</div>
 			<div class="buyername">買家: {{#fields}}{{buyername}}{{/fields}}</div>
 			<div class="buyerprice">價格: {{#fields}}{{price}}{{/fields}}</div>
-			<div class="owner"><a href="https://www.facebook.com/{{#fields}}{{owner}}{{/fields}}">聯絡賣家</a></div>
+			<div class="owner"><a href="https://www.facebook.com/{{#fields}}{{buyer}}{{/fields}}">聯絡買家</a></div>
 		</div>
 	{{/orderlist}}
 </body>
