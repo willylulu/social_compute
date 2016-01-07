@@ -49,6 +49,28 @@ app.get('/logout', function(req, res) {
     //res.sendFile(templates_route + 'LoginRegis.html');
 
 });
+
+
+app.get('/orderlist', function(req, res) {
+  var uid = req.query.uid;
+  var url = 'http://tvsalestream.herokuapp.com/orderlist/';
+  var data = {uid : uid.toString()};
+  request({
+    url: url,
+    method: 'POST',
+    form : data
+  },function(error, response, body){
+    if(error) {
+      console.log(error);
+    } else {
+      console.log(body);
+      res.render(templates_route + 'orderlist.html', {'orderlist' : body});
+      return;
+    }
+    res.sendStatus(404);
+  });
+});
+
 app.get('/productlist', function(req, res) {
   var onlive_channel = require('./index.js').channels;
   console.log(onlive_channel);
