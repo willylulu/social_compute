@@ -64,7 +64,8 @@ app.get('/orderlist', function(req, res) {
       console.log(error);
     } else {
       console.log(uid); 
-      res.render(templates_route + 'orderlist.html', {'orderlist' : body});
+      console.log(body);
+      res.render(templates_route + 'orderlist.html', {'orderlist' : JSON.parse(body)});
       return;
     }
     res.sendStatus(404);
