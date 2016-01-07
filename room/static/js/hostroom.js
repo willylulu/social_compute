@@ -47,12 +47,12 @@ function SellerConfirmProductOrder(customers)
 	sendObj.customers = customers;
 	socket.emit('seller_confirm_product_order',sendObj);
 }
-function UpdatePrice(response)
+function UpdatePrice(response,sort_user)
 {
     //price list 
     var wufa="";
-    for(var key in response){
-        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"bit\" value=\""+response[key].price+"\" id=\""+response[key].user.fb_id+"\">"+response[key].user.ufb_name+": $"+response[key].price+"<br>"
+    for(var key in sort_user){
+        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"bit\" value=\""+response[sort_user[key]].price+"\" id=\""+response[sort_user[key]].user.fb_id+"\">"+response[sort_user[key]].user.ufb_name+": $"+response[sort_user[key]].price+"<br>"
     }
     $('#price-box').html(wufa);
 }
