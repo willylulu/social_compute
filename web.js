@@ -7,7 +7,6 @@ var express = require('express'),
     cookieSession = require('cookie-session'),
     passport = require('passport'),
     FacebookStrategy = require('passport-facebook').Strategy;
-
 // webpage on port 8000
 //server.listen(process.env.PORT || 8000); // set server port
 
