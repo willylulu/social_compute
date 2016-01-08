@@ -35,7 +35,6 @@ function FBinitCallback () {
 }
 //buyer_send_message
 function SendMessage(msg) {
-    console.log(msg);
     var sendObj = new Object();
     sendObj.user = me;
     sendObj.msg = msg;
@@ -96,17 +95,15 @@ function SelectProduct(response)
 
 function OrderProduct()
 {
-    var data = genOrderData(true);
-    PostRequest('./send_order', data, function(response) {
-    });
+    var sendObj = genOrderData(true);
+    console.log(sendObj);
+    socket.emit('change_customer_orderstatus', sendObj);
 }
 
 function CancelOrderProduct()
 {
-    var data = genOrderData(false);
-    PostRequest('./send_order', data, function(response) {
-
-    });
+    var sendObj = genOrderData(false);
+    socket.emit('change_customer_orderstatus', sendObj);
 }
 
 function genOrderData(order)
@@ -115,8 +112,7 @@ function genOrderData(order)
     sendObj.user = me;
     sendObj.order = order;
     console.log(sendObj);
-    var data = JSON.stringify(sendObj);
-    return data;
+    return sendObj;
 }
 
 function PostRequest(url, data, callback)
