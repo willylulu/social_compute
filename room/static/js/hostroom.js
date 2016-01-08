@@ -12,6 +12,15 @@ $(window).unload(function() {
     Disconnect();
 });
 
+
+function SendMessage(msg) {
+    var sendObj = new Object();
+    sendObj.user = me;
+    sendObj.msg = msg;
+    socket.emit('send_msg',sendObj);
+}
+
+
 function UpdateSellerProductList (response) {
     // body...
     //res.product_list
@@ -90,3 +99,13 @@ function Disconnect()
     sendObj.user = me;
     socket.emit('host_disconnect', sendObj);
 }
+
+function UpdateOrderStatus(new_order, num)
+{
+    // new_order : true if someone has order it, false if someone has cancel it.
+    // num       : current number of order
+    // Do something with these two data.
+    console.log(new_order);
+    console.log(num);
+}
+
