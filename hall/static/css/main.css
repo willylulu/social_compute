@@ -171,3 +171,13 @@ section{
 	padding:10px 10px;
 
 }
+
+/* hangout tutorial*/
+
+.hangoutblock{
+    padding:10px;
+}
+.hangoutblock img{
+    width:100%;
+    height:100%;
+}

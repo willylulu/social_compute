@@ -27,12 +27,27 @@ function triggerHotStreamBtn(){
     });
 }
 
+$('.tutorialdescription').click(function(){
+    var target = $(this).parent().data('go');
+    console.log(target);
+    if ( target == 'addproduct'){
+        window.open('./addproduct/');
+    }
+    else if ( target == 'hangout'){
+        $('#hangouttutor').modal('show'); 
+    }
+    else if ( target == 'openstream'){
+        openstream();
+    }
+});
 
 
 /* jQuery Handle end */
 
-
-
+function openstream(){
+    $('#hangouttutor').modal('hide');
+    $('#openstream').modal('show'); 
+}
 
 function my_productlist (list) {
     // body...
