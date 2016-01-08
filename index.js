@@ -89,50 +89,6 @@ app.get('/hostroom', function(req, res) {
 app.get('/chatroom_lulu', function(req, res) {
     res.sendFile(room_route + 'chatroom_lulu.html');
 });
- 
-app.post('/send_order', function(req, res) {
-    // catch dataform, in json
-    var body = '';
-    var result = '';
-
-    req.on('data', function(data) { 
-        body += data;
-    });
-
-    req.on('end', function() {
-        var data = JSON.parse(body);
-        var uid = data.user.fb_id;
-        var host_fb_id = data.user.host_fb_id;
-        if(!host_fb_id | !uid) {
-            res.sendStatus(404);
-            return;
-        }
-
-
-        var order = data.order;
-        var cur = channels[host_fb_id].CurrentProduct;
-        var cur_product = channels[host_fb_id].ProductList[cur];
-
-        // if not init, init it.
-        if(!cur_product.order)
-        cur_product.order = new Object();
-
-        if(!order && cur_product.order[uid]) {
-            delete cur_product.order[uid];
-            result = 'cancel order success : ' + cur_product.productname ;;
-        } else if(order && !cur_product.order[uid]) {
-            cur_product.order[uid] = true;
-            result = 'order success : ' + cur_product.productname ;
-        } else if(order) {
-            result = 'already order : ' + cur_product.productname ;;
-        } else {
-            result = 'Cannot cancel because you have not ordered it';
-        }
-
-        res.status(200);
-        res.end(result);
-    });
- });
 
 app.get('/get_channel', function(req, res) {
     var hostfbid = req.query.hostfbid;
