@@ -60,4 +60,11 @@ function create_channel () {
 		UpdateSellerProductList(response.ProductList);
 		SelectProduct(response.CurrentProduct);
 	});
+
+	socket.on('change_host_orderstatus', function (response) {
+		console.log(response);
+		// UpdateOrderStatus is in hostroom.js, someone have to implement it
+		// to do corresponding UI action.
+		UpdateOrderStatus(response.newOrder, response.order_length);
+	});
 }
