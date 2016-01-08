@@ -247,10 +247,15 @@ io.sockets.on('connection', function(socket) {
     });
 
     socket.on('send_msg', function(req) {
+        console.log(req);
         var host_fb_id = req.user.host_fb_id;
         var customers = channels[host_fb_id].customers;
+
+        // If its host, add host name to it
+        if(socket.id === channels[host_fb_id].socket_id)
+            req.user.ufb_name = channels[host_fb_id].host_name;
+
         for (var key in customers) {
-            //io.to(customers[key].socket_id).emit('broadcast_msg',req);
             io.to(key).emit('broadcast_msg', req);
         }
         io.to(channels[host_fb_id].socket_id).emit('broadcast_msg', req);
