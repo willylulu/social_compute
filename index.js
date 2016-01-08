@@ -197,6 +197,9 @@ io.sockets.on('connection', function(socket) {
         var sendObj = new Object();
         var host_fb_id = req.host_fb_id;
 
+        if(!host_fb_id)
+            return;
+
         if(channels[host_fb_id].socket_id) {
             channels[host_fb_id].socket_id = socket.id;
             sendObj.ProductList = channels[host_fb_id].ProductList;
@@ -227,13 +230,17 @@ io.sockets.on('connection', function(socket) {
         var customer = new Object();
         var host_fb_id = req.host_fb_id;
         var sendObj = new Object();
+
+        if(!host_fb_id)
+            return;
+
         customer.user = req;
         customer.socket_id = socket.id;
         // put customer into channel's customers list.
 
         //channels[host_fb_id].customers[user_id] = customer;
         channels[host_fb_id].customers[socket.id] = customer;
-        sendObj.CurrentProduct = 0;
+        sendObj.CurrentProduct = channels[host_fb_id].CurrentProduct;
         sendObj.ProductList = channels[host_fb_id].ProductList;
 
         io.to(socket.id).emit('update_productlist', sendObj);
@@ -296,8 +303,10 @@ io.sockets.on('connection', function(socket) {
         console.log('Select : ' + host_fb_id);
         if(channels[host_fb_id]) {
             channels[host_fb_id].CurrentProduct = req.new_pos;
-            if(!channels[host_fb_id].ProductList[req.new_pos].order)
+            if(!channels[host_fb_id].ProductList[req.new_pos].order) {
                 channels[host_fb_id].ProductList[req.new_pos].order = new Object();
+                channels[host_fb_id].ProductList[req.new_pos].order_length = 0;
+            }
 
             customers = channels[host_fb_id].customers;
             orderlist = channels[host_fb_id].ProductList[req.new_pos].order;
@@ -338,6 +347,46 @@ io.sockets.on('connection', function(socket) {
             });
             delete channels[host_fb_id];
         }
+    });
+
+    socket.on('change_customer_orderstatus', function(req) {
+        var uid = req.user.fb_id;
+        var host_fb_id = req.user.host_fb_id;
+        if(!channels[host_fb_id]) {
+            return;
+        }
+
+        var order = req.order;
+        var cur = channels[host_fb_id].CurrentProduct;
+        var cur_product = channels[host_fb_id].ProductList[cur];
+
+        if(!order && cur_product.order[uid]) {
+            // custmoer want to cancel order.
+            delete cur_product.order[uid];
+            if(cur_product.order_length > 0)
+                cur_product.order_length--;
+
+            console.log('cancel order success (' + uid + ') : ' + cur_product.productname);
+
+        } else if(order && !cur_product.order[uid]) {
+            // customer want to order it.
+            cur_product.order[uid] = true;
+            cur_product.order_length ++;
+
+            console.log('order success (' + uid + ') : ' + cur_product.productname);
+        } else if(order) {
+            console.log('already order (' + uid + ') : ' + cur_product.productname);
+            return;
+        } else {            
+            console.log('Cannot cancel because you have not ordered it');
+            return;
+        }
+
+        var sendObj = new Object();
+        sendObj.newOrder = order;
+        sendObj.order_length = cur_product.order_length;
+        // only need to tell host that order status has change.
+        io.to(channels[host_fb_id].socket_id).emit('change_host_orderstatus', sendObj);
     });
 
 });
