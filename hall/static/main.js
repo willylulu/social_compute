@@ -90,6 +90,9 @@ function FBinitCallback () {
                 $("#username").html("Hi,"+res.name);
                 $("#sale_username").html("Hi,"+res.name);
                 $("#FB_Login").hide();
+                $("#OpenStream").show();
+                $("#productlistLink").show();
+                $("#orderlistLink").show();
                 $.post('/checklogin',{'uid':res.id},function(req,response) {
                     my_productlist(req);
                     createGlobalProductList(req);
@@ -438,4 +441,13 @@ function post(path, params, method) {
 
     document.body.appendChild(form);
     form.submit();
+}
+
+function gotoProductlist() {
+    // body...
+    window.location.href+="productlist";
+}
+function gotoOrderlist() {
+    // body...
+    window.location.href+="orderlist?uid="+me.authResponse.userID;
 }
