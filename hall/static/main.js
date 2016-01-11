@@ -102,70 +102,6 @@ function FBinitCallback () {
     }
 }
 
-/*
-function load_channels () {
-    // body...
-
-     var onlive_forloop_counter=1;
-    for (var key in onlive_Channel) {
-        if(key=='undefined')continue;
-        var onlive_obj1 = document.createElement('div');
-        $(".hotstreamcontainer").append(onlive_obj1);
-            var PopStream = document.createElement('a');
-            PopStream.id = 'PopStream';
-            PopStream.className = "PopStream";
-            onlive_obj1.appendChild(PopStream);
-            PopStream.setAttribute('data-toggle','modal');
-            PopStream.setAttribute('data-target','#streamviewpop'+onlive_forloop_counter);
-            PopStream.setAttribute('style','padding:1.3vw;');
-                var objh = document.createElement('h3');
-                PopStream.appendChild(objh);
-                    var t = document.createTextNode(onlive_Channel[key].host_name);
-                    objh.appendChild(t);
-
-        var onlive_obj2 = document.createElement('div');
-        onlive_obj2.id = 'streamviewpop'+onlive_forloop_counter;
-        onlive_obj2.className = "modal fade";
-        $(".hotstreamcontainer").append(onlive_obj2);
-            var dialog = document.createElement('div'); 
-            dialog.className = "modal-dialog";
-            onlive_obj2.appendChild(dialog);
-                var content = document.createElement('div');  
-                content.className = "modal-content";
-                dialog.appendChild(content);
-                    var header = document.createElement('div');
-                    header.className = "modal-header";
-                    content.appendChild(header);
-                        var button = document.createElement('button');
-                        header.appendChild(button);
-                        var h4 = document.createElement('div');
-                        h4.className = "modal-title";
-                        header.appendChild(h4);
-                            var t3 = document.createTextNode("Hi, Welcome to "+onlive_Channel[key].host_name+"'s stream");
-                            h4.appendChild(t3);
-                        button.setAttribute('class','close');
-                        button.setAttribute('data-dismiss','modal');
-                            var t2 = document.createTextNode('Close');
-                            button.appendChild(t2);
-                    var body = document.createElement('div');
-                    body.className = "modal-body";
-                    content.appendChild(body);
-                    body.setAttribute('style',"display:inline-block");
-                    var footer = document.createElement('div');
-                    footer.className = "modal-footer";
-                    content.appendChild(footer);
-                        var button2 = document.createElement('button');
-                        button2.className = "btn btn-default";
-                        footer.appendChild(button2);
-                        button2.setAttribute('type','button');
-                        button2.setAttribute('data-dismiss','modal');
-                        button2.setAttribute('onClick','enterChannel('+key+')');
-                            var t4 = document.createTextNode("Go!");
-                            button2.appendChild(t4);
-        
-         onlive_forloop_counter++;
-    }
-}*/
 
 function load_channels(){
     for (var key in onlive_Channel){
@@ -385,24 +321,20 @@ function openhost(){
         checkproduct['description'] = userproductlist[name]['description'];
         productlist.push(checkproduct);
     });
+
+
+    if(!stream_url.match(/^http:\/\/youtu.be\//)) {
+        alert('您的URL不符合Hangout格式 (http://youtu.be/...)');
+        return ;
+    }
+
     data = {};
     data['hostname'] = host_name;
     data['hostfbid'] = host_fb_id;
     data['streamurl'] = stream_url;
     data['productlist'] = productlist;
-//    console.log(productlist);
- /* 
-   var xhr = new XMLHttpRequest();
-  xhr.open('POST', posturl, true);
-  xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
-  // send the collected data as JSON
-  xhr.send(JSON.stringify(data));
 
-  xhr.onloadend = function () {
-    // done
-  };
-*/
     console.log('prepare!');
     data_json = JSON.stringify(data);
     $.ajax({
