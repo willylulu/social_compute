@@ -21,12 +21,12 @@ productlist.push(product1);
 
 $('.productlist').hover(function(){
     $('.productlistblock').animate({
-        left:'0',
+        right:'0',
     },500);
 
 }, function(){
     $('.productlistblock').animate({
-        left:'-300',
+        right:'-300',
     },500);
 });
 
@@ -85,7 +85,7 @@ function generateAppendItem(position){
                          ' <div class="productprofile">'+
                          ' </div>'+
                          ' <div class="iteminfo">'+
-                             ' <div class="producttitle">'+title+
+                             ' <div class="producttitle" title="'+title+'">'+title+
                               '</div>'+
                               '<div class="productprice">$'+price+
                               '</div>'+
