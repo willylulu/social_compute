@@ -261,7 +261,7 @@ var c = document.getElementById("draw_title");
 dashLen = 220;
 dashOffset = dashLen;
 speed = 10;
-txt = "  LiveStream Sale";
+txt = "LiveStream Sale";
 x = 0 ; i = 0 ;
 ctx.clearRect(x, 0, c.getAttribute("width"), c.getAttribute("height"));
 ctx.font = "75px Lora,'Helvetica Neue',Helvetica,Arial,sans-serif";
