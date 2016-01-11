@@ -22,12 +22,12 @@ var BUYSTATUS = false;
 
 $('.productlist').hover(function(){
     $('.productlistblock').animate({
-        right:'0',
+        left:'0',
     },500);
 
 }, function(){
     $('.productlistblock').animate({
-        right:'-300',
+        left:'-300',
     },500);
 
 });
