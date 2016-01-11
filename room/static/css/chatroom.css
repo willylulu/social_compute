@@ -1,10 +1,14 @@
+body{
+    background:black;
+}
+
 div{
     display:block;
     margin-top:5px;
 }
 
-
 .container-header{
+    display:none;
     padding:5px 5px;
     float:right;
 }
@@ -12,42 +16,60 @@ div{
     cursor:pointer;
 }
 
+.contentcontainer{
+    margin-right:5px;
+    width:98%;
+    height:48%;
+    position:relative;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+
+}
 
 #msg-container{
-    background:rgba(248,143,88,0.5);
+    border:2px solid rgba(248,143,88,1);
 }
 
 #price-container{
-    background:rgba(110,248,32,0.5);
+    border:2px solid rgba(110,248,32,1);
 }
 
 .wrapper{
     overflow-y: auto;
 }
 
+#msg-input-wrapper,#price-input-wrapper{
+    padding:5px;
+    position:absolute;
+    left:5px;
+    background:rgba(255,255,255,1);
+    bottom:5px;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+}
+
 #msg-box-wrapper{
-   width:20vw;
-   height:35vh;
+   width:100%;
+   height:90%;
+   color:white;
 }
 
 #price-box-wrapper{
-    width:20vw;
-    height:35vh;
+    width:100%;
+    height:90%;
+    color:white;
 }
 #stream-frame{
     position : absolute;
-    left : 5vw;
-    top :10vh;
-    width:60vw;
-    height:60vh;
+     top :5px;
+    width:70%;
+    height:98%;
 }
 
 #seller_info{
     background:rgba(133,200,200,0.5);
     position:absolute;
     box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
-    top:80vh;
-    left:5vw;
+    bottom:15px;
+    left:15px;
     padding:10px 10px;
 }
 
@@ -59,8 +81,10 @@ div{
 
 #chat-container{
     position : absolute;
-    left : 70vw;
-    top :10vh;
+    width:28%;
+    height:99%;
+    top:5px;
+    right:5px;
 }
 
 .info{
@@ -69,11 +93,6 @@ div{
     font-weight:bold;
 }
 
-.contentcontainer{
-    margin-top:5px;
-    padding:5px;
-    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
-}
 
 .inputholder{
     border:0px;
@@ -97,7 +116,7 @@ div{
 
 .tag{
     font-size:8px;
-    color:gray; 
+    color:white; 
 }
 
 ::-webkit-input-placeholder{
@@ -110,7 +129,7 @@ div{
 .productlistbtn{
     position:fixed;
     top:10%;
-    right:5px;
+    right:0px;
     width:48px;
     height:48px;
     z-index:100;
@@ -118,19 +137,18 @@ div{
     font-size:40px;
     text-align:center;
     padding:5px 5px;
-    background:rgba(0,0,0,0.5);
+    background:rgba(130,233,193,0.5);
     color:white;
 }
 
 .productlistblock{
     z-index:200;
     position:fixed;
-    right:-300px;
+    left:-300px;
     top:0px;
     height:100%;
     width:250px;
-    background:rgba(0,0,0,0.5);
-
+    background:rgba(255,255,255,0.5);
 }
 
 .productitem{
@@ -179,8 +197,8 @@ div{
 }
 
 .buycurrentbtn:hover{
-    padding-left:4vw;
-    width:10vw;
+    padding-left:2vw;
+    width:9vw;
 }
 
 .buycurrentbtn-bought{
