@@ -74,6 +74,7 @@ function fillCurrentProductBlock(position){
     var price = productlist[position]['price'];
     $('#currentname').text(productname);
     $('#currentprice').text(price); 
+    showChangeAlert();
 }
 
 function generateAppendItem(position){

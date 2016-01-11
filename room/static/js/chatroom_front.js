@@ -74,7 +74,23 @@ function fillCurrentProductBlock(position){
     currentproduct = position;
     $('#productname').text(productname);
     $('#productprice').text(price); 
+    showChangeAlert();
 }
+
+
+function showChangeAlert(){
+    var productalert = $('#changeproductalert');   
+    productalert.animate({'left':'6vw'},1000,function(){
+                setTimeout(function(){    
+                        productalert.css('background','rgba(255,0,0,0.7)');
+                        productalert.css('color','white');
+                        productalert.css('border','0px');
+                        },1000);
+                setTimeout(function(){
+                        productalert.animate({'left':'-300px'},100);},3000);
+    });
+}
+
 
 function fillHostName(name) {
   $('#hostname').empty();

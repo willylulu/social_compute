@@ -65,7 +65,7 @@ div{
 }
 
 #seller_info{
-    background:rgba(133,200,200,0.5);
+    background:rgba(0,0,0,0.5);
     position:absolute;
     box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
     bottom:15px;
@@ -89,7 +89,7 @@ div{
 
 .info{
     font-size:18px;
-    color:black;
+    color:white;
     font-weight:bold;
 }
 
@@ -152,21 +152,20 @@ div{
 }
 
 .productitem{
-    overflow-x:auto;
     margin-left:10px;
     margin-top:10px;
     width:90%;
     height:10%;
     background:rgba(255,255,192,0.5);
     box-shadow:0 2px 5px 0 rgba(255,255,255,0.16),0 2px 10px 0 rgba(255,255,255,0.12); 
-    padding:10px 10px;
+    padding:5px;
 }
 .iteminfo{
     vertical-align:top;
     display:inline-block;
 }
 .productprofile{
-    display:inline-block;
+    display:none;
     height:100%;
     width:40%;
     background:rgba(0,0,0,1);  
@@ -182,6 +181,7 @@ div{
 .productdescription{
     font-size:12px;
     font-weight:200;    
+    display:none;
 }
 
 .buycurrentbtn{
@@ -205,3 +205,21 @@ div{
     background:white;
     color:darkblue;
 }
+
+#changeproductalert{
+    left:-300px;
+    z-index:100;
+    border:2px solid rgba(255,0,0,0.5);
+    color:rgba(255,0,0,0.5);
+    font-weight:bold;
+    width:10vw;
+    height:3vw;
+    position:fixed;
+    bottom:12vw;
+    padding:5px;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+    transition:all 1s;
+    -webkit-transition:all 1s;
+}
+
+
