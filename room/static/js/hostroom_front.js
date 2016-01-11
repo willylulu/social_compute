@@ -21,12 +21,12 @@ productlist.push(product1);
 
 $('.productlist').hover(function(){
     $('.productlistblock').animate({
-        right:'0',
+        left:'0',
     },500);
 
 }, function(){
     $('.productlistblock').animate({
-        right:'-300',
+        left:'-300',
     },500);
 });
 
@@ -79,7 +79,7 @@ function fillCurrentProductBlock(position){
 function generateAppendItem(position){
     var title = productlist[position]['productname'];
     var price = productlist[position]['price'];
-    var description = productlist[position]['description'];  
+//    var description = productlist[position]['description'];  
 
      var append = '<div class="productitem" data-item="'+position+'">'+
                          ' <div class="productprofile">'+
@@ -89,8 +89,8 @@ function generateAppendItem(position){
                               '</div>'+
                               '<div class="productprice">$'+price+
                               '</div>'+
-                              '<div class="productdescription">'+description+
-                              '</div>'+
+  //                            '<div class="productdescription">'+description+
+  //                            '</div>'+
                          '</div>'+
                     '</div>';
     return append
