@@ -1,0 +1,12 @@
+@frank 1/12
+
+    Host can decide whether show the mirror or not,
+    if he/she close the mirror, then the chat, price box will 
+    filled the screen with a bigger font size. Therefore they can 
+    stand at a far distance to stream their product.
+
+    Auto greed from host when customer first enter chatroom.
+
+    Animation alert with 
+    1. Customer enter room. (Host)
+    2. Customer bought product. (Host)
