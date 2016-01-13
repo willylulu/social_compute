@@ -61,7 +61,13 @@ function UpdatePrice(response,sort_user)
     //price list 
     var wufa="";
     for(var key in sort_user){
-        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"bit\" value=\""+response[sort_user[key]].price+"\" id=\""+response[sort_user[key]].user.fb_id+"\">"+response[sort_user[key]].user.ufb_name+": $"+response[sort_user[key]].price+"<br>"
+        wufa+="<input type=\"checkbox\" name=\"bit\" class=\"msg\" value=\""+response[sort_user[key]].price+"\" id=\""+response[sort_user[key]].user.fb_id+"\">"+response[sort_user[key]].user.ufb_name+": $"+response[sort_user[key]].price+"<br>";
+    }
+    if ($('#videoblock').css('display') == 'none'){ 
+        $('.msg').css('font-size','30px');
+    }
+    else {
+        $('.msg').css('font-size','16px');
     }
     $('#price-box').html(wufa);
 }
@@ -71,6 +77,16 @@ function UpdateMessage(response) {
     msg_div.className = "msg";
     msg_div.innerHTML = response.user.ufb_name + " : " + response.msg + "<br>";
     $('#msg-box').append(msg_div);
+
+    /* resize if host hide webcam */
+    if ($('#videoblock').css('display') == 'none'){ 
+        $('.msg').css('font-size','30px');
+    }
+    else {
+        $('.msg').css('font-size','16px');
+    }
+
+
     $('#msg-box-wrapper')[0].scrollTop=$('#msg-box-wrapper')[0].scrollHeight*50;
 }
 

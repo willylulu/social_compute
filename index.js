@@ -229,7 +229,7 @@ io.sockets.on('connection', function(socket) {
         // get price and user info from req.
         price_info = req;
         price_info.price = parseInt(price_info.price);
-        if(Number.isInteger(price_info.price)){
+        //if(Number.isInteger(price_info.price)){
             channels[host_fb_id].PriceList[req.user.fb_id] = price_info;
             sort_user = Object.keys(channels[host_fb_id].PriceList);
             sort_user.sort(function(a,b){return channels[host_fb_id].PriceList[b].price-channels[host_fb_id].PriceList[a].price;});
@@ -237,7 +237,7 @@ io.sockets.on('connection', function(socket) {
                 io.to(key).emit('broadcast_customer_price',channels[host_fb_id].PriceList,sort_user);
             }
             io.to(channels[host_fb_id].socket_id).emit('broadcast_customer_price', channels[host_fb_id].PriceList,sort_user);
-        }
+       // }
     });
 
     socket.on('host_change_price', function(req) {

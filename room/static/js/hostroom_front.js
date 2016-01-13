@@ -121,6 +121,7 @@ function hidewebview(){
             $('.showvideo').animate({left:'30px',},1000);
         }
     );
+    $('.msg').css('font-size','30px');
     $('#currentproduct').css('background','rgba(255,255,255,0.7)');
     $('#currentproduct').children().css('color','black');
     $('#videoblock').css('display','none');
@@ -137,4 +138,5 @@ function showwebview(){
     $('.showvideo').animate({left:'-300px',},1000);
     $('#currentproduct').css('background','rgba(0,0,0,0.7)');
     $('#currentproduct').children().css('color','white');
+    $('.msg').css('font-size','16px');
 }
