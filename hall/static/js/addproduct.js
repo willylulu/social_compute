@@ -14,20 +14,19 @@ function submit () {
 	var description = $('textarea').val();
 	var picture = $('#picture')[0];
 	var file = picture.files[0];
-	if (!file.type.match('image.png')) {
-		alarm("需為圖片(Png)格式!");
+	if (!file.type.match('image.*')) {
 	    return;
 	}
 	var url = URL.createObjectURL(file);
 	upload(url,function(url) {
 		// body...
 		console.log(url);
-		$.ajax({
+		/*$.ajax({
 		      url:"http://tvsalestream.herokuapp.com/insertproduct/",
 		      type:"POST",
 		      data:{user:user,uid:uid,productname:name,price:price,description:description,image_url:url},
 		      dataType:"json"
-		}).done(function() {});
+		}).done(function() {});*/
 	});
 	console.log('Done');
 	$('#productnametext').val('');
@@ -55,7 +54,7 @@ function convertToDataURLviaCanvas(url, callback, outputFormat){
 function upload (url,callback) {
 	// body...
 	convertToDataURLviaCanvas(url,function(base64Img){
-		var temp = base64Img.replace("data:image/png;base64,", "");
+		var temp = base64Img.split(',')[1];
 		console.log(temp);
 		$.ajax({ 
 		    url: 'https://api.imgur.com/3/upload',
