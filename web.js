@@ -85,7 +85,10 @@ app.get('/productlist', function(req, res) {
             console.log(error);
         } else {
             // handle for demo SCAD, object to dictionary
-
+            for(var k in json){
+              console.log(json[k].fields.description);
+              json[k].fields.description = json[k].fields.description.replace(/\n/g,"<br>");
+            }
             var str_json = JSON.stringify(json);
             var str_channel = JSON.stringify(onlive_channel);
             res.render(templates_route + 'productlist.html',{'productlist':json,'onlive_channel':str_channel,'productlist_dict':str_json,});
