@@ -71,3 +71,24 @@ function upload () {
 		});
 	},'image/png');
 }
+
+function drawImage() {
+	// body...
+	var picture = $('#picture')[0];
+	var file = picture.files[0];
+	if (!file.type.match('image.*')) {
+	    return;
+	}
+	var url = URL.createObjectURL(file);
+	var img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = function(){
+    	var canvas = $("#canvas")[0];
+	    var ctx = canvas.getContext('2d');
+	    var dataURL;
+	    canvas.height = 300*this.height/this.width;
+	    canvas.width = 300;
+	    ctx.drawImage(this, 0, 0,300,300*this.height/this.width);
+    };
+    img.src = url;
+}
