@@ -203,7 +203,7 @@ io.sockets.on('connection', function(socket) {
 
         var announce = new Object();
         announce.new_customer = req;
-        io.to(channels[host].socket_id).emit('customer_enter', announce);
+        io.to(channels[host_fb_id].socket_id).emit('customer_enter', announce);
     });
 
     socket.on('send_msg', function(req) {
