@@ -21,7 +21,7 @@ function setModalAttribute(pk){
     var description = productlist[pk]['description'];
     var title = productlist[pk]['title'];
     var price = productlist[pk]['price'];
-    $('.modaldescription').text(description);
+    $('.modaldescription').append(description);
     $('.modaltitle').text(title);
 }
 
