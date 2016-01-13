@@ -55,7 +55,7 @@ function upload (url,callback) {
 	// body...
 	convertToDataURLviaCanvas(url,function(base64Img){
 		var temp = base64Img.split(',')[1];
-		console.log(temp);
+		//console.log(temp);
 		$.ajax({ 
 		    url: 'https://api.imgur.com/3/upload',
 		    headers: {
