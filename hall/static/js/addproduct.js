@@ -21,12 +21,12 @@ function submit () {
 	upload(url,function(url) {
 		// body...
 		console.log(url);
-		/*$.ajax({
+		$.ajax({
 		      url:"http://tvsalestream.herokuapp.com/insertproduct/",
 		      type:"POST",
 		      data:{user:user,uid:uid,productname:name,price:price,description:description,image_url:url},
 		      dataType:"json"
-		}).done(function() {});*/
+		}).done(function() {});
 	});
 	console.log('Done');
 	$('#productnametext').val('');
