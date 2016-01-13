@@ -47,7 +47,7 @@ function convertToDataURLviaCanvas(url, callback, outputFormat){
         ctx.drawImage(this, 0, 0);
         dataURL = canvas.toDataURL(outputFormat);
         callback(dataURL);
-        canvas = null; 
+        canvas = null;
     };
     img.src = url;
 }
