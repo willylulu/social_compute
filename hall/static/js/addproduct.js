@@ -71,8 +71,6 @@ function upload () {
 		});
 	},'image/png');
 }
-<<<<<<< HEAD
-=======
 
 function drawImage() {
 	// body...
@@ -94,4 +92,3 @@ function drawImage() {
     };
     img.src = url;
 }
->>>>>>> ccf1d0e737161ebb5b7a752d2acdcc78bedfa327

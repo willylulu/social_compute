@@ -86,7 +86,7 @@ app.get('/productlist', function(req, res) {
         } else {
             // handle for demo SCAD, object to dictionary
             for(var k in json){
-              console.log(json[k].fields.description);
+              //console.log(json[k].fields.description);
               json[k].fields.description = json[k].fields.description.replace(/\n/g,"<br>");
             }
             var str_json = JSON.stringify(json);
