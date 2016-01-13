@@ -1,9 +1,33 @@
-#viedoblock{
-    width:70%;
+#videoblock{
+    width:68%; 
     height:100%;
+    position:relative;
+    display:block;
 }
 #webcam{
-    width:68%;
+    width:100%;
+}
+.showvideo{
+    position:fixed;
+    left:-300px;
+    top:90%;
+    color:white;
+    z-index:100;
+    font-size:3vw;
+}
+.hidebtn{
+    position:absolute;
+    color:white;
+    background:rgba(0,0,0,0.7);
+    padding:5px;
+    font-size:3vw;
+    z-index:999;
+    top:5px;
+    right:5px;
+}
+
+.hidebtn:hover{
+    cursor:pointer;
 }
 body{
     background:black;
@@ -96,6 +120,7 @@ div{
 
 #chat-container{
     position : absolute;
+    /* new size 98%*/
     width:31%;
     height:99%;
     top:5px;

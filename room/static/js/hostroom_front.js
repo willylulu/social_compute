@@ -96,3 +96,45 @@ function generateAppendItem(position){
     return append
 }
 
+
+// Control WebView Block if  host want to close for a while
+
+var ORIGINALWIDTH = '31%';
+var RESIZEWIDTH = '98%';
+
+
+$('.hidebtn').click(function(){
+        hidewebview();
+});
+$('.showvideo').click(function(){
+        showwebview();
+});
+
+function hidewebview(){
+    $('#videoblock').animate({
+        left:'-70%',},1000);
+    $('#chat-container').animate({
+        width:RESIZEWIDTH,},1000);
+    $('#currentproduct').animate({
+        left:'65%',},1000,
+        function(){
+            $('.showvideo').animate({left:'30px',},1000);
+        }
+    );
+    $('#currentproduct').css('background','rgba(255,255,255,0.7)');
+    $('#currentproduct').children().css('color','black');
+    $('#videoblock').css('display','none');
+}
+
+function showwebview(){
+    $('#videoblock').css('display','block');
+    $('#videoblock').animate({
+        left:'0px',},1000);
+    $('#chat-container').animate({
+        width:ORIGINALWIDTH,},1000);
+    $('#currentproduct').animate({
+        left:'15px',},1000);
+    $('.showvideo').animate({left:'-300px',},1000);
+    $('#currentproduct').css('background','rgba(0,0,0,0.7)');
+    $('#currentproduct').children().css('color','white');
+}
