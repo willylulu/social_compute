@@ -67,4 +67,9 @@ function create_channel () {
 		// to do corresponding UI action.
 		UpdateOrderStatus(response.newOrder, response.order_length);
 	});
+
+	socket.on('customer_enter', function(response) {
+		console.log(response);
+		CustomerEnter(response.new_customer);
+	});
 }

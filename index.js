@@ -200,6 +200,10 @@ io.sockets.on('connection', function(socket) {
         sendObj.ProductList = channels[host_fb_id].ProductList;
 
         io.to(socket.id).emit('update_productlist', sendObj);
+
+        var announce = new Object();
+        announce.new_customer = req;
+        io.to(channels[host].socket_id).emit('customer_enter', announce);
     });
 
     socket.on('send_msg', function(req) {
