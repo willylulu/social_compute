@@ -14,8 +14,7 @@ function submit () {
 	var description = $('textarea').val();
 	var picture = $('#picture')[0];
 	var file = picture.files[0];
-	if (!file.type.match('image.png')) {
-		alarm("需為圖片(Png)格式!");
+	if (!file.type.match('image.*')) {
 	    return;
 	}
 	var url = URL.createObjectURL(file);
@@ -55,8 +54,8 @@ function convertToDataURLviaCanvas(url, callback, outputFormat){
 function upload (url,callback) {
 	// body...
 	convertToDataURLviaCanvas(url,function(base64Img){
-		var temp = base64Img.replace("data:image/png;base64,", "");
-		console.log(temp);
+		var temp = base64Img.split(',')[1];
+		//console.log(temp);
 		$.ajax({ 
 		    url: 'https://api.imgur.com/3/upload',
 		    headers: {
