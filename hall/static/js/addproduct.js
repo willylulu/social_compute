@@ -1,6 +1,5 @@
 var user;
 var uid;
-var uploading=0;
 function FBinitCallback () {
 	// body...
 	FB.api('/me',function(res){
@@ -13,18 +12,12 @@ function submit () {
 	var name = $("#productnametext").val();
 	var price = $("#productpricetext").val();
 	var description = $('textarea').val();
-	if(uploading){
-		if(confirm("圖片還在上傳中，確定送出?")){
-		}
-		else return;
-	}
 	$.ajax({
 	      url:"http://tvsalestream.herokuapp.com/insertproduct/",
 	      type:"POST",
 	      data:{user:user,uid:uid,productname:name,price:price,description:description,image_url:$('#status').val()},
 	      dataType:"json"
 	}).done(function() {});
-	console.log('Done');
 	$('#productnametext').val('');
 	$('#productpricetext').val('');
 	$('textarea').val('');
@@ -59,7 +52,6 @@ function upload () {
 		var temp = base64Img.split(',')[1];
 		//console.log(temp);
 		$("#status").html("上傳中...");
-		uploading=1;
 		$.ajax({ 
 		    url: 'https://api.imgur.com/3/upload',
 		    headers: {
@@ -72,9 +64,9 @@ function upload () {
 		    },
 		    success: function(res) {
 		    	var up_url = res.data.link;
-		    	$("#status").html("上傳成功 <a target=\"_blank\" href=\""+up_url+"\">看結果<a>");
+		    	$("#status").html("上傳成功");
 		    	$("#status").val(up_url);
-		    	uploading=0;
+		    	submit();
 		    }
 		});
 	},'image/png');
