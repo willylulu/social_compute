@@ -6,6 +6,37 @@ var FB_init_is_done = false;
 var front_end_url = './';
 var socket_url = './create_channel';
 var me;
+
+function load_productlist () {
+     // body...
+     for (var i = 0; i < productlist.length; i++) {
+         var product_for_sale = document.createElement('div');
+         product_for_sale.id = "product"+i;
+         product_for_sale.className = "product_list";
+         $("#product_sales").append(product_for_sale);
+         $("#product"+i).attr('style',"display:inline-block;");
+         $("#product"+i).html("<h4>"+productlist[i].fields.name+"</h4><h5>"+productlist[i].fields.price+"</h5><h5>"+productlist[i].fields.ownername+"</h5>");  
+     };
+ }
+function my_productlist (list) {
+     // body...
+     for (var i = 0; i < list.length; i++) {
+         var my_product_for_sale = document.createElement('div');
+         $("#my_product_for_sale").append(my_product_for_sale);
+         var input = document.createElement('input');
+         my_product_for_sale.appendChild(input);
+         input.setAttribute("type",'checkbox');
+         input.setAttribute('name','my_product');
+         input.setAttribute('data-product',list[i].fields.name);
+         input.setAttribute('value',list[i].pk);
+         var temp = document.createElement('span');
+         my_product_for_sale.appendChild(temp);
+         var t = document.createTextNode(list[i].fields.name+" $"+list[i].fields.price);
+        temp.appendChild(t);
+     };
+ }
+
+
 /* jQuery Handle event block */
 function triggerHotStreamBtn(){
     $('.hotstreambtn').click(function(){

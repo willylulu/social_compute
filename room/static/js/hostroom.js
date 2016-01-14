@@ -117,8 +117,6 @@ function UpdateOrderStatus(new_order, num)
     // num       : current number of order
     // Do something with these two data.
     $('#currentordernum').text(num);
-    console.log(new_order);
-    console.log(num);
 }
 
 Object.size = function(obj){
@@ -131,5 +129,21 @@ Object.size = function(obj){
 
 function CustomerEnter(newcustomer, length){
     var name = newcustomer.ufb_name;
-    
+    var length;
+    EnterAnimation(name,length); 
+}
+
+/* enter animation */
+
+function EnterAnimation(n,l){
+    $('.entercustomer>.name').text(n); 
+    $('.entercustomer').animate({opacity:'1'},500)
+                       .animate({fontSize:'0px',width:'300px',opacity:'0'},1000,function(){
+                            setTimeout( function(){
+                                $('.entercustomer').css('font-size','2.5vw');
+                                $('.entercustomer').css('width','auto');
+                                $('#currentview').text(l);
+                            },1000);
+                        });
+
 }

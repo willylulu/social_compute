@@ -257,7 +257,15 @@ div{
     position:fixed;
 }
    
-
+.entercustomer{
+    font-size:2vw;
+    background:rgb(10,10,10);
+    color:white;
+    padding:5px;
+    top:inherit;
+    width:inherit;
+    opacity:0.5;
+}
 .hostroominfo{
     color:white;
     font-size:2.5vw;
