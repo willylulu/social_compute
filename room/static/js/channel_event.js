@@ -13,7 +13,7 @@ function enter_store () {
 	socket.emit('enter_channel',me);
 
 	socket.on('broadcast_msg',function (response) {
-		UpdateMessage(response);
+		UpdateMessage(response.user.ufb_name, response.msg);
 	});
 
 	socket.on('broadcast_customer_price',function (response,sort_user) {
@@ -44,7 +44,7 @@ function create_channel () {
 	// listen on target socket
 	socket.on('broadcast_msg',function (response) {
 		// body...
-		UpdateMessage(response);
+		UpdateMessage(response.user.ufb_name, response.msg);
 	});
 	socket.on('broadcast_customer_price',function (response,sort_user) {
 		UpdatePrice(response,sort_user);

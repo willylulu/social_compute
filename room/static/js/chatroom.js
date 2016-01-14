@@ -2,6 +2,7 @@ var me = new Object();
 var init_data = new Object();
 me.guest = true;
 me.ufb_name = 'Guest';
+
 window.onbeforeunload = function (e) {
     Disconnect();
 }
@@ -24,6 +25,7 @@ function FBinitCallback () {
                 $('#stream-frame').attr('src', 'http://www.youtube.com/embed/' + stream_url);
                 init_data.CurrentProduct = response.CurrentProduct; 
                 fillHostName(response.host_name);
+                greetCustomer(response.host_name);
                 enter_store();
                 }
                 });
@@ -41,10 +43,11 @@ function SendMessage(msg) {
 }
 
 
-function UpdateMessage(response) {
+function UpdateMessage(name, msg) {
     var msg_div = document.createElement("div");
     msg_div.className = "msg";
-    msg_div.innerHTML = response.user.ufb_name + " : " + response.msg + "<br>";
+    msg_div.innerHTML = name + " : " + msg + "<br>";
+
     $('#msg-box').append(msg_div);
     $('#msg-box-wrapper')[0].scrollTop=$('#msg-box-wrapper')[0].scrollHeight*50;
 }
@@ -130,4 +133,8 @@ function BuyButtonReset (status)
     setBuyButtonStatus(status);
 }
 
-
+function greetCustomer(host_name)
+{
+    var msg = 'Hello，' + me.ufb_name + '！希望你能有個愉快的購物體驗！'; 
+    UpdateMessage(host_name, msg);
+}
