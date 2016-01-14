@@ -5,16 +5,21 @@
 	<title>商品集</title>
     <link href="hall/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="hall/static/css/productlist.css" rel="stylesheet">
+    <link href="hall/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <div class="headcover"><font>商品列表</font></div>
+    <div class="backarrow"><i class="fa fa-arrow-left"></i></div>
+    <div class="productlist_container">
     {{ #productlist }}
-        <div class="productblock" data-pk="{{pk}}"data-toggle="modal" data-target="#productdetail" data-owner="{{#fields}}{{owner}}{{/fields}}">
+        <div class="productblock" data-pk="{{pk}}"data-toggle="modal" data-target="" data-owner="{{#fields}}{{owner}}{{/fields}}">
+            <div class="productimage"><img src="{{#fields}}{{{imgurl}}}{{/fields}}" ></div>
             <div class="producttitle">{{#fields}}{{name}}{{/fields}}</div>
-            <div class="productprice">{{#fields}}{{price}}{{/fields}}</div>
-            <div class="productimage"><img src="{{#fields}}{{{imgurl}}}{{/fields}}" width="182" ></div>
+            <div class="productowner">{{#fields}}{{ownername}}{{/fields}}</div>
+            <div class="productprice">${{#fields}}{{price}}{{/fields}}</div>
         </div>
     {{ /productlist }}
-	<div id='who'></div>
+    </div>
 <!-- Modal -->
 <div id="productdetail" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -54,7 +59,6 @@
 </script>
 
 <script src="hall/static/js/jquery.js"></script>
-<script src="hall/static/js/FBlogin.js"></script>
 <script src="hall/static/js/productlist.js"></script>
 <script src="hall/static/js/bootstrap.min.js"></script>
 </html>
