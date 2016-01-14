@@ -1,5 +1,6 @@
 var productlist = [];
 var currentproduct = 0;
+
 /*var productlist = [];
 
 

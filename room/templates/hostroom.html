@@ -42,25 +42,36 @@
    </section>
 
 
+    <div class="nav">
+        <div class="entercustomer"></div>    
+        <div class="hostroominfo">
+                <i class="fa fa-users">
+                    <font id="currentview">0</font>
+                </i>
+                <i class="fa fa-shopping-cart">
+                    <font id="currentordernum">0</font>
+                </i>
+        </div>
 
-    <div id="currentproduct">
-        <div class="currentinfo">
-            <div class="tag">直播商品</div>
-            <div  id="currentname">
-                哈哈
+        <div id="currentproduct">
+            <div class="currentinfo">
+                <div class="tag">直播商品</div>
+                <div  id="currentname">
+                    哈哈
+                </div>
             </div>
-        </div>
-        <div class="currentinfo">
-            <div class="tag">現在價格</div>
-            <div id="currentprice">
-                1234
+            <div class="currentinfo">
+                <div class="tag">現在價格</div>
+                <div id="currentprice">
+                    1234
+                </div>
+            </div> 
+            <div class="currentinfo" id="price-input-wrapper">
+                        <input id="price-input" type="number" class="inputholder" placeholder="希望價格">
+                        <button id="changepricebtn">Go</button>
             </div>
-        </div> 
-        <div class="currentinfo" id="price-input-wrapper">
-                    <input id="price-input" type="number" class="inputholder" placeholder="希望價格">
-                    <button id="changepricebtn">Go</button>
-        </div>
-  </div>
+      </div>
+    </div>
 
     <div class="productlist">
         <div class="productlistbtn">
@@ -84,8 +95,8 @@
         create_channel();
 	});
 </script>
-<script src="room/static/js/hostroom_front.js"></script>
 <script src="room/static/js/hostroom.js"></script>
+<script src="room/static/js/hostroom_front.js"></script>
 <script src="room/static/js/hostroom_event.js"></script>
 <script src="room/static/js/hostroom_webcam.js"></script>
 </html>

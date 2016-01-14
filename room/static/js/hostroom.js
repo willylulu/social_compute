@@ -116,7 +116,20 @@ function UpdateOrderStatus(new_order, num)
     // new_order : true if someone has order it, false if someone has cancel it.
     // num       : current number of order
     // Do something with these two data.
+    $('#currentordernum').text(num);
     console.log(new_order);
     console.log(num);
 }
 
+Object.size = function(obj){
+    var size = 0, key;
+    for (key in obj){
+        if(obj.hasOwnProperty(key))size ++;
+    }
+    return size;
+}
+
+function CustomerEnter(newcustomer){
+    var name = newcustomer.ufb_name;
+    
+}
