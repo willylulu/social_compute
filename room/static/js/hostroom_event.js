@@ -5,6 +5,29 @@ $('#price_input').keypress(function(e) {
 	}
 
 });
+
+
+$('#msg-send-btn').click(function()
+{
+	var msg = $('#msg-input').val();
+        console.log(msg);
+        $('#msg-input').val('');
+         SendMessage(msg);
+});
+
+
+
+
+$('#msg-input').keypress(function(e){
+if(e.keyCode==13){
+    var msg_input = document.getElementById("msg-input");
+    var msg = msg_input.value;
+    $('#msg-input').val('');
+    SendMessage(msg);
+    } 
+});
+
+
 $("#send").click(function() {
 	// body...
 	var price = $('#price-input').val();
