@@ -1,23 +1,35 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.min.js"></script>
-		<script src="https://code.jquery.com/jquery-3.0.0-alpha1.js"></script>
-	  	<meta charset="utf-8">
-	  	<title>Document</title>
-	  	<style type="text/css">
+<head>
+	<meta charset="UTF-8">
+	<title>新增商品</title>
+    <link href="../hall/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../hall/static/css/addproduct.css" rel="stylesheet">
+    <link href="../hall/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	 <div class="headcover"><font>新增你的商品</font></div>
+	 <div class="container">
+	 	<div class="canvas-div" >
+			<canvas id="canvas"></canvas>
+			<input type="file" name="picture" id="picture" onChange="drawImage()" ></input>
+		</div>
+	 	<div class="container-blk">
+			<input type ="text" name = "productname" placeholder=" Product Name" id="productnametext">
+		</div>
+		<div class="container-blk">
+			<input type ="text" name = "price" placeholder=" Product Price" id="productpricetext">
+		</div>
+		<div id="description" class="container-blk">
+			<textarea rows="10" cols="18" id = "textarea" placeholder="說說看這個商品"></textarea>
+			<button class="submit-btn" type="submit" onClick="upload()">GO</button>
 
-	  	</style>
-	</head>
-	<body>
-		<input type ="text" name = "productname" placeholder=" Product Name" id="productnametext">
-		<input type ="text" name = "price" placeholder=" Product Price" id="productpricetext">
-		<textarea rows="10" cols="20" id = "textarea" placeholder="說說看這個商品"></textarea>
+		</div>
+
 		<div id="status" value=""></div>
-		<canvas id="canvas"></canvas>
-		<input type="file" name="picture" id="picture" onChange="drawImage()" ></input>
-		<button type="submit" onClick="upload()">GO</button>
-	</body>
+
+	</div>
+</body>
 	<script src="../hall/static/js/FBlogin.js"></script>
 	<script src="../hall/static/js/jquery.js"></script>
 	<script src="../hall/static/js/addproduct.js"></script>
