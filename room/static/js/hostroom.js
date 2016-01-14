@@ -72,10 +72,10 @@ function UpdatePrice(response,sort_user)
     $('#price-box').html(wufa);
 }
 
-function UpdateMessage(response) {
+function UpdateMessage(name, msg) {
     var msg_div = document.createElement("div");
     msg_div.className = "msg";
-    msg_div.innerHTML = response.user.ufb_name + " : " + response.msg + "<br>";
+    msg_div.innerHTML = name + " : " + msg + "<br>";
     $('#msg-box').append(msg_div);
 
     /* resize if host hide webcam */

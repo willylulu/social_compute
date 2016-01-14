@@ -134,4 +134,3 @@ function setBuyButtonStatus(status)
     }
     BUYSTATUS = status;
 }
-
