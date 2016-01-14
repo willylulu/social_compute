@@ -1,3 +1,6 @@
+body{
+    padding-bottom:10px;
+}
 .headcover{
     color:white;
     font-size:5vw;
@@ -12,4 +15,69 @@
 }
 .headcover font{
     border-bottom:2px solid white;
+}
+
+.backarrow{
+    padding:5px;
+    font-size:3vw;
+    color:rgba(100,100,255,1);
+    position:fixed;
+    top:30%;
+    transition:all 1s;
+    -webkit-transition:all 1s;
+    left:5px;
+}
+
+.backarrow:hover{
+    font-size:5vw;
+    cursor:pointer;
+}
+
+.ordercontainer{
+    position:absolute;
+    top:25%;
+    left:10%;
+}
+
+.productblock{
+    margin:5px;
+    position:relative;
+    display:inline-block;
+    height:20vw;
+    width:25vw;
+    padding:10px;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+}
+.productname{
+    position:absolute;
+    top:5px;
+    left:5px;
+    font-size:3vw;
+    font-weight:bold;
+}
+.buyername{
+    font-size:1.5vw;
+    top:5vw;
+    left:5px;
+    position:absolute;
+}
+.buyerprice{
+    position:absolute;
+    display:right:5px;
+    bottom:5px;
+    font-weight:bold;
+    display:inline-block;
+    border-bottom:2px solid black;
+}
+.owner{
+    position:absolute;
+    right:15px;
+    bottom:5px;
+    font-weight:bold;
+    background:darkblue;
+    padding:5px;
+    box-shadow:0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12); 
+}
+.owner a{
+    color:white;
 }
