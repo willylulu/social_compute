@@ -138,8 +138,10 @@ function CustomerEnter(newcustomer, length){
 function EnterAnimation(n,l){
     $('.entercustomer>.name').text(n); 
     $('.entercustomer').animate({opacity:'1'},500)
-                       .animate({fontSize:'0px',width:'300px',opacity:'0'},1000,function(){
+                       .animate({fontSize:'0px',width:'300px'},1000)
+                       .animate({opacity:'0'},500,function(){
                             setTimeout( function(){
+                                
                                 $('.entercustomer').css('font-size','2.5vw');
                                 $('.entercustomer').css('width','auto');
                                 $('#currentview').text(l);

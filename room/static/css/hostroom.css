@@ -259,12 +259,11 @@ div{
    
 .entercustomer{
     font-size:2vw;
-    background:rgb(10,10,10);
+    background:rgba(255,0,0,0.7);
     color:white;
     padding:5px;
-    top:inherit;
     width:inherit;
-    opacity:0.5;
+    opacity:0;
 }
 .hostroominfo{
     color:white;
