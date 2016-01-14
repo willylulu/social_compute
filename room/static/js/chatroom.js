@@ -135,6 +135,15 @@ function BuyButtonReset (status)
 
 function greetCustomer(host_name)
 {
-    var msg = 'Hello，' + me.ufb_name + '！希望你能有個愉快的購物體驗！'; 
-    UpdateMessage(host_name, msg);
+    var msg = 
+    {
+        '1' : 'Hello，' + me.ufb_name + '！希望你能有個愉快的購物體驗！',
+        '2' : '嘿，' + me.ufb_name + '！你來得正好！這商品你肯定有興趣！',
+        '3' : me.ufb_name + '，你想要來一點新鮮的商品嗎？',
+        '4' : me.ufb_name + '，I ain\'t got it, you don\'t want it !',
+        '5' : '你好啊旅行者' + me.ufb_name + '，你看這個商品怎麼樣？'
+     };
+     var keys = Object.keys(msg);
+     var rand_msg = msg[keys[ keys.length * Math.random() << 0]];
+    UpdateMessage(host_name, rand_msg);
 }
