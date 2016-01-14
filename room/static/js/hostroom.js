@@ -129,7 +129,7 @@ Object.size = function(obj){
     return size;
 }
 
-function CustomerEnter(newcustomer){
+function CustomerEnter(newcustomer, length){
     var name = newcustomer.ufb_name;
     
 }

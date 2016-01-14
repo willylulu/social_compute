@@ -70,6 +70,6 @@ function create_channel () {
 
 	socket.on('customer_enter', function(response) {
 		console.log(response);
-		CustomerEnter(response.new_customer);
+		CustomerEnter(response.new_customer, response.customer_length);
 	});
 }

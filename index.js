@@ -132,7 +132,8 @@ app.post('/create_channel', function(req, res) {
         channels[host_fb_id].PriceList = new Object();
         channels[host_fb_id].customers = new Object();
         channels[host_fb_id].stream_url = streamurl;
-        channels[host_fb_id].host_name = host_name;    
+        channels[host_fb_id].host_name = host_name;   
+        channels[host_fb_id].customer_length = 0; 
         res.render(room_route + 'chatroom.html', data);
 
     });
@@ -196,6 +197,7 @@ io.sockets.on('connection', function(socket) {
 
         //channels[host_fb_id].customers[user_id] = customer;
         channels[host_fb_id].customers[socket.id] = customer;
+        channels[host_fb_id].customer_length ++;
         sendObj.CurrentProduct = channels[host_fb_id].CurrentProduct;
         sendObj.ProductList = channels[host_fb_id].ProductList;
 
@@ -203,6 +205,7 @@ io.sockets.on('connection', function(socket) {
 
         var announce = new Object();
         announce.new_customer = req;
+        announce.customer_length = channels[host_fb_id].customer_length;
         io.to(channels[host_fb_id].socket_id).emit('customer_enter', announce);
     });
 
@@ -299,6 +302,7 @@ io.sockets.on('connection', function(socket) {
         if(channels[host_fb_id].customers[socket.id]) {
             console.log('customer leave : ' + channels[host_fb_id].customers[socket.id].user.fb_id + ' '+ socket.id);
             delete channels[host_fb_id].customers[socket.id];
+            channels[host_fb_id].customer_length --;
         }
     });
 
