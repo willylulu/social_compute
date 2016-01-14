@@ -1,12 +1,16 @@
 var now_from=0;
 var onlive={};
-function checkOnlive() {
-	// body...
+function CheckOnlive() {
 	for(var e in onlive_channel){
 		for (var i = 0; i < onlive_channel[e].ProductList.length; i++) {
-			onlive[onlive_channel[e].ProductList[i].pid]=true;
+			var onlineid = onlive_channel[e].ProductList[i].pid;
+            onlive[onlineid]=true;
+            var onlineblock = $('.productblock[data-pk="'+onlineid+'"]');
+            onlineblock.addClass('streaming');
+            onlineblock.append(appendbtn());
 		};
 	}
+    console.log(onlive);
 }
 
 function FBinitCallback(){
@@ -15,6 +19,11 @@ function FBinitCallback(){
             $("#who").html('Hi! '+res.name);
         });
     }
+}
+
+function appendbtn(){
+    var btn = '<div class="gostreambtn">前往直播</div>';
+    return btn;
 }
 
 function setModalAttribute(pk){
@@ -41,7 +50,23 @@ $('.productblock').click(function(){
     cleanModal();
     setModalAttribute(pk);
 });
+function TriggerAction(){
+    $('.gostreambtn').click(function(){
+        var hostid = $(this).parent().data('owner');
+        $('.headcover').text('前往直播');
+        $('.headcover').animate({
+            height:'100%',
+        },1000)
+        .animate({opacity:'1'},1000,function(){
+        setTimeout(function(){
+            window.location.href="./chatroom?hostfbid="+hostid;
+            },500);
+        });
+    });
 
-
-checkOnlive();
-
+    $('.backarrow').click(function(){
+        window.location.href="/";
+    });
+}
+CheckOnlive();
+TriggerAction();

@@ -13,7 +13,7 @@
     <div class="productlist_container">
     {{ #productlist }}
         <div class="productblock" data-pk="{{pk}}"data-toggle="modal" data-target="" data-owner="{{#fields}}{{owner}}{{/fields}}">
-            <div class="productimage"><img src="{{#fields}}{{{imgurl}}}{{/fields}}" ></div>
+            <div class="productimage" style="background-image:url({{#fields}}{{{imgurl}}}{{/fields}})"></div>
             <div class="producttitle">{{#fields}}{{name}}{{/fields}}</div>
             <div class="productowner">{{#fields}}{{ownername}}{{/fields}}</div>
             <div class="productprice">${{#fields}}{{price}}{{/fields}}</div>
