@@ -281,6 +281,11 @@ io.sockets.on('connection', function(socket) {
                 sendObj.order = orderlist[customers[key].user.fb_id];
                 io.to(key).emit('broadcast_product_select', sendObj);
             }
+            var changeOrder = new Object();
+            changeOrder.newOrder = false;
+            changeOrder.order_length = channels[host_fb_id].ProductList[req.new_pos].order_length;
+            // only need to tell host that order status has change.
+            io.to(channels[host_fb_id].socket_id).emit('change_host_orderstatus', changeOrder);
         }
 
     });
