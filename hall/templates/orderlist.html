@@ -3,8 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>查看訂單</title>
+    <link href="hall/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="hall/static/css/orderlist.css" rel="stylesheet">
+    <link href="hall/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+	<div class="headcover"><font>訂單一覽</font></div>
+    <div class="backarrow"><i class="fa fa-arrow-left"></i></div>
 	{{#orderlist}}
 		<div class="productblock" data-pk="{{pk}}" data-owner="{{#fields}}{{owner}}{{/fields}}">
 			<div class="productname">商品: {{#fields}}{{productname}}{{/fields}}</div>
