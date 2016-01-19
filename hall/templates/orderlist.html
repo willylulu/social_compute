@@ -10,15 +10,18 @@
 <body>
 	<div class="headcover"><font>訂單一覽</font></div>
     <div class="backarrow"><i class="fa fa-arrow-left"></i></div>
-	{{#orderlist}}
+	<div class="ordercontainer">
+    {{#orderlist}}
 		<div class="productblock" data-pk="{{pk}}" data-owner="{{#fields}}{{owner}}{{/fields}}">
-			<div class="productname">商品: {{#fields}}{{productname}}{{/fields}}</div>
-			<div class="buyername">買家: {{#fields}}{{buyername}}{{/fields}}</div>
-			<div class="buyerprice">價格: {{#fields}}{{price}}{{/fields}}</div>
+			<div class="productname">{{#fields}}{{productname}}{{/fields}}</div>
+			<div class="buyername">{{#fields}}{{buyername}}{{/fields}}</div>
+			<div class="buyerprice">$ {{#fields}}{{price}}{{/fields}}</div>
 			<div class="owner"><a href="https://www.facebook.com/{{#fields}}{{buyer}}{{/fields}}">聯絡買家</a></div>
 		</div>
 	{{/orderlist}}
+    </div>
 </body>
 <script src="hall/static/js/jquery.js"></script>
 <script src="hall/static/js/bootstrap.min.js"></script>
+<script src="hall/static/js/orderlist.js"></script>
 </html>

@@ -80,7 +80,9 @@ div{
 .wrapper{
     overflow-y: auto;
 }
-
+#msg-input{
+    color:black;
+}
 #msg-input-wrapper{
     padding:5px;
     position:absolute;
@@ -170,8 +172,9 @@ div{
 }
 
 ::-webkit-input-placeholder{
-    color:white;
+    color:black;
 }
+
 .productlist:hover{
     cursor:pointer;
 }  
