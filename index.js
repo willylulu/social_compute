@@ -9,7 +9,7 @@ var express = require('express'),
 var channels = new Object(); // save all channel info
 var room_route = __dirname + '/room/templates/';
 
-// share channel data to all backend port
+//  share channel data to all backend port
 module.exports.channels = channels;
 module.exports.app = app;
 
