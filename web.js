@@ -16,11 +16,101 @@ var templates_route = __dirname + '/hall/templates/';
 //app.set('views', __dirname + 'views');
 //app.use(express.static(__dirname + '/hall/static'));
 
+var rootpath = 'http://localhost:3000';
+
+////////////////////////////////////////////////
+//              FACEBOOK SECTION              //
+////////////////////////////////////////////////
+
+// use cookie mechanism to maintain user login status.
+// we have to init cookie parser/session first, and initilize
+// passport after it.
+app.use(cookieParser());
+app.use(cookieSession({
+  secret: 'Youknowthissecretsoyouareapsycho',
+  cookie: {
+    maxAge: 60*1000*500
+  }
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// serialize data to put in session
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
+
+// The function will put user object into session.
+// We can check the session by access req.user.
+passport.use('facebook', new FacebookStrategy({
+  clientID: '938533709533376',
+  clientSecret: 'fe74d87e74a2d2e145974556ed7e7c0a',
+  callbackURL: '../auth/response'
+  },
+  function(accessToken, refreshToken, profile, done) {
+    var user = profile;
+    return done(null, user);
+  }
+));
+
+// check if user has login or not and redirect.
+// currently useless.
+app.get('/auth', function(req, res) {
+    console.log(req);
+    if(req.isAuthenticated()) {
+        console.log('logged in');
+    } else {
+        console.log('nope');
+    }
+    res.redirect('../');
+});
+
+app.get('/auth/facebook', 
+    passport.authenticate('facebook', 
+        { authType: 'rerequest', scope: ['user_status', 'user_checkins'] }));
+
+app.get('/auth/response', passport.authenticate('facebook', {
+  successRedirect: '/auth',
+  failureRedirect: '../',
+  failureFlash: true
+}));
+
+app.get('/auth/islogin', function(req, res) {
+    // return user data or null.
+    if(req.user)
+      res.send(req.user._json);
+    else
+      res.send(null);
+});
+
+app.get('/auth/logout', function(req, res) {
+    console.log(req);
+    if(req.user) {
+      // nullify session.
+      req.session = null;
+    }
+    res.redirect('../../');
+});
+
+
+
 
 // front page.
 app.get('/', function(req, res) {
     var onlive_channel = require('./index.js').channels;
-    console.log(onlive_channel);
+    var name = 'Guest', id = -1;
+
+    if(req.user) {
+      id = req.user._json.id; 
+      name = req.user._json.name;
+    }
+
     request({
         url: 'http://tvsalestream.herokuapp.com/getuserproduct/',
          //URL to hit
@@ -32,7 +122,9 @@ app.get('/', function(req, res) {
         } else {
             var str_json = JSON.stringify(json);
             var str_channel = JSON.stringify(onlive_channel);
-            res.render(templates_route + 'index.html',{'accountname':'Guest','uid':-1,'productlist':str_json,'onlive_channel':str_channel});
+
+
+            res.render(templates_route + 'index.html',{'accountname':name,'uid': id,'productlist':str_json,'onlive_channel':str_channel});
         }
     });
 });
@@ -122,72 +214,4 @@ app.get('/addproduct',function (req,res) {
     // body...
     res.sendFile(templates_route+'addproduct.html');
 });
-
-////////////////////////////////////////////////
-//              FACEBOOK SECTION              //
-////////////////////////////////////////////////
-
-// use cookie mechanism to maintain user login status.
-// we have to init cookie parser/session first, and initilize
-// passport after it.
-app.use(cookieParser());
-app.use(cookieSession({
-  secret: 'Youknowthissecretsoyouareapsycho',
-  cookie: {
-    maxAge: 60*1000*500
-  }
-}))
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-// serialize data to put in session
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
-
-
-// The function will put user object into session.
-// We can check the session by access req.user.
-passport.use('facebook', new FacebookStrategy({
-  clientID: '938533709533376',
-  clientSecret: 'fe74d87e74a2d2e145974556ed7e7c0a',
-  callbackURL: 'http://localhost:8000/auth/response'
-  },
-  function(accessToken, refreshToken, profile, done) {
-    var user = profile;
-    return done(null, user);
-  }
-));
-
-// check if user has login or not and redirect.
-app.get('/auth', function(req, res) {
-    if(req.user) {
-        console.log('logged in');
-    } else {
-        console.log('nope');
-    }
-    console.log(req.user);
-    res.redirect('../');
-});
-
-app.get('/auth/facebook', 
-    passport.authenticate('facebook', 
-        { authType: 'rerequest', scope: ['user_status', 'user_checkins'] }));
-
-app.get('/auth/response', passport.authenticate('facebook', {
-  successRedirect: '/auth',
-  failureRedirect: '../',
-  failureFlash: true
-}));
-
-app.get('/islogin', function(req, res) {
-    console.log(req);
-    res.send(req.user);
-});
-
 
