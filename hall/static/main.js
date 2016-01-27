@@ -382,5 +382,5 @@ function gotoProductlist() {
 }
 function gotoOrderlist() {
     // body...
-    window.location.href+="orderlist“;
+    window.location.href+="orderlist";
 }
