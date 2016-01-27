@@ -143,7 +143,13 @@ app.get('/logout', function(req, res) {
 
 
 app.get('/orderlist', function(req, res) {
-  var uid = req.query.uid;
+
+  if(!req.user) {
+    res.sendStatus(404);
+    return;
+  }
+
+  var uid = req.user._json.id;
   var url = 'http://tvsalestream.herokuapp.com/orderlist/';
   var data = {uid : uid.toString()};
   console.log(uid);
