@@ -378,9 +378,9 @@ function post(path, params, method) {
 
 function gotoProductlist() {
     // body...
-    window.location.href+="productlist";
+    window.location.href = "../productlist";
 }
 function gotoOrderlist() {
     // body...
-    window.location.href+="orderlist";
+    window.location.href ="../orderlist";
 }
