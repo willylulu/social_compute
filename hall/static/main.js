@@ -308,6 +308,7 @@ function create(){
 function openhost(){
 
     console.log(userproductlist);
+    console.log(accountname + uid);
 
     var posturl = socket_url;
     var host_name = accountname;
@@ -338,17 +339,15 @@ function openhost(){
 
 
     console.log('prepare!');
-    data_json = JSON.stringify(data);
+    data_json = JSON.stringify(data); 
     $.ajax({
         url: posturl,
         type: 'POST',
         data: data_json,
         success: function(response) {
-            console.log('Mom I did it');
+            window.location = 'hostroom';        
         }
     });
-   // post(posturl,data_json,'post');
-    window.location = 'hostroom?hostfbid=' + host_fb_id;        
 }
 
 
