@@ -80,26 +80,28 @@ function createGlobalProductList(list){
     }
 }
 
-function FBinitCallback () {
+function initFront (name, id) {
     // body...
-    if(me!=undefined&&me.status=='connected'){
-        FB.api('/me',function(res){
-            $.post(check_url,{'user':res.name,'uid':res.id},function() {
-                accountname=res.name;
-                uid  = res.id;
-                $("#username").html("Hi,"+res.name);
-                $("#sale_username").html("Hi,"+res.name);
-                $("#FB_Login").hide();
-                $("#OpenStream").show();
-                $("#productlistLink").show();
-                $("#orderlistLink").show();
-                $.post('/checklogin',{'uid':res.id},function(req,response) {
-                    my_productlist(req);
-                    createGlobalProductList(req);
-                });
+
+    // non guest
+    if(id != -1) {
+        $("#username").html("Hi,"+name);
+        $("#sale_username").html("Hi,"+name);
+        $("#FB_Login").hide();
+        $("#OpenStream").show();
+        $("#productlistLink").show();
+        $("#orderlistLink").show();
+
+        $.post(check_url,{'user':name,'uid':id},function() {
+
+            $.post('/checklogin',{'uid':id},function(req,response) {
+                my_productlist(req);
+                createGlobalProductList(req);
             });
         });
+
     }
+    
 }
 
 
