@@ -28,7 +28,6 @@ app.set('view engine', 'html');
 app.set('views', __dirname + 'views');
 app.use(express.static(__dirname));
 
-
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
@@ -67,22 +66,38 @@ app.get('/chatroom', function(req, res) {
     // parse url to chatroom.html
     var hostfbid = req.query.hostfbid;
     var stream_url = req.query.stream_url;
+    var name = 'guest', id = -1;
     if(!hostfbid) {
         res.sendStatus(404);
         return;        
     }
-    res.render(room_route + 'chatroom.html',{'host_fb_id':hostfbid,'stream_url':stream_url});
+
+    if(req.user) {
+        id = req.user._json.id;
+        name = req.user._json.name;
+    }
+
+    res.render(room_route + 'chatroom.html',{'accountname': name,'uid': id});
 });
 
 app.get('/hostroom', function(req, res) {
     // parse url to chatroom.html
-    var hostfbid = req.query.hostfbid;
-    var stream_url = req.query
-    if(!hostfbid) {
+
+    var id;
+
+    if(!req.user) {
         res.sendStatus(404);
         return;
     }
-    res.render(room_route + 'hostroom.html',{'host_fb_id':hostfbid});
+
+    id = req.user._json.id;
+
+    if(!channels[id]) {
+        res.sendStatus(404);
+        return;
+    }
+
+    res.render(room_route + 'hostroom.html',{'host_fb_id':id});
 });
 
 // not sure why lulu keep this.
@@ -122,7 +137,7 @@ app.post('/create_channel', function(req, res) {
         var ProductList = data.productlist;
         var streamurl = data.streamurl; 
         var host_name = data.hostname;      
-        console.log(data);
+
         // put basic info into target channel.
         // other info such as stream url and socket id
         // will be init when create_channel socket catch data.
