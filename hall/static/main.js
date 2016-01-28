@@ -80,31 +80,6 @@ function createGlobalProductList(list){
     }
 }
 
-function initFront (name, id) {
-    // body...
-
-    // non guest
-    if(id != -1) {
-        $("#username").html("Hi,"+name);
-        $("#sale_username").html("Hi,"+name);
-        $("#FB_Login").hide();
-        $("#OpenStream").show();
-        $("#productlistLink").show();
-        $("#orderlistLink").show();
-
-        $.post(check_url,{'user':name,'uid':id},function() {
-
-            $.post('/checklogin',{'uid':id},function(req,response) {
-                my_productlist(req);
-                createGlobalProductList(req);
-            });
-        });
-
-    }
-    
-}
-
-
 function load_channels(){
     for (var key in onlive_Channel){
         if ( key =='undefined'){
