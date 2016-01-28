@@ -1,14 +1,12 @@
 var user;
 var uid;
-function FBinitCallback () {
-	// body...
-	FB.api('/me',function(res){
-	        user = res.name;
-	        uid = res.id;
-    	});
-}
+
 function submit () {
 	// body...
+
+    if(uid == -1)
+        return;
+
 	var name = $("#productnametext").val();
 	var price = $("#productpricetext").val();
 	var description = $('textarea').val();
@@ -21,6 +19,8 @@ function submit () {
 	$('#productnametext').val('');
 	$('#productpricetext').val('');
 	$('textarea').val('');
+    console.log(user);
+    console.log(uid);
 }
 //user
 //uid

@@ -218,6 +218,12 @@ app.post('/checklogin', function(req, response) {
 });
 app.get('/addproduct',function (req,res) {
     // body...
-    res.sendFile(templates_route+'addproduct.html');
+    var name = 'Guest', id = -1;
+
+    if(req.user) {
+      id = req.user._json.id; 
+      name = req.user._json.name;
+    }
+    res.render(templates_route + 'addproduct.html', {'accountname':name,'uid': id});
 });
 
