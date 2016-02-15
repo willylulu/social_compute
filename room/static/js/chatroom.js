@@ -8,31 +8,31 @@ window.onbeforeunload = function (e) {
 }
 
 
-function FBinitCallback () {
+function initChatroom (name, id) {
     // body...
-    FB.api('/me',function(res){
-            var host_fb_id = window.location.href.split('hostfbid=')[1];
-            console.log(res);
-            me.host_fb_id = host_fb_id;
-            me.ufb_name = res.name;
-            me.fb_id = res.id;
-            me.guest = false;
-            $.ajax({
-                url: './get_channel?hostfbid=' + host_fb_id,
-                type: 'GET',
-                success: function(response) {
-                var stream_url = response.stream_url.split('youtu.be/')[1];
-                $('#stream-frame').attr('src', 'http://www.youtube.com/embed/' + stream_url);
-                init_data.CurrentProduct = response.CurrentProduct; 
-                fillHostName(response.host_name);
-                greetCustomer(response.host_name);
-                enter_store();
-                }
-                });
-            //me.stream_url = res.stream_url;
-            //enter_store();
+    console.log(name);
+    console.log(id);
+
+    if(id != -1) {
+        var host_fb_id = window.location.href.split('hostfbid=')[1];
+        me.host_fb_id = host_fb_id;
+        me.ufb_name = name;
+        me.fb_id = id;
+        me.guest = false;
+        $.ajax({
+            url: './get_channel?hostfbid=' + host_fb_id,
+            type: 'GET',
+            success: function(response) {
+            var stream_url = response.stream_url.split('youtu.be/')[1];
+            $('#stream-frame').attr('src', 'http://www.youtube.com/embed/' + stream_url);
+            init_data.CurrentProduct = response.CurrentProduct; 
+            fillHostName(response.host_name);
+            greetCustomer(response.host_name);
+            enter_store();
+            }
+        });
+    }
            
-    });
 }
 //buyer_send_message
 function SendMessage(msg) {

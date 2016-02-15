@@ -61,6 +61,7 @@
                     </li>
                     <li>
                         <a onclick="loginFacebook()" id='FB_Login'>Login</a>
+                        <!--a href="../auth/facebook" id='FB_Login'>Login</a-->
                     </li>
                     <li>
                         <a class="page-scroll" href="#getstarted">GetStarted</a>
@@ -276,6 +277,25 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="hall/static/js/grayscale.js"></script>
+    <script>
+        if('{{uid}}' != -1) {
+            $("#username").html("Hi," + '{{accountname}}');
+            $("#sale_username").html("Hi," + '{{accountname}}');
+            $("#FB_Login").hide();
+            $("#OpenStream").show();
+            $("#productlistLink").show();
+            $("#orderlistLink").show();
+
+            $.post(check_url,{'user':'{{accountname}}','uid':'{{uid}}'},function() {
+
+                $.post('/checklogin',{'uid':'{{uid}}'},function(req,response) {
+                    my_productlist(req);
+                    createGlobalProductList(req);
+                });
+            });
+
+        }
+    </script>
 
 </body>
 

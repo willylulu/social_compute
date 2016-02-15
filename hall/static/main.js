@@ -80,29 +80,6 @@ function createGlobalProductList(list){
     }
 }
 
-function FBinitCallback () {
-    // body...
-    if(me!=undefined&&me.status=='connected'){
-        FB.api('/me',function(res){
-            $.post(check_url,{'user':res.name,'uid':res.id},function() {
-                accountname=res.name;
-                uid  = res.id;
-                $("#username").html("Hi,"+res.name);
-                $("#sale_username").html("Hi,"+res.name);
-                $("#FB_Login").hide();
-                $("#OpenStream").show();
-                $("#productlistLink").show();
-                $("#orderlistLink").show();
-                $.post('/checklogin',{'uid':res.id},function(req,response) {
-                    my_productlist(req);
-                    createGlobalProductList(req);
-                });
-            });
-        });
-    }
-}
-
-
 function load_channels(){
     for (var key in onlive_Channel){
         if ( key =='undefined'){
@@ -306,6 +283,7 @@ function create(){
 function openhost(){
 
     console.log(userproductlist);
+    console.log(accountname + uid);
 
     var posturl = socket_url;
     var host_name = accountname;
@@ -336,17 +314,15 @@ function openhost(){
 
 
     console.log('prepare!');
-    data_json = JSON.stringify(data);
+    data_json = JSON.stringify(data); 
     $.ajax({
         url: posturl,
         type: 'POST',
         data: data_json,
         success: function(response) {
-            console.log('Mom I did it');
+            window.location = 'hostroom';        
         }
     });
-   // post(posturl,data_json,'post');
-    window.location = 'hostroom?hostfbid=' + host_fb_id;        
 }
 
 
@@ -377,9 +353,9 @@ function post(path, params, method) {
 
 function gotoProductlist() {
     // body...
-    window.location.href+="productlist";
+    window.location.href = "../productlist";
 }
 function gotoOrderlist() {
     // body...
-    window.location.href+="orderlist?uid="+me.authResponse.userID;
+    window.location.href ="../orderlist";
 }
