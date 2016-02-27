@@ -1,22 +1,13 @@
-var express = require('express'),
-    app = require('./index.js').app,
-    //server = require('http').createServer(app),
-    engines = require('consolidate'),
-    request = require('request'),
-    cookieParser = require('cookie-parser'),
-    cookieSession = require('cookie-session'),
-    passport = require('passport'),
-    FacebookStrategy = require('passport-facebook').Strategy;
-// webpage on port 8000
-//server.listen(process.env.PORT || 8000); // set server port
+var express          = require('./index.js').express,
+    app              = require('./index.js').app,
+    engines          = require('./index.js').engines,
+    request          = require('./index.js').request,
+    cookieParser     = require('cookie-parser'),
+    cookieSession    = require('cookie-session'),
+    passport         = require('passport'),
+    FacebookStrategy = require('passport-facebook').Strategy,
+    templates_route  = __dirname + '/hall/templates/';
 
-var templates_route = __dirname + '/hall/templates/';
-//app.engine('html', engines.mustache);
-//app.set('view engine', 'html');
-//app.set('views', __dirname + 'views');
-//app.use(express.static(__dirname + '/hall/static'));
-
-var rootpath = 'http://localhost:3000';
 
 ////////////////////////////////////////////////
 //              FACEBOOK SECTION              //
@@ -76,9 +67,9 @@ app.get('/auth/facebook',
         { authType: 'rerequest', scope: ['user_status', 'user_checkins'] }));
 
 app.get('/auth/response', passport.authenticate('facebook', {
-  successRedirect: '/auth',
-  failureRedirect: '../',
-  failureFlash: true
+    successRedirect: '/auth',
+    failureRedirect: '../',
+    failureFlash: true
 }));
 
 app.get('/auth/islogin', function(req, res) {
