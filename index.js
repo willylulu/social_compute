@@ -1,48 +1,38 @@
-var express = require('express'),
-	app = express(),
-	server = require('http').createServer(app),
-	io = require('socket.io').listen(server),
-    engines = require('consolidate'),
-    request = require('request');
-    //web = require('./web.js');
-
-var channels = new Object(); // save all channel info
-var room_route = __dirname + '/room/templates/';
+var express    = require('express'),
+	app        = express(),
+	server     = require('http').createServer(app),
+	io         = require('socket.io').listen(server),
+    engines    = require('consolidate'),
+    request    = require('request'),
+    room_route = __dirname + '/room/templates/',
+    channels   = new Object();
 
 //  share channel data to all backend port
 module.exports.channels = channels;
 module.exports.app = app;
 
-var web = require('./web.js');
+// start web mapping
+require('./web.js');
 
-
-// url base.
-var backend_url = 'http://localhost:3000/';
-var djangoport_url = 'http://localhost:8000/';
-var update_url = 'http://localhost:8000/updatelive/';
-var db_url = 'http://tvsalestream.herokuapp.com/';
-// server socket on 3000
-server.listen(process.env.PORT || 3000); // set server port
+// server on 3000
+server.listen(process.env.PORT || 3000);
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 app.set('views', __dirname + 'views');
 app.use(express.static(__dirname));
 
-app.use(function (req, res, next) {
+var db_url = 'http://tvsalestream.herokuapp.com/';
 
+app.use(function (req, res, next) {
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8000');
-
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
     // Request headers you wish to allow
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
     // Set to true if you need the website to include cookies in the requests sent
     // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', true);
-
     // Pass to next layer of middleware
     next();
 });
@@ -81,23 +71,17 @@ app.get('/chatroom', function(req, res) {
 });
 
 app.get('/hostroom', function(req, res) {
-    // parse url to chatroom.html
+    try {
+        var id = req.user._json.id;
 
-    var id;
+        if(!channels[id])
+            throw ReferenceError;
 
-    if(!req.user) {
+        res.render(room_route + 'hostroom.html', {'host_fb_id' : id});
+    } catch (err) {
+        console.log(err);
         res.sendStatus(404);
-        return;
     }
-
-    id = req.user._json.id;
-
-    if(!channels[id]) {
-        res.sendStatus(404);
-        return;
-    }
-
-    res.render(room_route + 'hostroom.html',{'host_fb_id':id});
 });
 
 // not sure why lulu keep this.
@@ -106,18 +90,15 @@ app.get('/chatroom_lulu', function(req, res) {
 });
 
 app.get('/get_channel', function(req, res) {
-    var hostfbid = req.query.hostfbid;
-    if(!hostfbid) {
+    try {
+        var hostfbid = req.query.hostfbid;
+        if(!channels[hostfbid])
+            throw ReferenceError;
+        res.send(channels[hostfbid]);
+    } catch (err) {
+        console.log(err);
         res.sendStatus(404);
-        return;
     }
-
-    if(!channels[hostfbid]) {
-        res.sendStatus(404);
-        return;
-    }
-
-    res.send(channels[hostfbid]);
 });
 
 // initialize channel info from Django server.
