@@ -66,7 +66,7 @@ app.get('/chatroom', function(req, res) {
     }
 
     if(req.user) {
-        id = req.user._json.id;
+        id   = req.user._json.id;
         name = req.user._json.name;
     }
 
@@ -76,7 +76,6 @@ app.get('/chatroom', function(req, res) {
 app.get('/hostroom', function(req, res) {
     try {
         var id = req.user._json.id;
-
         if(!channels[id])
             throw ReferenceError;
 
@@ -121,7 +120,7 @@ app.post('/create_channel', function(req, res) {
         var ProductList = data.productlist;
         var streamurl   = data.streamurl; 
         var host_name   = data.hostname;      
-        var channel     = channels[host_fb_id];
+        var channel     = new Object();
         // put basic info into target channel.
         // other info such as stream url and socket id
         // will be init when create_channel socket catch data.
@@ -133,6 +132,7 @@ app.post('/create_channel', function(req, res) {
         channel.stream_url      = streamurl;
         channel.host_name       = host_name;   
         channel.ProductList     = ProductList;
+        channels[host_fb_id]    = channel;
 
         res.render(room_route + 'chatroom.html', data);
 
