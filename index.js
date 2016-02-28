@@ -1,11 +1,11 @@
-var express    = require('express'),
-    app        = express(),
-    server     = require('http').createServer(app),
-    io         = require('socket.io').listen(server),
-    engines    = require('consolidate'),
-    request    = require('request'),
-    room_route = __dirname + '/room/templates/',
-    channels   = new Object();
+const express    = require('express'),
+      app        = express(),
+      server     = require('http').createServer(app),
+      io         = require('socket.io').listen(server),
+      engines    = require('consolidate'),
+      request    = require('request'),
+      room_route = __dirname + '/room/templates/',
+      channels   = new Object();
 
 //  share channel data to all backend port
 module.exports.app      = app;

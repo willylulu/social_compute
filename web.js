@@ -1,12 +1,12 @@
-var express          = require('./index.js').express,
-    app              = require('./index.js').app,
-    engines          = require('./index.js').engines,
-    request          = require('./index.js').request,
-    cookieParser     = require('cookie-parser'),
-    cookieSession    = require('cookie-session'),
-    passport         = require('passport'),
-    FacebookStrategy = require('passport-facebook').Strategy,
-    templates_route  = __dirname + '/hall/templates/';
+const express          = require('./index.js').express,
+      app              = require('./index.js').app,
+      engines          = require('./index.js').engines,
+      request          = require('./index.js').request,
+      cookieParser     = require('cookie-parser'),
+      cookieSession    = require('cookie-session'),
+      passport         = require('passport'),
+      FacebookStrategy = require('passport-facebook').Strategy,
+      templates_route  = __dirname + '/hall/templates/';
 
 
 ////////////////////////////////////////////////
