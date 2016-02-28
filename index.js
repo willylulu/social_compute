@@ -16,6 +16,10 @@ module.exports.channels = channels;
 
 // start web mapping
 require('./web.js');
+require('./database/models/Product.js');
+require('./database/models/User.js');
+require('./database/models/BuyQueue.js');
+
 
 // server on 3000
 server.listen(process.env.PORT || 3000);
