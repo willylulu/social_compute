@@ -7,6 +7,7 @@ const express          = require('./index.js').express,
       passport         = require('passport'),
       FacebookStrategy = require('passport-facebook').Strategy,
       product          = require('./database/controller/Product.js'),
+      muser             = require('./database/controller/User.js'),
       templates_route  = __dirname + '/hall/templates/';
 
 
@@ -115,7 +116,6 @@ app.get('/', function(req, res) {
             var str_json = JSON.stringify(json);
             var str_channel = JSON.stringify(onlive_channel);
 
-
             res.render(templates_route + 'index.html',{'accountname':name,'uid': id,'productlist':str_json,'onlive_channel':str_channel});
         }
     });
@@ -220,3 +220,4 @@ app.get('/addproduct',function (req,res) {
 });
 
 app.post('/insertproduct', product.insert);
+app.get('/testuser', muser.insert);
