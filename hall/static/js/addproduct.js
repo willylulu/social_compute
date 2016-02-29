@@ -11,9 +11,10 @@ function submit () {
 	var price = $("#productpricetext").val();
 	var description = $('textarea').val();
 	$.ajax({
-	      url:"http://tvsalestream.herokuapp.com/insertproduct/",
+	      url:"../insertproduct/",
 	      type:"POST",
 	      data:{user:user,uid:uid,productname:name,price:price,description:description,image_url:$('#status').val()},
+          contentType : "application/json; charset=utf-8",
 	      dataType:"json"
 	}).done(function() {});
 	$('#productnametext').val('');

@@ -6,6 +6,7 @@ const express          = require('./index.js').express,
       cookieSession    = require('cookie-session'),
       passport         = require('passport'),
       FacebookStrategy = require('passport-facebook').Strategy,
+      product          = require('./database/controller/Product.js'),
       templates_route  = __dirname + '/hall/templates/';
 
 
@@ -196,8 +197,8 @@ app.post('/checklogin', function(req, response) {
         var uurl = 'http://tvsalestream.herokuapp.com/getuserproduct/?uid='+temp;
         request({
             url: uurl,
-             method: 'GET',
-             json:true
+            method: 'GET',
+           json:true
         },function(error,res,userproduct){
              if(error) {
                 console.log(error);
@@ -218,3 +219,4 @@ app.get('/addproduct',function (req,res) {
     res.render(templates_route + 'addproduct.html', {'accountname':name,'uid': id});
 });
 
+app.post('/insertproduct', product.insert);

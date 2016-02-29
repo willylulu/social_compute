@@ -5,6 +5,8 @@ const express    = require('express'),
       engines    = require('consolidate'),
       request    = require('request'),
       room_route = __dirname + '/room/templates/',
+      mongoose   = require('mongoose'),
+      bodyParser = require('body-parser'),
       channels   = new Object();
 
 //  share channel data to all backend port
@@ -14,11 +16,7 @@ module.exports.request  = request;
 module.exports.express  = express;
 module.exports.channels = channels;
 
-// start web mapping
-require('./web.js');
-require('./database/models/Product.js');
-require('./database/models/User.js');
-require('./database/models/BuyQueue.js');
+
 
 
 // server on 3000
@@ -26,7 +24,12 @@ server.listen(process.env.PORT || 3000);
 app.engine('html', engines.mustache);
 app.set('view engine', 'html');
 app.set('views', __dirname + 'views');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : true }));
+
 app.use(express.static(__dirname));
+
+mongoose.connect('mongodb://localhost/test');
 
 var db_url = 'http://tvsalestream.herokuapp.com/';
 
@@ -43,6 +46,12 @@ app.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+
+// start web mapping
+require('./database/models/Product.js');
+require('./database/models/User.js');
+require('./database/models/BuyQueue.js');
+require('./web.js');
 
 
 app.get('/test_chatroom', function(req, res) {
@@ -109,38 +118,28 @@ app.get('/get_channel', function(req, res) {
 
 // initialize channel info from Django server.
 app.post('/create_channel', function(req, res) {
-    var body = '';
-    var qs = require('querystring');
-    // on receiving request data
-    req.on('data', function(data) {
-        body += data; 
-    });
+    var data        = req.body;
+    var host_fb_id  = data.hostfbid; // use fb id as identifier  
+    var ProductList = data.productlist;
+    var streamurl   = data.streamurl; 
+    var host_name   = data.hostname;      
+    var channel     = new Object();
+    
+    // put basic info into target channel.
+    // other info such as stream url and socket id
+    // will be init when create_channel socket catch data.
+    channel                 = new Object();
+    channel.PriceList       = new Object();
+    channel.customers       = new Object();
+    channel.customer_length = 0; 
+    channel.CurrentProduct  = 0;
+    channel.stream_url      = streamurl;
+    channel.host_name       = host_name;   
+    channel.ProductList     = ProductList;
+    channels[host_fb_id]    = channel;
 
-    req.on('end', function() {
-        //body = qs.parse(body);
-        //console.log(body);
-        var data        = JSON.parse(body);
-        var host_fb_id  = data.hostfbid; // use fb id as identifier  
-        var ProductList = data.productlist;
-        var streamurl   = data.streamurl; 
-        var host_name   = data.hostname;      
-        var channel     = new Object();
-        // put basic info into target channel.
-        // other info such as stream url and socket id
-        // will be init when create_channel socket catch data.
-        channel                 = new Object();
-        channel.PriceList       = new Object();
-        channel.customers       = new Object();
-        channel.customer_length = 0; 
-        channel.CurrentProduct  = 0;
-        channel.stream_url      = streamurl;
-        channel.host_name       = host_name;   
-        channel.ProductList     = ProductList;
-        channels[host_fb_id]    = channel;
+    res.render(room_route + 'chatroom.html', data);
 
-        res.render(room_route + 'chatroom.html', data);
-
-    });
 
 });
 

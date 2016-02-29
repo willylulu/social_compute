@@ -8,6 +8,12 @@ const BuyQueueSchema = new Schema({
     owner     : ObjectId
 });
 
+BuyQueueSchema.statics = {
+    load : function (_id) {
+        return this.findOne({ _id })
+               .populate('owner', 'uid name')
+    },
+}
 
 
 BuyQueueSchema.index({productId : 1, buyer : 1, owner : 1});

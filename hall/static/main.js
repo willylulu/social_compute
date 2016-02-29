@@ -313,12 +313,13 @@ function openhost(){
     data['productlist'] = productlist;
 
 
-    console.log('prepare!');
+    console.log('prepare!!!');
     data_json = JSON.stringify(data); 
     $.ajax({
         url: posturl,
         type: 'POST',
         data: data_json,
+        contentType : "application/json; charset=utf-8",
         success: function(response) {
             window.location = 'hostroom';        
         }
