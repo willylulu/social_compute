@@ -21,7 +21,7 @@ exports.insert = wrap (function * (req, res) {
 
         console.log('insert product to ' + uid);
 
-        res.sendStatus(400);
+        res.sendStatus(200);
     } catch (err) {
         console.log(err);
         res.sendStatus(400);
