@@ -290,6 +290,8 @@ function openhost(){
     var host_fb_id = uid;
     var stream_url = $('#youtubeurl').val();
     var productlist = [];
+
+
     $("input[name='my_product']:checked").each(function(){
         var checkproduct = {};
         var name = $(this).data('product');
@@ -300,7 +302,7 @@ function openhost(){
         productlist.push(checkproduct);
     });
 
-
+    console.log('why');
     if(!stream_url.match(/^http:\/\/youtu.be\//)) {
         alert('您的URL不符合Hangout格式 (http://youtu.be/...)');
         return ;

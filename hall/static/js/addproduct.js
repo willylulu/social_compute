@@ -10,13 +10,26 @@ function submit () {
 	var name = $("#productnametext").val();
 	var price = $("#productpricetext").val();
 	var description = $('textarea').val();
+    var image_url = $('#status').val();
+
+    var data = { 
+        user        : user,
+        uid         : uid,
+        productname : name,
+        price       : price,
+        description : description,
+        image_url   : image_url
+    };
+
+    data = JSON.stringify(data);
+
 	$.ajax({
-	      url:"../insertproduct/",
-	      type:"POST",
-	      data:{user:user,uid:uid,productname:name,price:price,description:description,image_url:$('#status').val()},
+	      url         : "../insertproduct/",
+	      type        : "POST",
+	      data        : data,
           contentType : "application/json; charset=utf-8",
-	      dataType:"json"
-	}).done(function() {});
+	      dataType    : "json"
+	});
 	$('#productnametext').val('');
 	$('#productpricetext').val('');
 	$('textarea').val('');
