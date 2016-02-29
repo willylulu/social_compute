@@ -6,8 +6,8 @@ const mongoose = require('mongoose'),
 
 exports.insert = wrap (function * (req, res) {
     try {
-        const uid  = req.body.uid;
-        const user = yield User.load(uid);
+        const uid     = req.body.uid;
+        const user    = yield User.load(uid);
         const product = new Product({
             name        : req.body.productname,
             price       : req.body.price,
