@@ -4,9 +4,9 @@ const mongoose = require('mongoose'),
 
 const ProductSchema = new Schema({
     name        : {type : String, trim : true, required : true},
+    uid         : {type : String, trim : true, required : true},
     description : {type : String, default : '', trim : true},
     imgurl      : {type : String, default : '', trim : true},
-    owner       : {type : ObjectId, required : true},
     price       : {type : Number, default : 0, min : 0},
     live        : Boolean,
 });
