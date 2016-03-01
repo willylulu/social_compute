@@ -1,6 +1,7 @@
 var now_from=0;
 var onlive={};
 function CheckOnlive() {
+
 	for(var e in onlive_channel){
 		for (var i = 0; i < onlive_channel[e].ProductList.length; i++) {
 			var onlineid = onlive_channel[e].ProductList[i].pid;

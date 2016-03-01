@@ -55,7 +55,6 @@ passport.use('facebook', new FacebookStrategy({
 // check if user has login or not and redirect.
 // currently useless.
 app.get('/auth', function(req, res) {
-    console.log(req);
     if(req.isAuthenticated()) {
         console.log('logged in');
     } else {
@@ -162,7 +161,7 @@ app.get('/orderlist', function(req, res) {
   });
 });
 
-app.get('/productlist', function(req, res) {
+/*app.get('/productlist', function(req, res) {
   var onlive_channel = require('./index.js').channels;
   console.log(onlive_channel);
   request({
@@ -184,7 +183,8 @@ app.get('/productlist', function(req, res) {
             res.render(templates_route + 'productlist.html',{'productlist':json,'onlive_channel':str_channel,'productlist_dict':str_json,});
         }
     });
-});
+});*/
+
 app.post('/checklogin', function(req, response) {
     var body = '';
     var str_json;
@@ -220,4 +220,5 @@ app.get('/addproduct',function (req,res) {
 });
 
 app.post('/insertproduct', product.insert);
+app.get('/productlist', product.productlist);
 app.get('/testuser', muser.insert);

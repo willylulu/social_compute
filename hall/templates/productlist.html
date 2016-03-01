@@ -12,11 +12,11 @@
     <div class="backarrow"><i class="fa fa-arrow-left"></i></div>
     <div class="productlist_container">
     {{ #productlist }}
-        <div class="productblock" data-pk="{{pk}}"data-toggle="modal" data-target="" data-owner="{{#fields}}{{owner}}{{/fields}}">
-            <div class="productimage" style="background-image:url({{#fields}}{{{imgurl}}}{{/fields}})"></div>
-            <div class="producttitle">{{#fields}}{{name}}{{/fields}}</div>
-            <div class="productowner">{{#fields}}{{ownername}}{{/fields}}</div>
-            <div class="productprice">${{#fields}}{{price}}{{/fields}}</div>
+        <div class="productblock" data-pk="{{_id}}"data-toggle="modal" data-target="" data-owner="{{owner}}">
+            <div class="productimage" style="background-image:url({{{imgurl}}})"></div>
+            <div class="producttitle">{{name}}</div>
+            <div class="productowner">{{ownername}}</div>
+            <div class="productprice">${{price}}</div>
         </div>
     {{ /productlist }}
     </div>
@@ -44,17 +44,18 @@
 
 </body>
 <script>
-	onlive_channel={{{onlive_channel}}};
+	onlive_channel= {{{onlive_channel}}};
     var productlist = {};
 
     {{ #productlist }}
             var tempproduct = {};
-            tempproduct['price'] = '{{#fields}}{{price}}{{/fields}}';
-            tempproduct['title'] = '{{#fields}}{{name}}{{/fields}}' ;
-            tempproduct['description'] = '{{#fields}}{{{description}}}{{/fields}}';
-            tempproduct['imgurl'] = '{{#fields}}{{{imgurl}}}{{/fields}}';
+            tempproduct['price'] = '{{price}}';
+            tempproduct['title'] = '{{name}}' ;
+            tempproduct['description'] = '{{{description}}}';
+            tempproduct['imgurl'] = '{{{imgurl}}}';
             tempproduct['onlive'] =  false;   
-            productlist['{{pk}}'] = tempproduct; 
+            productlist['{{_id}}'] = tempproduct; 
+            console.log(tempproduct);
     {{ /productlist}}
 </script>
 

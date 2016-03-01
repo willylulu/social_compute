@@ -9,7 +9,7 @@ const ProductSchema = new Schema({
     imgurl      : {type : String, default : '', trim : true},
     price       : {type : Number, default : 0, min : 0},
     live        : Boolean,
-});
+}, { timestamps: { createdAt: 'created_at' } });
 
 ProductSchema.methods = {
 
@@ -25,8 +25,9 @@ ProductSchema.statics = {
 
     list : function (options) {
         const criteria = options.criteria || {};
-
+        console.log('list');
         return this.find(criteria)
+               .sort({'created_at' : -1})
                .exec();
     }
 };

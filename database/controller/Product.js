@@ -4,7 +4,7 @@ const mongoose = require('mongoose'),
       User     = mongoose.model('User');
 
 
-exports.insert = wrap (function * (req, res) {
+exports.insert = wrap (function* (req, res) {
     try {
         const uid     = req.body.uid;
         const user    = yield User.load(uid);
@@ -26,4 +26,21 @@ exports.insert = wrap (function * (req, res) {
         console.log(err);
         res.sendStatus(400);
     } 
+});
+
+exports.productlist = wrap (function* (req, res) {
+    try {
+        const products = yield Product.list({});
+        const channels = require('../../index.js').channels;
+
+
+        console.log('show all products');
+        console.log(products);
+        res.render('/Users/AtSu/Documents/NodeJS/Lu_repo/social_compute/hall/templates/productlist.html', 
+                 {'productlist' : products, 'onlive_channel' : JSON.stringify(channels)});
+        // res.json(products);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(400);
+    }
 });
