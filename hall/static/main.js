@@ -1,7 +1,7 @@
 var userproductlist = {};
 var ptr = 0;//modify
 
-var bound = productlist.length; //modify
+var bound; //modify
 var FB_init_is_done = false;
 var front_end_url = './';
 var socket_url = './create_channel';
@@ -15,11 +15,12 @@ function load_productlist () {
          product_for_sale.className = "product_list";
          $("#product_sales").append(product_for_sale);
          $("#product"+i).attr('style',"display:inline-block;");
-         $("#product"+i).html("<h4>"+productlist[i].fields.name+"</h4><h5>"+productlist[i].fields.price+"</h5><h5>"+productlist[i].fields.ownername+"</h5>");  
+         $("#product"+i).html("<h4>"+productlist[i].name+"</h4><h5>"+productlist[i].price+"</h5><h5>"+productlist[i].ownername+"</h5>");  
      };
  }
 function my_productlist (list) {
      // body...
+     bound = productlist.length;
      for (var i = 0; i < list.length; i++) {
          var my_product_for_sale = document.createElement('div');
          $("#my_product_for_sale").append(my_product_for_sale);
@@ -27,11 +28,11 @@ function my_productlist (list) {
          my_product_for_sale.appendChild(input);
          input.setAttribute("type",'checkbox');
          input.setAttribute('name','my_product');
-         input.setAttribute('data-product',list[i].fields.name);
-         input.setAttribute('value',list[i].pk);
+         input.setAttribute('data-product',list[i].name);
+         input.setAttribute('value',list[i]._id);
          var temp = document.createElement('span');
          my_product_for_sale.appendChild(temp);
-         var t = document.createTextNode(list[i].fields.name+" $"+list[i].fields.price);
+         var t = document.createTextNode(list[i].name+" $"+list[i].price);
         temp.appendChild(t);
      };
  }

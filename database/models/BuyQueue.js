@@ -13,6 +13,14 @@ BuyQueueSchema.statics = {
         return this.findOne({ _id })
                .populate('owner', 'uid name')
     },
+
+    list : function (options) {
+        const criteria = options.criteria || {};
+        const sort     = options.sort || {};
+        return this.find(criteria)
+               .sort(sort)
+               .exec();
+    }
 }
 
 
