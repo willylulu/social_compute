@@ -12,6 +12,12 @@ const UserSchema = new Schema({
 
 UserSchema.methods = {
 
+
+    setUrl        : function (url) {
+        this.streamurl = url;
+        return this.save();
+    },
+
     addProduct    : function (pid) {
         this.products.push(pid);
         return this.save();
@@ -27,7 +33,7 @@ UserSchema.methods = {
         }
 
         return this.save();
-    }
+    },
 }
 
 UserSchema.statics = {
