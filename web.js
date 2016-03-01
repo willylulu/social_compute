@@ -158,29 +158,6 @@ app.get('/orderlist', function(req, res) {
   });
 });
 
-app.post('/checklogin', function(req, response) {
-    var body = '';
-    var str_json;
-    req.on('data', function(data) {
-        body += data; 
-    });
-    req.on('end',function() {
-        var temp = body.split("=");
-        var temp = temp[1];
-        var uurl = 'http://tvsalestream.herokuapp.com/getuserproduct/?uid='+temp;
-        request({
-            url: uurl,
-            method: 'GET',
-           json:true
-        },function(error,res,userproduct){
-             if(error) {
-                console.log(error);
-            } else {
-                response.json(userproduct);
-            }
-        });
-    });
-});
 app.get('/addproduct',function (req,res) {
     // body...
     var name = 'Guest', id = -1;
