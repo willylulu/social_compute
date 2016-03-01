@@ -43,3 +43,17 @@ exports.productlist = wrap (function* (req, res) {
         res.sendStatus(400);
     }
 });
+
+exports.getUserProduct = wrap ( function* (req, res) {
+    try {
+        const uid      = req.user.id;
+        const options  = { 'uid' : uid };
+        const products = yield Product.list(options);
+
+        res.json(products);
+
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(400);
+    }
+});
