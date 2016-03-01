@@ -5,6 +5,7 @@ const express          = require('./index.js').express,
       cookieParser     = require('cookie-parser'),
       cookieSession    = require('cookie-session'),
       passport         = require('passport'),
+      wrap             = require('co-express'),
       FacebookStrategy = require('passport-facebook').Strategy,
       product          = require('./database/controller/Product.js'),
       User             = require('./database/controller/User.js'),
@@ -94,31 +95,26 @@ app.get('/auth/logout', function(req, res) {
 
 
 // front page.
-app.get('/', function(req, res) {
+app.get('/', product.getUserProduct, function (req, res) {
     var onlive_channel = require('./index.js').channels;
+    var products = res.products;
     var name = 'Guest', id = -1;
 
     if(req.user) {
-      console.log(req.user);
       id = req.user._json.id; 
       name = req.user._json.name;
     }
 
-    request({
-        url: 'http://tvsalestream.herokuapp.com/getuserproduct/',
-         //URL to hit
-        method: 'GET',
-        json:true
-    }, function(error, response, json){
-        if(error) {
-            console.log(error);
-        } else {
-            var str_json = JSON.stringify(json);
-            var str_channel = JSON.stringify(onlive_channel);
+    console.log(products);
 
-            res.render(templates_route + 'index.html',{'accountname':name,'uid': id,'productlist':str_json,'onlive_channel':str_channel});
-        }
-    });
+
+    res.render(templates_route + 'index.html',  
+      { 'accountname'    : name,
+        'uid'            : id, 
+        'productlist'    : JSON.stringify(products), 
+        'onlive_channel' : JSON.stringify(onlive_channel)
+      });
+    
 });
 
 
@@ -200,4 +196,11 @@ app.get('/addproduct',function (req,res) {
 // product api.
 app.post('/insertproduct', product.insert);
 app.get('/productlist', product.productlist);
-app.get('/userproduct', product.getUserProduct);
+app.get('/userproduct', product.getUserProduct, function (req, res) {
+    const products = res.products;
+    if(products) {
+        res.json(products);
+    } else {
+        res.sendStatus(400);
+    }
+});
