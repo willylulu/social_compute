@@ -4,19 +4,18 @@ const mongoose = require('mongoose'),
       User     = mongoose.model('User');
 
 
-exports.insert = wrap (function * (req, res) {
+exports.insert = wrap(function * (uid, name) {
     try {
-        const uid  = req.user.id;
-        const val  = { name : req.user.displayName };
-     
+        const val  = { name : name };
         User.findOneAndUpdate({uid : uid}, val , { upsert : true }, function (err, doc) {
             console.log(err);
             console.log(doc);
         });
-        
-        res.sendStatus(200);
+        return null;        
     } catch (err) {
         console.log(err);
-        res.sendStatus(400);
+        return err;
     } 
 });
+
+
