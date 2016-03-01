@@ -7,7 +7,7 @@ const express          = require('./index.js').express,
       passport         = require('passport'),
       FacebookStrategy = require('passport-facebook').Strategy,
       product          = require('./database/controller/Product.js'),
-      muser             = require('./database/controller/User.js'),
+      User             = require('./database/controller/User.js'),
       templates_route  = __dirname + '/hall/templates/';
 
 
@@ -42,15 +42,15 @@ passport.deserializeUser(function(user, done) {
 // The function will put user object into session.
 // We can check the session by access req.user.
 passport.use('facebook', new FacebookStrategy({
-  clientID: '938533709533376',
-  clientSecret: 'fe74d87e74a2d2e145974556ed7e7c0a',
-  callbackURL: '../auth/response'
-  },
-  function(accessToken, refreshToken, profile, done) {
-    var user = profile;
-    return done(null, user);
-  }
-));
+    clientID: '938533709533376',
+    clientSecret: 'fe74d87e74a2d2e145974556ed7e7c0a',
+    callbackURL: '../auth/response'
+    }, 
+    function(accessToken, refreshToken, profile, done) {
+        var user =  profile;
+        User.insert(profile.id, profile.displayName);
+        return done(null, user);
+  }));
 
 // check if user has login or not and redirect.
 // currently useless.
@@ -99,6 +99,7 @@ app.get('/', function(req, res) {
     var name = 'Guest', id = -1;
 
     if(req.user) {
+      console.log(req.user);
       id = req.user._json.id; 
       name = req.user._json.name;
     }
@@ -161,30 +162,6 @@ app.get('/orderlist', function(req, res) {
   });
 });
 
-/*app.get('/productlist', function(req, res) {
-  var onlive_channel = require('./index.js').channels;
-  console.log(onlive_channel);
-  request({
-        url: 'http://tvsalestream.herokuapp.com/allproduct/',
-         //URL to hit
-        method: 'GET',
-        json:true
-    }, function(error, response, json){
-        if(error) {
-            console.log(error);
-        } else {
-            // handle for demo SCAD, object to dictionary
-            for(var k in json){
-              //console.log(json[k].fields.description);
-              json[k].fields.description = json[k].fields.description.replace(/\n/g,"<br>");
-            }
-            var str_json = JSON.stringify(json);
-            var str_channel = JSON.stringify(onlive_channel);
-            res.render(templates_route + 'productlist.html',{'productlist':json,'onlive_channel':str_channel,'productlist_dict':str_json,});
-        }
-    });
-});*/
-
 app.post('/checklogin', function(req, response) {
     var body = '';
     var str_json;
@@ -219,6 +196,8 @@ app.get('/addproduct',function (req,res) {
     res.render(templates_route + 'addproduct.html', {'accountname':name,'uid': id});
 });
 
+
+// product api.
 app.post('/insertproduct', product.insert);
 app.get('/productlist', product.productlist);
-app.get('/testuser', muser.insert);
+app.get('/userproduct', product.getUserProduct);
