@@ -30,13 +30,12 @@ exports.insert = wrap (function* (req, res) {
 
 exports.productlist = wrap (function* (req, res) {
     try {
-        const products = yield Product.list({});
-        const channels = require('../../index.js').channels;
-
+        const products  = yield Product.list({});
+        const channels  = require('../../index.js').channels;
 
         console.log('show all products');
         console.log(products);
-        res.render('/Users/AtSu/Documents/NodeJS/Lu_repo/social_compute/hall/templates/productlist.html', 
+        res.render(__dirname + '/../../hall/templates/productlist.html', 
                  {'productlist' : products, 'onlive_channel' : JSON.stringify(channels)});
         // res.json(products);
     } catch (err) {
