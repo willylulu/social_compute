@@ -63,15 +63,12 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var styles = {
-	    button: {},
-	    nav: {}
-	};
+	var styles = {};
 
 	var NavBar = _react2.default.createClass({
 	    displayName: 'NavBar',
 	    render: function render() {
-	        return _react2.default.createElement('nav', { className: 'navbar' });
+	        return _react2.default.createElement('div', { className: 'navbar' });
 	    }
 	});
 
