@@ -25,7 +25,7 @@ ProductSchema.statics = {
     },
 
     list : function (options) {
-        const criteria = options || {};
+        const criteria = options.criteria || {};
         return this.find(criteria)
                .sort({'created_at' : -1})
                .exec();

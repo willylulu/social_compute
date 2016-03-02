@@ -30,12 +30,7 @@
 </head>
 
 <body  data-spy="scroll" data-target=".navbar-fixed-top">
-<script>
-    productlist={{{productlist}}};
-    onlive_Channel={{{onlive_channel}}};
-    uid='{{uid}}';
-    accountname='{{accountname}}';
-</script>
+
     <!-- Navigation -->
     <span id="nomeantop"></span>
     <div id="navhook">
@@ -267,7 +262,6 @@
             <p>Copyright &copy; Your Website 2014</p>
         </div>
     </footer>
-    <script src="hall/static/js/FBlogin.js"></script>
     <!-- jQuery -->
     <script src="hall/static/js/jquery.js"></script>
     <script src="hall/static/main.js"></script>
@@ -282,6 +276,10 @@
     <script src="hall/static/js/grayscale.js"></script>
     <script>
         if('{{uid}}' != -1) {
+            productlist    = {{{productlist}}};
+            onlive_Channel = {{{onlive_channel}}};
+            uid            = '{{uid}}';
+            accountname    = '{{accountname}}';
             $("#username").html("Hi," + '{{accountname}}');
             $("#sale_username").html("Hi," + '{{accountname}}');
             $("#FB_Login").hide();
@@ -289,13 +287,7 @@
             $("#productlistLink").show();
             $("#orderlistLink").show();
 
-            $.post(check_url,{'user':'{{accountname}}','uid':'{{uid}}'},function() {
-
-                $.post('/checklogin',{'uid':'{{uid}}'},function(req,response) {
-                    my_productlist(req);
-                    createGlobalProductList(req);
-                });
-            });
+            my_productlist(productlist);
 
         }
     </script>

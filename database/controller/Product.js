@@ -44,16 +44,16 @@ exports.productlist = wrap (function* (req, res) {
     }
 });
 
-exports.getUserProduct = wrap ( function* (req, res) {
+exports.getUserProduct = wrap ( function* (req, res, next) {
     try {
-        const uid      = req.user.id;
+        const uid      = req.query.id || req.user.id;
         const options  = { 'uid' : uid };
         const products = yield Product.list(options);
 
-        res.json(products);
-
+        res.products = products;
+        next();
     } catch (err) {
         console.log(err);
-        res.sendStatus(400);
+        next();
     }
 });
