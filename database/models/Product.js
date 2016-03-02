@@ -18,7 +18,8 @@ ProductSchema.methods = {
 ProductSchema.statics = {
 
     load : function (_id) {
-        return this.findOne({ _id })
+
+        return this.findOne({ _id})
                .populate('owner', 'name')
                .exec();
     },
