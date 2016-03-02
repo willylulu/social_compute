@@ -45,7 +45,7 @@ passport.deserializeUser(function(user, done) {
 passport.use('facebook', new FacebookStrategy({
     clientID: '938533709533376',
     clientSecret: 'fe74d87e74a2d2e145974556ed7e7c0a',
-    callbackURL: '../auth/response'
+    callbackURL: '/auth/facebook/callback'
     }, 
     function(accessToken, refreshToken, profile, done) {
         var user =  profile;
@@ -53,34 +53,17 @@ passport.use('facebook', new FacebookStrategy({
         return done(null, user);
   }));
 
-// check if user has login or not and redirect.
-// currently useless.
-app.get('/auth', function(req, res) {
-    if(req.isAuthenticated()) {
-        console.log('logged in');
-    } else {
-        console.log('nope');
-    }
-    res.redirect('../');
-});
-
 app.get('/auth/facebook', 
-    passport.authenticate('facebook', 
-        { authType: 'rerequest', scope: ['user_status', 'user_checkins'] }));
+    passport.authenticate('facebook', { 
+      authType: 'rerequest', 
+      scope: ['user_status', 'user_checkins'] 
+}));
 
-app.get('/auth/response', passport.authenticate('facebook', {
-    successRedirect: '/auth',
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: '/',
     failureRedirect: '../',
     failureFlash: true
 }));
-
-app.get('/auth/islogin', function(req, res) {
-    // return user data or null.
-    if(req.user)
-      res.send(req.user._json);
-    else
-      res.send(null);
-});
 
 app.get('/auth/logout', function(req, res) {
     console.log(req);
@@ -90,8 +73,6 @@ app.get('/auth/logout', function(req, res) {
     }
     res.redirect('../../');
 });
-
-
 
 
 // front page.
