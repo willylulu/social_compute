@@ -1,8 +1,7 @@
 var path = require('path');
-
 module.exports = {
     entry: [
-        './component/navbar.jsx'
+        './component/navbar.js'
     ],
     output: {
         path: path.join(__dirname, '/build/'),
