@@ -1,12 +1,7 @@
 section{
 	width:100%;
-	height:100%;
-}
-
-#getstarted{
-	background:rgba(10,10,10,1);
+	min-height:100%;
     height:auto;
-    position:relative;
 }
 
 

@@ -63,16 +63,44 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var styles = {};
+	var styles = {
+	    bar: {
+	        zIndex: '999',
+	        top: '0',
+	        left: '0',
+	        position: 'fixed',
+	        background: 'rgba(255,255,255,1)',
+	        height: '10%',
+	        width: '100%'
+	    },
+	    button: {
+	        float: 'right',
+	        display: 'inline-block'
+	    },
+	    brandname: {
+	        padding: '5px',
+	        fontSize: '3vw',
+	        color: '#000'
+	    }
+	};
 
 	var NavBar = _react2.default.createClass({
 	    displayName: 'NavBar',
 	    render: function render() {
-	        return _react2.default.createElement('div', { className: 'navbar' });
+	        return _react2.default.createElement(
+	            'nav',
+	            { className: 'navbar', style: Object.assign({}, styles.bar, {}) },
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'brandname', style: styles.brandname },
+	                this.props.brandname
+	            ),
+	            _react2.default.createElement('div', { className: 'navbtn', style: styles.button })
+	        );
 	    }
 	});
 
-	_reactDom2.default.render(_react2.default.createElement(NavBar, null), document.getElementById('navhook'));
+	_reactDom2.default.render(_react2.default.createElement(NavBar, { brandname: 'LIVESTREAMSALE' }), document.getElementById('container'));
 
 /***/ },
 /* 2 */
